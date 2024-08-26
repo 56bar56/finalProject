@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/chatBubble"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="1dp">
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/message_in_bubble"
+            android:text="Hello, this is a message!"
+            android:textSize="20dp"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/hourSent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chatBubble"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="3dp"
+        android:text="12:34 PM"
+        android:textColor="#C9BFAF"
+        android:textSize="12dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginLeft="4dp"/>
+
+</RelativeLayout>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#FFFEFA"
+    android:id="@+id/settingsRelativeLayout">
+
+    <TextView
+        android:id="@+id/tvChatRoom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="30dp"
+        android:background="#74CFA0"
+        android:text="Chat Room"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="#F7F1AE"
+        android:textSize="30sp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnCancelSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="3dp"
+        android:backgroundTint="#74CFA0"
+        android:contentDescription="Back Button"
+        android:src="@drawable/back_foreground"
+        app:maxImageSize="48dp"
+        app:tint="#F7F1AE"
+        android:foregroundGravity="center_horizontal"/>
+
+    <TextView
+        android:layout_width="259dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="77dp"
+        android:layout_marginTop="163dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginBottom="507dp"
+        android:text="Settings"
+        android:textAlignment="center"
+        android:textColor="#0FADCF"
+        android:textSize="40dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="301dp"
+        android:layout_height="245dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="57dp"
+        android:layout_marginBottom="262dp"
+        android:background="@drawable/add_contact_edittext"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="50dp"
+                android:text="Dark mode:"
+                android:textColor="#0FADCF"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnDarkMode"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/register_button_rounded"
+                android:text="On"
+                android:textSize="25dp"
+                app:backgroundTint="@null" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:text="Change server address:"
+                android:textColor="#0FADCF"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editServerAddress"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:hint="Server Address"
+                android:textColor="#0FADCF"
+                android:textColorHint="#0FADCF"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/btnServerAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/register_button_rounded"
+                android:text="OK"
+                android:textSize="25dp"
+                app:backgroundTint="@null" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FEFFDA"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="43dp"
+        android:layout_marginBottom="34dp"
+        android:text="CHAT ROOM"
+        android:textAlignment="center"
+        android:textColor="#7D635B"
+        android:textSize="50dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="394dp"
+        android:layout_height="64dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="114dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="553dp"
+        android:text="Experience A World Of Opportunities"
+        android:textAlignment="center"
+        android:textColor="#543734"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+
+        <ImageView
+            android:id="@+id/profileImg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/coffee2" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/loginPage"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="134dp"
+        android:layout_marginBottom="165dp"
+        android:background="@drawable/login_button_rounded"
+        android:text="Sign in"
+        android:textColor="#FFFEFA"
+        android:textSize="30dp"
+        app:backgroundTint="@null" />
+
+    <Button
+        android:id="@+id/registerPage"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="130dp"
+        android:layout_marginBottom="87dp"
+        android:background="@drawable/register_button_rounded"
+        android:text="Sign up"
+        android:textColor="#FFFEFA"
+        android:textSize="30dp"
+        app:backgroundTint="@null" />
+</RelativeLayout>

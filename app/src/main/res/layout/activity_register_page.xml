@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/workdesk"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="83dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="77dp"
+        android:layout_marginBottom="30dp"
+        android:text="REGISTER"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="#7D635B"
+        android:textSize="50dp"/>
+
+
+    <TextView
+        android:id="@+id/noAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="45dp"
+        android:layout_marginBottom="80dp"
+        android:text="Already has an account? press here"
+        android:textAlignment="center"
+        android:textColor="#543734"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/registerBtn"
+        android:layout_width="276dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="77dp"
+        android:layout_marginTop="429dp"
+        android:layout_marginEnd="73dp"
+        android:layout_marginBottom="165dp"
+        android:background="@android:color/transparent"
+        android:text="Sign up"
+        android:textColor="#7D635B"
+        android:textSize="40dp"
+        app:backgroundTint="@null" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/registerProfileImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="158dp"
+        android:layout_marginTop="110dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="onProfileImageClicked"
+        android:scaleType="centerCrop"
+        android:src="@drawable/profile_img" />
+
+    <LinearLayout
+        android:layout_width="287dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="62dp"
+        android:layout_marginBottom="245dp"
+        android:background="@drawable/login_edittext"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/registerUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:hint="Username"
+            android:textColor="#8A706A"
+            android:textColorHint="#8A706A"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/registerPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="5dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColor="#8A706A"
+            android:textColorHint="#8A706A"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:text="Must contain $, numbers, letters(size 4-16)"
+            android:textSize="13dp"
+            android:textColor="#8A706A"/>
+
+        <EditText
+            android:id="@+id/registerEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:hint="Email"
+            android:textColor="#8A706A"
+            android:textColorHint="#8A706A"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/registerDisplayName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:hint="Display Mame"
+            android:textColor="#8A706A"
+            android:textColorHint="#8A706A"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
