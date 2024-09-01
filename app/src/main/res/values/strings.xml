@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Targil4_AP2</string>
+    <!-- Array for Location Preferences -->
+    <string-array name="location_preferences">
+        <item>Midtown</item>
+        <item>Suburbs</item>
+        <item>Rural</item>
+        <item>Beachfront</item>
+    </string-array>
+
+    <!-- Array for Trip Types -->
+    <string-array name="trip_types">
+        <item>Leisure</item>
+        <item>Business</item>
+        <item>Adventure</item>
+        <item>Cultural</item>
+        <item>Relaxation</item>
+    </string-array>
 </resources>

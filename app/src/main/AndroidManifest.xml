@@ -18,12 +18,16 @@
         android:theme="@style/Theme.Targil4_AP2"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".questionnaireActivity"
+            android:exported="false" />
+
         <service
             android:name=".MyService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
@@ -44,7 +48,7 @@
             android:exported="false" />
         <activity
             android:name=".SettingsActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
