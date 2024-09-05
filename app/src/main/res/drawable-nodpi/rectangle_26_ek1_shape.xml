@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- rectangle_26_ek1 from your XD file. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+	android:shape="rectangle" >
+	<corners android:radius="10dp" />
+	<solid android:color="@color/hello__i_m_professional_expert_ui_ux_designer__i_love_create_a_app_design__landing_page_web_design__i_am_over_3_year_s_experience_in_ui_ux_design__color" />
+</shape>
+

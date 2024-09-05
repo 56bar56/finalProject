@@ -1,7 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
     <color name="darkModeBackground">#1C1B1A</color>
     <color name="lightModeBackground">#FFFEFA</color>
+
+    <!-- log_in_page colors -->
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="_bg__log_in_page_ek2_color">#FFFFFF</color>
+    <color name="forgot_password__color">#FF7D0D</color>
+    <color name="or_color">#AAAAAA</color>
+    <color name="log_in_with_google_color">#000000</color>
+    <color name="bg_ek2_color">#ffffff</color>
+    <color name="password_ek1_color">#666666</color>
+    <color name="bg_color">#FF7D0D</color>
+    <color name="i_agree_and_accept_the_terms_ot_use__color">#000000</color>
+    <color name="bg_ek1_color">#FF7D0C</color>
+    <color name="password_ek2_color">#666666</color>
+
+    <!--  explore colors  -->
+    <color name="_bg__explore_ek2_color">#FFFFFF</color>
+    <color name="rectangle_6_color">#FF7D0D</color>
+    <color name="_3_day_color">#333333</color>
+    <color name="sesimbra__lisbon_color">#AAAAAA</color>
+    <color name="japan_most_unique_country_color">#000000</color>
+    <color name="rectangle_12_color">#666666</color>
+    <color name="bg_ek13_color">#ffffff</color>
+    <color name="rectangle_2_color">#C4C4C4</color>
+
+    <!--  tour_details colors  -->
+    <color name="_bg__tour_details_ek2_color">#FFFFFF</color>
+    <color name="bangkok__thailand_s_capital__is_a_large_city_known_for_ornate_shrines_and_vibrant_street_life__the_boat_filled_chao_phraya_river_feeds_its_network_of_canals__flowing_past_the_rattanakosin_royal_district__home_to_opulent_grand_palace_and_its_sacred_wat_phra_kaew_temple__earby_is_wat_pho_temple_with_an_enormous_reclining_buddha_and__on_the_opposite_shore__color">#888888</color>
+    <color name="bg_ek3_color">#FF7D0D</color>
+    <color name="service_ek1_color">#000000</color>
+    <color name="_30_c_color">#AAAAAA</color>
+    <color name="ellipse_15_color">#C4C4C4</color>
+
+    <!--  main_page colors  -->
+    <color name="_bg__main_page_ek2_color">#FFFFFF</color>
+    <color name="rectangle_5_color">#C4C4C4</color>
+    <color name="see_all_color">#CCCCCC</color>
+    <color name="best_place_color">#000000</color>
+
+    <!--  settings colors  -->
+    <color name="_bg__settings_ek2_color">#FFFFFF</color>
+    <color name="rectangle_27_color">#FFAC65</color>
+    <color name="currency_ek1_color">#666666</color>
+    <color name="preference_ek1_color">#000000</color>
+    <color name="sample_gmail_com_color">#AAAAAA</color>
+    <color name="ellipse_19_color">#C4C4C4</color>
+
+    <!--  chat colors  -->
+    <color name="_bg__chat_ek2_color">#FFFFFF</color>
+    <color name="_12_15_am_color">#AAAAAA</color>
+    <color name="susan_doolan_color">#000000</color>
+    <color name="rectangle_30_color">#666666</color>
+    <color name="search_message____color">#CCCCCC</color>
+
+    <!--  choice_date colors  -->
+    <color name="_bg__choice_date_ek2_color">#FFFFFF</color>
+    <color name="rectangle_23_color">#F8F8F8</color>
+    <color name="_10_color">#000000</color>
+    <color name="rectangle_21_color">#FF7D0D</color>
+
+    <!--  profile colors  -->
+    <color name="_bg__profile_ek2_color">#FFFFFF</color>
+    <color name="hello__i_m_professional_expert_ui_ux_designer__i_love_create_a_app_design__landing_page_web_design__i_am_over_3_year_s_experience_in_ui_ux_design__color">#666666</color>
+    <color name="hasan_mahmud_color">#000000</color>
 </resources>

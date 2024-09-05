@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,55 +8,39 @@
     android:background="#FEFFDA"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="328dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="43dp"
-        android:layout_marginBottom="34dp"
-        android:text="CHAT ROOM"
-        android:textAlignment="center"
-        android:textColor="#7D635B"
-        android:textSize="50dp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="394dp"
-        android:layout_height="64dp"
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="114dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="553dp"
-        android:text="Experience A World Of Opportunities"
-        android:textAlignment="center"
-        android:textColor="#543734"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/openimg" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp">
+    <RelativeLayout
+        android:id="@+id/logo_ek1"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/enjoy_your_traveling"
+            android:textSize="16sp"
+            android:textColor="@color/log_in_with_google_color"
+            android:layout_marginLeft="41dp"
+            android:layout_marginTop="70dp"
+            android:layout_width="165dp"
+            android:layout_height="31dp"
+            android:text="@string/enjoy_your_traveling_string" />
 
         <ImageView
-            android:id="@+id/profileImg"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/coffee2" />
-
-    </LinearLayout>
+            android:id="@+id/logo_ek2"
+            android:src="@drawable/logo_ek2"
+            android:contentDescription="Logo"
+            android:layout_width="256dp"
+            android:layout_height="86dp" />
+    </RelativeLayout>
 
     <Button
         android:id="@+id/loginPage"
@@ -84,4 +69,5 @@
         android:textColor="#FFFEFA"
         android:textSize="30dp"
         app:backgroundTint="@null" />
+
 </RelativeLayout>

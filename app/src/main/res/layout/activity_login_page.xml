@@ -1,102 +1,222 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/workdesk"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
 
-    <TextView
-        android:layout_width="251dp"
-        android:layout_height="66dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="83dp"
-        android:layout_marginTop="39dp"
-        android:layout_marginEnd="77dp"
-        android:layout_marginBottom="30dp"
-        android:text="LOGIN"
-        android:textAlignment="center"
-        android:textColor="#7D635B"
-        android:textSize="50dp"
-        android:textStyle="bold" />
+    <RelativeLayout
+        android:id="@+id/content_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/noAccount"
-        android:layout_width="387dp"
-        android:layout_height="71dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="634dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginBottom="27dp"
-        android:text="Doesn't have an account? press here"
-        android:textAlignment="center"
-        android:textColor="#543734"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+        <RelativeLayout
+            android:id="@+id/page_log_in_page_ek1"
+            android:layout_marginTop="0dp"
+            android:layout_marginStart="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/logInBtn"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="77dp"
-        android:layout_marginTop="389dp"
-        android:layout_marginEnd="73dp"
-        android:layout_marginBottom="203dp"
-        android:background="@android:color/transparent"
-        android:text="Sign in"
-        android:textColor="#7D635B"
-        android:textSize="40dp"
-        app:backgroundTint="@null" />
+            <View
+                android:id="@+id/_bg__log_in_page_ek2"
+                android:background="@drawable/_bg__log_in_page_ek2_shape"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_width="375dp"
+                android:layout_height="812dp" />
 
-    <LinearLayout
-        android:layout_width="287dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="57dp"
-        android:layout_marginBottom="395dp"
-        android:background="@drawable/login_edittext"
-        android:orientation="vertical">
+            <View
+                android:id="@+id/log_in_page__background_mask_"
+                android:background="@drawable/log_in_page__background_mask__shape"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_width="375dp"
+                android:layout_height="812dp" />
 
-        <EditText
-            android:id="@+id/LoginUsername"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="15dp"
-            android:hint="Username"
-            android:textColor="#8A706A"
-            android:textColorHint="#8A706A"
-            android:textSize="20dp" />
+            <View
+                android:id="@+id/log_in_page__background_mask__ek1"
+                android:background="@drawable/log_in_page__background_mask__ek1_shape"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-        <EditText
-            android:id="@+id/LoginPassword"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="15dp"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:textColor="#8A706A"
-            android:textColorHint="#8A706A"
-            android:textSize="20dp" />
+            <RelativeLayout
+                android:id="@+id/sub_text"
+                android:layout_marginTop="509dp"
+                android:layout_marginStart="122dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/forgot_password_"
+                    android:textSize="13sp"
+                    android:textColor="@color/forgot_password__color"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_width="124.5dp"
+                    android:layout_height="25.5dp"
+                    android:text="@string/forgot_password__string" />
 
+                <Button
+                    android:id="@+id/noAccount"
+                    android:textSize="13sp"
+                    android:textColor="@color/black"
+                    app:backgroundTint="@null"
+                    android:background="@drawable/register_button_rounded"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="171dp"
+                    android:layout_width="130.5dp"
+                    android:layout_height="40.5dp"
+                    android:text="@string/sign_up_here_string" />
+
+                <TextView
+                    android:id="@+id/or"
+                    android:textSize="16sp"
+                    android:textColor="@color/or_color"
+                    android:layout_marginLeft="58dp"
+                    android:layout_marginTop="85dp"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:text="@string/or_string" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/button"
+                android:layout_marginTop="541dp"
+                android:layout_marginStart="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/logInBtn"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_width="335dp"
+                    android:layout_height="40dp"
+                    app:backgroundTint="@null"
+                    android:background="@drawable/login_button_rounded"
+                    android:textSize="16sp"
+                    android:textColor="@color/_bg__log_in_page_ek2_color"
+                    android:text="@string/log_in_string" />
+
+                <RelativeLayout
+                    android:id="@+id/log_in_button_ek1"
+                    android:layout_marginTop="82dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/log_in_with_google"
+                        android:layout_width="335dp"
+                        android:layout_height="40dp"
+                        app:backgroundTint="@null"
+                        android:background="@color/white"
+                        android:textSize="16sp"
+                        android:textColor="@color/log_in_with_google_color"
+                        app:iconTint="@null"
+                        app:icon="@drawable/logo"
+                        android:text="@string/log_in_with_google_string" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/password"
+                android:layout_marginTop="417dp"
+                android:layout_marginStart="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/LoginPassword"
+                    android:layout_marginTop="24dp"
+                    android:layout_width="335dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_ek2_shape"
+                    android:hint="@string/password_ek1_string"
+                    android:inputType="textPassword"
+                    android:textColor="@color/password_ek1_color" />
+
+                <RelativeLayout
+                    android:id="@+id/eye"
+                    android:layout_marginTop="38dp"
+                    android:layout_marginStart="300dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/vector"
+                        android:src="@drawable/vector"
+                        android:contentDescription="Show/Hide Password"
+                        android:layout_width="18dp"
+                        android:layout_height="13dp" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/username"
+                android:layout_marginTop="333dp"
+                android:layout_marginStart="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/LoginUsername"
+                    android:layout_marginTop="24dp"
+                    android:layout_width="335dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_ek3_shape"
+                    android:hint="Username"
+                    android:textColor="@color/log_in_with_google_color" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/title_ek2"
+                android:layout_marginTop="250dp"
+                android:layout_marginStart="146dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/log_in_ek1"
+                    android:textSize="30sp"
+                    android:textColor="@color/log_in_with_google_color"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_width="119dp"
+                    android:layout_height="59dp"
+                    android:text="@string/log_in_ek1_string" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/logo_ek1"
+                android:layout_marginTop="100dp"
+                android:layout_marginStart="60dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/enjoy_your_traveling"
+                    android:textSize="16sp"
+                    android:textColor="@color/log_in_with_google_color"
+                    android:layout_marginLeft="41dp"
+                    android:layout_marginTop="70dp"
+                    android:layout_width="165dp"
+                    android:layout_height="31dp"
+                    android:text="@string/enjoy_your_traveling_string" />
+
+                <ImageView
+                    android:id="@+id/logo_ek2"
+                    android:src="@drawable/logo_ek2"
+                    android:contentDescription="Logo"
+                    android:layout_width="256dp"
+                    android:layout_height="86dp" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
 </RelativeLayout>

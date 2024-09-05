@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Targil4_AP2</string>
     <!-- Array for Location Preferences -->
     <string-array name="location_preferences">
         <item>Midtown</item>
@@ -16,4 +15,115 @@
         <item>Cultural</item>
         <item>Relaxation</item>
     </string-array>
+
+    <!-- log_in_page strings -->
+    <string name="app_name">Page 1</string>
+    <string name="ek_img_content">ExportKit Image</string>
+    <string name="sign_up_string">Sign Up</string>
+    <string name="i_agree_and_accept_the_terms_ot_use__string">I agree and accept the terms ot use.</string>
+    <string name="password_ek2_string">Password</string>
+    <string name="confirm_password_ek1_string">Confirm Password</string>
+    <string name="female_ek1_string">Female</string>
+    <string name="male_ek1_string">Male</string>
+    <string name="sign_up_ek1_string">Sign Up</string>
+    <string name="enjoy_your_traveling_string">Enjoy your traveling</string>
+    <string name="forgot_password__string">Forgot Password?</string>
+    <string name="sign_up_here_string">Sign Up Here</string>
+    <string name="or_string">Or</string>
+    <string name="log_in_string">Log In</string>
+    <string name="log_in_with_google_string">LOG IN WITH GOOGLE</string>
+    <string name="password_ek1_string">Password</string>
+    <string name="davidwolion_gmail_com_string">davidwolion@gmail.com</string>
+    <string name="email_ek1_string">Email</string>
+    <string name="log_in_ek1_string">Log In</string>
+
+    <!--  explore strings  -->
+    <string name="__3_000_string">$3 000</string>
+    <string name="_3_day_string">3 day</string>
+    <string name="winter_string">winter</string>
+    <string name="sesimbra__lisbon_string">Sesimbra, Lisbon</string>
+    <string name="japan_most_unique_country_string">Japan Most Unique Country</string>
+    <string name="__2_000_string">$2 000</string>
+    <string name="_3_day_ek1_string">3 day</string>
+    <string name="summer_ek2_string">summer</string>
+    <string name="sesimbra__lisbon_ek1_string">Sesimbra, Lisbon</string>
+    <string name="sesimbra_e_arrabida_string">Sesimbra e Arrabida</string>
+    <string name="__3_000_ek1_string">$3 000</string>
+    <string name="_7_day_ek3_string">7 day</string>
+    <string name="winter_ek1_string">winter</string>
+    <string name="lisbon_string">Lisbon</string>
+    <string name="winter_in_portugal_string"> Winter in Portugal</string>
+    <string name="find_your_location____string">Find your location...</string>
+    <string name="explore_ek3_string">Explore</string>
+
+    <!--  tour_details strings  -->
+    <string name="bangkok__thailand_s_capital__is_a_large_city_known_for_ornate_shrines_and_vibrant_street_life__the_boat_filled_chao_phraya_river_feeds_its_network_of_canals__flowing_past_the_rattanakosin_royal_district__home_to_opulent_grand_palace_and_its_sacred_wat_phra_kaew_temple__earby_is_wat_pho_temple_with_an_enormous_reclining_buddha_and__on_the_opposite_shore__string">Bangkok, Thailands capital, is a large city known for ornate shrines and vibrant street life. The boat-filled Chao Phraya River feeds its network of canals, flowing past the Rattanakosin royal district, home to opulent Grand Palace and its sacred Wat Phra Kaew Temple. earby is Wat Pho Temple with an enormous reclining Buddha and, on the opposite shore.</string>
+    <string name="service_ek1_string">Service</string>
+    <string name="_30_c_string">30C</string>
+    <string name="__5_000_string">$5 000</string>
+    <string name="bangkok__thailand_string">Bangkok, Thailand</string>
+    <string name="capital_of_thailand_string">Capital of Thailand</string>
+
+    <!--  main_page strings  -->
+    <string name="sesimbra_e_arrabida_ek1_string">Sesimbra e Arrabida</string>
+    <string name="see_all_string">See All</string>
+    <string name="best_place_string">Top Destinations Of The Month</string>
+    <string name="get_ready_for_the_travel_trip__string">Get Ready ForThe Travel Trip!</string>
+    <string name="new_trip">New Trip</string>
+    <string name="my_trips">My Trips</string>
+
+    <!--  settings strings  -->
+    <string name="log_out_ek2_string">Log Out</string>
+    <string name="currency_ek1_string">Currency</string>
+    <string name="language_ek1_string">Language</string>
+    <string name="notification_ek1_string">Notification</string>
+    <string name="preference_ek1_string">preference </string>
+    <string name="sample_gmail_com_string">sample@gmail.com</string>
+    <string name="name_string">Barben Tovim</string>
+    <string name="settings_ek3_string">Settings</string>
+
+    <!--  chat strings  -->
+    <string name="_12_15_am_string">12:15 AM</string>
+    <string name="_10_12_2020_string">10/12 2020</string>
+    <string name="message_text_send_string">Message text send</string>
+    <string name="susan_doolan_string">Susan Doolan</string>
+    <string name="_12_15_am_ek1_string">12:15 AM</string>
+    <string name="_13_12_2020_string">13/12 2020</string>
+    <string name="hello__can_i_help_you____string">Hello, can i help you...</string>
+    <string name="rosemary_casas_string">Rosemary Casas</string>
+    <string name="_9_15_am_string">9:15 AM</string>
+    <string name="_13_12_2020_ek1_string">13/12 2020</string>
+    <string name="if_you_want_to_experince_string">If you want to experince</string>
+    <string name="john_wells_string">John Wells</string>
+    <string name="search_message____string">Search Message...</string>
+    <string name="chat_ek3_string">Chat</string>
+
+    <!--  choice_date strings  -->
+    <string name="_10_string">10</string>
+    <string name="_7_string">7</string>
+    <string name="_3_string">3</string>
+    <string name="_1_string">1</string>
+    <string name="persons_ek1_string">Persons</string>
+    <string name="_5_2_day_string">5-2day</string>
+    <string name="_7_4_day_string">7-4day</string>
+    <string name="_15_7_day_string">15-7day</string>
+    <string name="_30_day_s_or_lass_string">30 daysor lass</string>
+    <string name="travel_day_s_string">Travel Days</string>
+    <string name="april_string">April</string>
+    <string name="march_string">March</string>
+    <string name="fabruary_string">Fabruary</string>
+    <string name="january_string">January</string>
+    <string name="travel_time_string">Travel Time</string>
+    <string name="_1_x_string">1 x</string>
+    <string name="fabruary_x_string">Fabruary x</string>
+    <string name="_5_star_x_string">5 Star x</string>
+    <string name="europe_x_string">Europe x</string>
+    <string name="choice_date_ek3_string">Choice Date</string>
+    <string name="next_string">Start Now Tour</string>
+
+    <!--  profile strings  -->
+    <string name="hello__i_m_professional_expert_ui_ux_designer__i_love_create_a_app_design__landing_page_web_design__i_am_over_3_year_s_experience_in_ui_ux_design__string">Hello, im Professional Expert UI/UX Designer.I love create a App Design, Landing page,Web Design.I am over 3 years experience in UI/Ux Design.</string>
+    <string name="edit_profile_string">Edit Profile</string>
+    <string name="hasan_mahmud_string">Hasan Mahmud</string>
+    <string name="profile_ek3_string">Profile</string>
 </resources>

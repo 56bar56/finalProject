@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +57,7 @@ public class registerPage extends AppCompatActivity {
     private EditText editRegisterEmail;
     private EditText editProfileName;
     private CircleImageView imageView;
+    private CheckBox checkBox;
     private AppDB db;
     private PostDao postDao;
     private Retrofit retrofit;
@@ -74,6 +76,7 @@ public class registerPage extends AppCompatActivity {
         editRegisterPassword = findViewById(R.id.registerPassword);
         editRegisterEmail = findViewById(R.id.registerEmail);
         editProfileName = findViewById(R.id.registerDisplayName);
+        checkBox = findViewById(R.id.check_mark);
         db = Room.databaseBuilder(getApplicationContext(), AppDB.class, "PostsDB").allowMainThreadQueries().build();
         postDao = db.postDao();
         db2=Room.databaseBuilder(getApplicationContext(),AppDB.class,"sveLogin").allowMainThreadQueries().build();
@@ -152,13 +155,18 @@ public class registerPage extends AppCompatActivity {
                 }
                 if(profileName.isEmpty()) {
                     informationOk = false;
-                    errorMsg+="profileName is not valid\n";
+                    errorMsg+="Profile Name is not valid\n";
 
                 }
                 String regex3 = "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$";
                 if (!email.matches(regex3)) {
                     informationOk = false;
-                    errorMsg+="email is not valid\n";
+                    errorMsg+="Email is not valid\n";
+                }
+                // Check if the CheckBox is checked
+                if (!checkBox.isChecked()) {
+                    informationOk = false;
+                    errorMsg+="You must agree to the terms to sign up\n";
                 }
 
                 if (informationOk) {

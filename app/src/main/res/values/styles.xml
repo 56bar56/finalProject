@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+		<!-- Set your primary colors -->
+		<item name="colorPrimary">@color/colorPrimary</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+		<item name="colorAccent">@color/colorAccent</item>
+		<!-- Override default button style -->
+		<item name="buttonStyle">@style/CustomButtonStyle</item>
+	</style>
+
+	<style name="CustomButtonStyle" parent="Widget.AppCompat.Button">
+		<item name="android:backgroundTint">@null</item>
+		<item name="android:background">#FF7D0D</item>
+		<item name="android:textColor">#FFFFFF</item>
+	</style>
+
+</resources>
+
