@@ -31,17 +31,21 @@ public class WelcomeActivity extends AppCompatActivity {
         my_trips = findViewById(R.id.my_trips);
 
         // Get the intent and extract the name
+        //TODO fix the transition to contact page
         Intent intent = getIntent();
-        String name = intent.getStringExtra("displayName");
+        String displayName = intent.getStringExtra("displayName");
+        String profilePic = intent.getStringExtra("profilePic");
+
+
 
         // Update the TextView with the user's name
-        hello_name.setText("Hello " + name + ",");
+        hello_name.setText("Hello " + displayName + ",");
 
         // Set onClickListener for the new_trip button to go to NewTripActivity
         new_trip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WelcomeActivity.this, NewTripActivity.class);
+                Intent intent = new Intent(WelcomeActivity.this, Flight_Preferance_Activity.class);
                 startActivity(intent);
             }
         });
@@ -68,7 +72,15 @@ public class WelcomeActivity extends AppCompatActivity {
         chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(WelcomeActivity.this, contacts_pageActivity.class);
+                if(getIntent().getStringExtra("CheckWithServer").equals("yes")) {
+                    intent.putExtra("CheckWithServer","yes");
+
+                }
+                else {
+                    intent.putExtra("CheckWithServer","not");
+                }
                 startActivity(intent);
             }
         });

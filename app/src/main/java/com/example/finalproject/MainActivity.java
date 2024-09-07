@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     user.getTokenWithFireBase(globalVars.username, globalVars.password, newToken);
                 }
             });
-            Intent intent = new Intent(getApplicationContext(), contacts_pageActivity.class);
+            Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
             intent.putExtra("CheckWithServer", "yes");
             startActivity(intent);
         }

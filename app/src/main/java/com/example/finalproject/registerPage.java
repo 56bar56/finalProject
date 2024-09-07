@@ -247,7 +247,7 @@ public class registerPage extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<UserToGet> call2, Response<UserToGet> response2) {
                             UserToGet serverReturn = response2.body();
-                            Intent intent = new Intent(getApplicationContext(), contacts_pageActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
                             intent.putExtra("username", serverReturn.getUsername());
                             intent.putExtra("displayName", serverReturn.getDisplayName());
                             intent.putExtra("profilePic", serverReturn.getProfilePic());

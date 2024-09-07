@@ -3,44 +3,116 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
-    android:background="@drawable/contact_item_background"
-    android:clickable="true">
+    android:background="@color/white"
+    android:clickable="true"
+    android:orientation="horizontal"
+    android:id="@+id/one_contact">
 
-
+    <!-- Profile Image Section -->
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profileImg"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:src="@drawable/profile_img"
-        android:scaleType="centerCrop"/>
+        android:src="@drawable/_8tfybysgco_1"
+        android:contentDescription="profile_img"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="centerCrop"
+        android:layout_marginEnd="16dp"/>
 
+    <!-- Contact Name and Last Message Section -->
     <LinearLayout
-        android:layout_width="289dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="16dp"
-        android:layout_weight="1"
+        android:id="@+id/contact_name"
         android:orientation="vertical"
-        android:gravity="center_vertical">
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp">
 
         <TextView
             android:id="@+id/displayName"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:textColor="#0FADCF"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textSize="13sp"
+            android:textColor="@color/susan_doolan_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/susan_doolan_string"/>
+
+        <TextView
+            android:id="@+id/last_message"
+            android:textColor="@color/_12_15_am_color"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/message_text_send_string"/>
+
+    </LinearLayout>
+
+    <!-- Date and Time Section -->
+    <LinearLayout
+        android:id="@+id/date_time"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical">
 
         <TextView
             android:id="@+id/date"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textColor="#0FADCF"
-            android:textSize="20sp"
-            android:gravity="end"
-            android:layout_gravity="end" />
+            android:textColor="@color/_12_15_am_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_12_15_am_string"
+            android:layout_marginBottom="8dp"/>
+
 
     </LinearLayout>
 
 </LinearLayout>
+
+
+    <!--
+    <?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background="@drawable/contact_item_background"
+        android:clickable="true">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImg"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:src="@drawable/profile_img"
+            android:scaleType="centerCrop"/>
+
+        <LinearLayout
+            android:layout_width="289dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/displayName"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:textColor="#0FADCF"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textColor="#0FADCF"
+                android:textSize="20sp"
+                android:gravity="end"
+                android:layout_gravity="end" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    -->

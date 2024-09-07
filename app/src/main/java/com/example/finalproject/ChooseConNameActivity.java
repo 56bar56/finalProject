@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,7 +32,7 @@ public class ChooseConNameActivity extends AppCompatActivity {
 
     private EditText editConName;
     private Button buttonSave;
-    private FloatingActionButton buttonCancel;
+    private ImageView buttonCancel;
     private AppDB db;
     private PostDao postDao;
     private Retrofit retrofit;

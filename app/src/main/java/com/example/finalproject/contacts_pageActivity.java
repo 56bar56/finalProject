@@ -2,10 +2,13 @@ package com.example.finalproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
@@ -31,7 +34,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class contacts_pageActivity extends AppCompatActivity {
     private FloatingActionButton btnAdd;
     private FloatingActionButton btnLogout;
-    private FloatingActionButton btnSettings;
+    //private FloatingActionButton btnSettings;
+    private ImageView back_button;
     private List<Contact> contacts;
     private AppDB db;
     private PostDao postDao;
@@ -89,6 +93,32 @@ public class contacts_pageActivity extends AppCompatActivity {
         adapter.setContacts(chats);
         myService.setAdapterCon(adapter);
 
+        // Set onClickListener for the back button to go to WelcomeActivity
+        back_button = findViewById(R.id.back_button);
+        back_button.setOnClickListener(v -> {
+            Intent intent = new Intent(contacts_pageActivity.this, WelcomeActivity.class);
+            if(getIntent().getStringExtra("CheckWithServer").equals("yes")) {
+                intent.putExtra("CheckWithServer","yes");
+
+            }
+            else {
+                intent.putExtra("CheckWithServer","not");
+            }
+            myService.setContactUserName(intent.getStringExtra(""));
+            finish();
+        });
+
+        /*
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(contacts_pageActivity.this, WelcomeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+         */
+
         adapter.setOnContactClickListener(new ContactsListAdapter.OnContactClickListener() {
             @Override
             public void onContactClick(Contact contact) {
@@ -123,6 +153,9 @@ public class contacts_pageActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), loginActivity.class);
             startActivity(intent);
         });
+
+        //TODO take care of settings
+        /*
         btnSettings=findViewById(R.id.btnSettings);
         btnSettings.setOnClickListener(v -> {
             Intent goToSettings= new Intent(getApplicationContext(),SettingsActivity.class);
@@ -130,6 +163,9 @@ public class contacts_pageActivity extends AppCompatActivity {
             startActivity(goToSettings);
 
         });
+
+         */
+
         String x= getIntent().getStringExtra("CheckWithServer");
         if(getIntent().getStringExtra("CheckWithServer").equals("yes")) {
             retrofit = new Retrofit.Builder()

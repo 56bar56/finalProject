@@ -6,55 +6,114 @@
     android:orientation="vertical"
     android:background="#FFFEFA">
 
-    <TextView
-        android:id="@+id/tvChatRoom"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="30dp"
-        android:background="#74CFA0"
-        android:text="Chat Room"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:textColor="#F7F1AE"
-        android:textSize="30sp" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnCancelAdd"
+    <RelativeLayout android:id="@+id/tvChatRoom"
+        android:layout_marginTop="44dp"
+        android:layout_marginStart="20dp"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginBottom="3dp"
-        android:backgroundTint="#74CFA0"
-        android:contentDescription="Back Button"
-        android:src="@drawable/back_foreground"
-        app:maxImageSize="48dp"
-        app:tint="#F7F1AE" />
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+        <!-- app:layout_constraintBottom_toTopOf="@id/btnAdd" -->
 
-    <TextView
-        android:layout_width="259dp"
-        android:layout_height="61dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="77dp"
-        android:layout_marginTop="163dp"
-        android:layout_marginEnd="75dp"
-        android:layout_marginBottom="459dp"
-        android:text="Add contact"
-        android:textAlignment="center"
-        android:textColor="#0FADCF"
-        android:textSize="40dp"
-        android:textStyle="bold" />
+        <RelativeLayout android:id="@+id/title"
+            android:layout_marginTop="6dp"
+            android:layout_marginStart="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
 
-    <LinearLayout
+            <TextView android:id="@+id/chat_ek3"
+                android:textSize="26sp"
+                android:textColor="@color/susan_doolan_color"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Contact"
+                />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout android:id="@+id/author"
+            android:layout_marginTop="0dp"
+            android:layout_marginStart="295dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+
+            <RelativeLayout android:id="@+id/author_img"
+                android:layout_marginTop="0dp"
+                android:layout_marginStart="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <View   android:id="@+id/rectangle_2"
+                    android:background="@drawable/rectangle_2_shape"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+
+                <View   android:id="@+id/rectangle_2_ek1"
+                    android:background="@drawable/rectangle_2_ek1_shape"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+
+                <ImageView android:id="@+id/ava_7_1"
+                    android:src="@drawable/ava_7_1"
+                    android:contentDescription="ava_7_1"
+                    android:layout_marginStart="-4dp"
+                    android:layout_marginTop="-4dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp" />
+
+            </RelativeLayout>
+
+            <View   android:id="@+id/active"
+                android:background="@drawable/active_shape"
+                android:layout_marginStart="29dp"
+                android:layout_marginTop="35dp"
+                android:layout_width="10dp"
+                android:layout_height="10dp" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout android:id="@+id/notification"
+            android:layout_marginTop="11dp"
+            android:layout_marginStart="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:id="@+id/btnCancelAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="5dp"
+                android:contentDescription="vector_ek28"
+                android:src="@drawable/vector_ek28" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="296dp"
         android:layout_height="200dp"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="54dp"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="59dp"
         android:layout_marginBottom="257dp"
-        android:background="@drawable/add_contact_edittext"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -67,20 +126,113 @@
             android:layout_marginRight="15dp"
             android:layout_marginBottom="15dp"
             android:hint="Contact's Username"
-            android:textSize="20dp"
-            android:textColor="#0FADCF"
-            android:textColorHint="#0FADCF" />
+            android:textColor="#FF7D0D"
+            android:textColorHint="#FF7D0D"
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/btnSaveCon"
             android:layout_width="188dp"
             android:layout_height="58dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="46dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/register_button_rounded"
             android:text="Add"
             android:textColor="@color/white"
             android:textSize="30dp"
             app:backgroundTint="@null" />
 
-    </LinearLayout>
-
+    </RelativeLayout>
 </RelativeLayout>
+
+    <!--
+    <?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:background="#FFFEFA">
+
+        <TextView
+            android:id="@+id/tvChatRoom"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="30dp"
+            android:background="#74CFA0"
+            android:text="Chat Room"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="#F7F1AE"
+            android:textSize="30sp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnCancelAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="3dp"
+            android:backgroundTint="#74CFA0"
+            android:contentDescription="Back Button"
+            android:src="@drawable/back_foreground"
+            app:maxImageSize="48dp"
+            app:tint="#F7F1AE" />
+
+        <TextView
+            android:layout_width="259dp"
+            android:layout_height="61dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="77dp"
+            android:layout_marginTop="163dp"
+            android:layout_marginEnd="75dp"
+            android:layout_marginBottom="459dp"
+            android:text="Add contact"
+            android:textAlignment="center"
+            android:textColor="#0FADCF"
+            android:textSize="40dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="296dp"
+            android:layout_height="200dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="54dp"
+            android:layout_marginBottom="257dp"
+            android:background="@drawable/add_contact_edittext"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editNewConName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="15dp"
+                android:hint="Contact's Username"
+                android:textSize="20dp"
+                android:textColor="#0FADCF"
+                android:textColorHint="#0FADCF" />
+
+            <Button
+                android:id="@+id/btnSaveCon"
+                android:layout_width="188dp"
+                android:layout_height="58dp"
+                android:background="@drawable/register_button_rounded"
+                android:text="Add"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                app:backgroundTint="@null" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    -->

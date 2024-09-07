@@ -34,7 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class chatActivity extends AppCompatActivity {
 
-    private FloatingActionButton btnBack;
+    private ImageView btnBack;
     private ImageView profileImg;
     private TextView displayName;
     private FloatingActionButton btnSend;
