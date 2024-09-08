@@ -76,10 +76,10 @@ public class Flight_Preferance_Activity extends AppCompatActivity {
                 "Cape Town, South Africa",
                 "Caracas, Venezuela",
                 "Casablanca, Morocco",
-                "Chicago, United States",
+                "Chicago, USA",
                 "Copenhagen, Denmark",
                 "Cyprus",
-                "Dallas, United States",
+                "Dallas, USA",
                 "Doha, Qatar",
                 "Dubai, United Arab Emirates",
                 "Edinburgh, United Kingdom",
@@ -92,7 +92,7 @@ public class Flight_Preferance_Activity extends AppCompatActivity {
                 "Helsinki, Finland",
                 "Ho Chi Minh City, Vietnam",
                 "Hong Kong, China",
-                "Houston, United States",
+                "Houston, USA",
                 "Iceland",
                 "Israel",
                 "Jakarta, Indonesia",
@@ -102,7 +102,7 @@ public class Flight_Preferance_Activity extends AppCompatActivity {
                 "Lima, Peru",
                 "Lisbon, Portugal",
                 "London, United Kingdom",
-                "Los Angeles, United States",
+                "Los Angeles, USA",
                 "Luxembourg",
                 "Madrid, Spain",
                 "Maldives",
@@ -118,7 +118,7 @@ public class Flight_Preferance_Activity extends AppCompatActivity {
                 "Nairobi, Kenya",
                 "Nepal",
                 "New Delhi, India",
-                "New York, United States",
+                "New York, USA",
                 "Nice, France",
                 "Osaka, Japan",
                 "Oslo, Norway",
@@ -127,7 +127,7 @@ public class Flight_Preferance_Activity extends AppCompatActivity {
                 "Porto, Portugal",
                 "Rio de Janeiro, Brazil",
                 "Rome, Italy",
-                "San Francisco, United States",
+                "San Francisco, USA",
                 "San Marino",
                 "Sao Paulo, Brazil",
                 "Santiago, Chile",
@@ -327,10 +327,11 @@ public class Flight_Preferance_Activity extends AppCompatActivity {
 
 
                 // Pass data to FlightsActivity using intent
-                Intent intent = new Intent(Flight_Preferance_Activity.this, NewTripActivity.class); //TODO change to FlightsActivity.class
+                Intent intent = new Intent(Flight_Preferance_Activity.this, FlightsActivity.class);
                 intent.putExtra("departureLocation", departureLocation);
                 intent.putExtra("arrivalLocation", arrivalLocation);
                 intent.putExtra("departureDate", departureDate);
+                intent.putExtra("arrivalDate", arrivalDate);
                 intent.putExtra("minDay", minDay);
                 intent.putExtra("maxDay", maxDay);
                 intent.putExtra("peopleNumber", peopleNumber);
