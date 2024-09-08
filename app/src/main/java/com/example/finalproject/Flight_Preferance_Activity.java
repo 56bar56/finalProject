@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ import java.util.Locale;
 
 public class Flight_Preferance_Activity extends AppCompatActivity {
 
+    private ImageView backButton;
     private AutoCompleteTextView startLocation;
     private AutoCompleteTextView destinationLocation;
     private TextView startDateTextView;
@@ -50,6 +52,13 @@ public class Flight_Preferance_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.flight_preferance_page);
+
+        // Taking care of back button
+        // Set onClickListener for the back button to go to WelcomeActivity
+        backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(v -> {
+            finish();
+        });
 
         // Taking care of start and destination locations
         startLocation = findViewById(R.id.start_location);

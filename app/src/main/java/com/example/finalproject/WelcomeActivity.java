@@ -32,11 +32,10 @@ public class WelcomeActivity extends AppCompatActivity {
 
         // Get the intent and extract the name
         //TODO fix the transition to contact page
+        //TODO get the display name from the server with the global vars
         Intent intent = getIntent();
         String displayName = intent.getStringExtra("displayName");
         String profilePic = intent.getStringExtra("profilePic");
-
-
 
         // Update the TextView with the user's name
         hello_name.setText("Hello " + displayName + ",");

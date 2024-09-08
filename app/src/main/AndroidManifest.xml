@@ -25,6 +25,9 @@
             android:name=".FlightsActivity"
             android:exported="false" />
         <activity
+            android:name=".Hotel_Preferance_Activity"
+            android:exported="false" />
+        <activity
             android:name=".Flight_Preferance_Activity"
             android:exported="false" />
         <activity

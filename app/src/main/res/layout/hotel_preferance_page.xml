@@ -1,6 +1,5 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -21,21 +20,18 @@
             android:id="@+id/next_button"
             android:layout_width="335dp"
             android:layout_height="40dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="641dp"
             android:layout_marginTop="641dp"
-            android:layout_marginEnd="641dp"
-            android:layout_marginBottom="641dp"
-            android:background="@drawable/login_button_rounded"
+            android:layout_centerHorizontal="true"
+            app:backgroundTint="@null"
+            android:background="@drawable/bg_shape"
             android:text="Next"
             android:textColor="@color/_bg__log_in_page_ek2_color"
-            android:textSize="16sp"
-            app:backgroundTint="@null" />
+            android:textSize="16sp" />
 
 
         <RelativeLayout
             android:id="@+id/menu_bar"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="37dp">
@@ -43,18 +39,21 @@
 
             <RelativeLayout
                 android:id="@+id/title_ek3"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:layout_marginStart="104dp"
                 android:layout_marginTop="0dp">
 
                 <TextView
                     android:id="@+id/choice_date_ek3"
                     android:layout_width="wrap_content"
-                    android:layout_height="51dp"
+                    android:layout_height="80dp"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginLeft="0dp"
                     android:layout_marginTop="0dp"
-                    android:text="Flight  Preferences"
+                    android:gravity="center"
+                    android:text="Accommodation Preferences"
                     android:textColor="@color/_10_color"
                     android:textSize="26sp" />
 
@@ -94,7 +93,7 @@
                 android:padding="16dp">
 
                 <RelativeLayout
-                    android:id="@+id/location"
+                    android:id="@+id/city_to_sleep"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="19dp"
@@ -105,80 +104,152 @@
                         android:layout_height="35dp"
                         android:layout_marginLeft="0dp"
                         android:layout_marginTop="0dp"
-                        android:text="Airports:"
+                        android:text="City:"
                         android:textColor="@color/_10_color"
                         android:textSize="18sp" />
 
-                    <AutoCompleteTextView
-                        android:id="@+id/start_location"
+                    <EditText
+                        android:id="@+id/city"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Enter start location"
+                        android:hint="The city where I want to sleep"
                         android:layout_marginStart="32dp"
                         android:layout_marginEnd="32dp"
                         android:layout_marginTop="25dp"
                         android:inputType="text" />
 
-                    <!-- End Date Input -->
-                    <AutoCompleteTextView
-                        android:id="@+id/destination_location"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Enter destination location"
-                        android:inputType="text"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginTop="60dp" />
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/date_range"
+                    android:id="@+id/distance_from_city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="20dp">
 
-                    <TextView
-                        android:layout_width="118dp"
-                        android:layout_height="35dp"
-                        android:layout_marginLeft="0dp"
-                        android:layout_marginTop="0dp"
-                        android:text="Date Range:"
-                        android:textColor="@color/_10_color"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/start_date"
+                    <HorizontalScrollView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Enter start date"
-                        android:inputType="none"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginTop="16dp"
-                        android:textSize="18dp"
-                        android:padding="10dp"
-                        />
+                        android:scrollbars="none">
 
-                    <!-- End Date Input -->
-                    <TextView
-                        android:id="@+id/end_date"
-                        android:layout_width="match_parent"
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RelativeLayout
+                                android:id="@+id/center1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="40dp">
+
+                                <View
+                                    android:id="@+id/center2"
+                                    android:layout_width="80dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginStart="0dp"
+                                    android:layout_marginTop="0dp"
+                                    android:background="@drawable/rectangle_21_shape" />
+
+                                <TextView
+                                    android:id="@+id/center3"
+                                    android:layout_width="60dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center_horizontal|center"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginTop="5dp"
+                                    android:gravity="center"
+                                    android:text="Center"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp" />
+
+                            </RelativeLayout>
+
+
+                            <RelativeLayout
+                                android:id="@+id/suburb1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="40dp">
+
+                                <View
+                                    android:id="@+id/suburb2"
+                                    android:layout_width="80dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginStart="0dp"
+                                    android:layout_marginTop="0dp"
+                                    android:background="@drawable/rectangle_24_shape" />
+
+                                <TextView
+                                    android:id="@+id/suburb3"
+                                    android:layout_width="60dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center_horizontal|center"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginTop="5dp"
+                                    android:gravity="center"
+                                    android:text="Suburb"
+                                    android:textColor="@color/_10_color"
+                                    android:textSize="16sp" />
+
+                            </RelativeLayout>
+
+
+                            <RelativeLayout
+                                android:id="@+id/outside1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="40dp">
+
+                                <View
+                                    android:id="@+id/outside2"
+                                    android:layout_width="80dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginStart="0dp"
+                                    android:layout_marginTop="0dp"
+                                    android:background="@drawable/rectangle_24_shape" />
+
+                                <TextView
+                                    android:id="@+id/outside3"
+                                    android:layout_width="60dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center_horizontal|center"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginTop="5dp"
+                                    android:gravity="center"
+                                    android:text="Outside"
+                                    android:textColor="@color/_10_color"
+                                    android:textSize="16sp" />
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="Enter end date"
-                        android:inputType="none"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginTop="50dp"
-                        android:textSize="18dp"
-                        android:padding="10dp"
-                        />
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginTop="0dp"
+                            android:text="Distance From The City:"
+                            android:textColor="@color/_10_color"
+                            android:textSize="18sp" />
+
+                    </RelativeLayout>
 
                 </RelativeLayout>
 
-
                 <RelativeLayout
-                    android:id="@+id/travel_day"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="19dp"
@@ -196,44 +267,14 @@
                             android:orientation="horizontal">
 
                             <RelativeLayout
-                                android:id="@+id/two_to_four_days1"
+                                android:id="@+id/hotel1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="40dp">
 
                                 <View
-                                    android:id="@+id/two_to_four_days2"
-                                    android:layout_width="80dp"
-                                    android:layout_height="50dp"
-                                    android:layout_marginStart="0dp"
-                                    android:layout_marginTop="0dp"
-                                    android:background="@drawable/rectangle_24_shape" />
-
-                                <TextView
-                                    android:id="@+id/two_to_four_days3"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_gravity="center_horizontal|center"
-                                    android:layout_marginLeft="20dp"
-                                    android:layout_marginTop="5dp"
-                                    android:gravity="center"
-                                    android:text="2-4 days"
-                                    android:textColor="@color/_10_color"
-                                    android:textSize="16sp" />
-
-                            </RelativeLayout>
-
-
-                            <RelativeLayout
-                                android:id="@+id/five_to_seven_days1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="40dp">
-
-                                <View
-                                    android:id="@+id/five_to_seven_days2"
+                                    android:id="@+id/hotel2"
                                     android:layout_width="80dp"
                                     android:layout_height="50dp"
                                     android:layout_marginStart="0dp"
@@ -241,14 +282,14 @@
                                     android:background="@drawable/rectangle_21_shape" />
 
                                 <TextView
-                                    android:id="@+id/five_to_seven_days3"
-                                    android:layout_width="40dp"
+                                    android:id="@+id/hotel3"
+                                    android:layout_width="60dp"
                                     android:layout_height="40dp"
                                     android:layout_gravity="center_horizontal|center"
-                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginLeft="10dp"
                                     android:layout_marginTop="5dp"
                                     android:gravity="center"
-                                    android:text="5-7 days"
+                                    android:text="Hotel"
                                     android:textColor="@color/white"
                                     android:textSize="16sp" />
 
@@ -256,14 +297,14 @@
 
 
                             <RelativeLayout
-                                android:id="@+id/seven_to_fourteen_days1"
+                                android:id="@+id/Cabbin1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="40dp">
 
                                 <View
-                                    android:id="@+id/seven_to_fourteen_days2"
+                                    android:id="@+id/Cabbin2"
                                     android:layout_width="80dp"
                                     android:layout_height="50dp"
                                     android:layout_marginStart="0dp"
@@ -271,14 +312,14 @@
                                     android:background="@drawable/rectangle_24_shape" />
 
                                 <TextView
-                                    android:id="@+id/seven_to_fourteen_days3"
-                                    android:layout_width="40dp"
+                                    android:id="@+id/Cabbin3"
+                                    android:layout_width="60dp"
                                     android:layout_height="40dp"
                                     android:layout_gravity="center_horizontal|center"
-                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginLeft="10dp"
                                     android:layout_marginTop="5dp"
                                     android:gravity="center"
-                                    android:text="7-14 days"
+                                    android:text="Cabin"
                                     android:textColor="@color/_10_color"
                                     android:textSize="16sp" />
 
@@ -286,14 +327,14 @@
 
 
                             <RelativeLayout
-                                android:id="@+id/fifteen_to_thirty_days1"
+                                android:id="@+id/airbnb1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="40dp">
 
                                 <View
-                                    android:id="@+id/fifteen_to_thirty_days2"
+                                    android:id="@+id/airbnb2"
                                     android:layout_width="80dp"
                                     android:layout_height="50dp"
                                     android:layout_marginStart="0dp"
@@ -301,28 +342,29 @@
                                     android:background="@drawable/rectangle_24_shape" />
 
                                 <TextView
-                                    android:id="@+id/fifteen_to_thirty_days3"
-                                    android:layout_width="50dp"
+                                    android:id="@+id/airbnb3"
+                                    android:layout_width="60dp"
                                     android:layout_height="40dp"
                                     android:layout_gravity="center_horizontal|center"
-                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginLeft="10dp"
                                     android:layout_marginTop="5dp"
                                     android:gravity="center"
-                                    android:text="15-30 days"
+                                    android:text="Airbnb"
                                     android:textColor="@color/_10_color"
                                     android:textSize="16sp" />
 
                             </RelativeLayout>
+
 
                             <RelativeLayout
-                                android:id="@+id/above_thirty_days1"
+                                android:id="@+id/warehouse1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="40dp">
 
                                 <View
-                                    android:id="@+id/above_thirty_days2"
+                                    android:id="@+id/warehouse2"
                                     android:layout_width="80dp"
                                     android:layout_height="50dp"
                                     android:layout_marginStart="0dp"
@@ -330,18 +372,19 @@
                                     android:background="@drawable/rectangle_24_shape" />
 
                                 <TextView
-                                    android:id="@+id/above_thirty_days3"
-                                    android:layout_width="50dp"
+                                    android:id="@+id/warehouse3"
+                                    android:layout_width="80dp"
                                     android:layout_height="40dp"
                                     android:layout_gravity="center_horizontal|center"
-                                    android:layout_marginLeft="15dp"
+                                    android:layout_marginLeft="0dp"
                                     android:layout_marginTop="5dp"
                                     android:gravity="center"
-                                    android:text="Above 30"
+                                    android:text="Warehouse"
                                     android:textColor="@color/_10_color"
                                     android:textSize="16sp" />
 
                             </RelativeLayout>
+
                         </LinearLayout>
                     </HorizontalScrollView>
 
@@ -354,12 +397,12 @@
                         android:layout_marginTop="0dp">
 
                         <TextView
-                            android:id="@+id/travel_day_s"
-                            android:layout_width="124dp"
+                            android:id="@+id/type"
+                            android:layout_width="wrap_content"
                             android:layout_height="35dp"
                             android:layout_marginLeft="0dp"
                             android:layout_marginTop="0dp"
-                            android:text="@string/travel_day_s_string"
+                            android:text="Type Of Accommodation"
                             android:textColor="@color/_10_color"
                             android:textSize="18sp" />
 
@@ -367,8 +410,9 @@
 
                 </RelativeLayout>
 
+
                 <RelativeLayout
-                    android:id="@+id/num_of_persons"
+                    android:id="@+id/nuber_of_stars"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="19dp"
@@ -386,14 +430,14 @@
 
 
                             <RelativeLayout
-                                android:id="@+id/one_person1"
+                                android:id="@+id/one_star1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="36dp">
 
                                 <View
-                                    android:id="@+id/one_person2"
+                                    android:id="@+id/one_star2"
                                     android:layout_width="40dp"
                                     android:layout_height="40dp"
                                     android:layout_marginStart="0dp"
@@ -401,7 +445,7 @@
                                     android:background="@drawable/rectangle_23_shape" />
 
                                 <TextView
-                                    android:id="@+id/one_person3"
+                                    android:id="@+id/one_star3"
                                     android:layout_width="30dp"
                                     android:layout_height="30dp"
                                     android:layout_marginStart="5dp"
@@ -414,14 +458,14 @@
                             </RelativeLayout>
 
                             <RelativeLayout
-                                android:id="@+id/two_person1"
+                                android:id="@+id/two_star1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="36dp">
 
                                 <View
-                                    android:id="@+id/two_person2"
+                                    android:id="@+id/two_star2"
                                     android:layout_width="40dp"
                                     android:layout_height="40dp"
                                     android:layout_marginStart="0dp"
@@ -429,7 +473,7 @@
                                     android:background="@drawable/rectangle_23_shape" />
 
                                 <TextView
-                                    android:id="@+id/two_person3"
+                                    android:id="@+id/two_star3"
                                     android:layout_width="30dp"
                                     android:layout_height="30dp"
                                     android:layout_marginStart="5dp"
@@ -442,14 +486,14 @@
                             </RelativeLayout>
 
                             <RelativeLayout
-                                android:id="@+id/three_person1"
+                                android:id="@+id/three_star1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="36dp">
 
                                 <View
-                                    android:id="@+id/three_person2"
+                                    android:id="@+id/three_star2"
                                     android:layout_width="40dp"
                                     android:layout_height="40dp"
                                     android:layout_marginStart="0dp"
@@ -457,27 +501,29 @@
                                     android:background="@drawable/rectangle_23_shape" />
 
                                 <TextView
-                                    android:id="@+id/three_person3"
+                                    android:id="@+id/three_star3"
                                     android:layout_width="30dp"
                                     android:layout_height="30dp"
+                                    android:layout_alignParentEnd="true"
                                     android:layout_marginStart="5dp"
                                     android:layout_marginTop="5dp"
-                                    android:text="3"
+                                    android:layout_marginEnd="5dp"
                                     android:gravity="center"
+                                    android:text="3"
                                     android:textColor="@color/_10_color"
                                     android:textSize="18sp" />
 
                             </RelativeLayout>
 
                             <RelativeLayout
-                                android:id="@+id/four_person1"
+                                android:id="@+id/four_star1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="36dp">
 
                                 <View
-                                    android:id="@+id/four_person2"
+                                    android:id="@+id/four_star2"
                                     android:layout_width="40dp"
                                     android:layout_height="40dp"
                                     android:layout_marginStart="0dp"
@@ -485,7 +531,7 @@
                                     android:background="@drawable/rectangle_21_shape" />
 
                                 <TextView
-                                    android:id="@+id/four_person3"
+                                    android:id="@+id/four_star3"
                                     android:layout_width="30dp"
                                     android:layout_height="30dp"
                                     android:layout_marginStart="5dp"
@@ -498,14 +544,14 @@
                             </RelativeLayout>
 
                             <RelativeLayout
-                                android:id="@+id/five_person1"
+                                android:id="@+id/five_star1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="36dp">
 
                                 <View
-                                    android:id="@+id/five_person2"
+                                    android:id="@+id/five_star2"
                                     android:layout_width="40dp"
                                     android:layout_height="40dp"
                                     android:layout_marginStart="0dp"
@@ -513,320 +559,12 @@
                                     android:background="@drawable/rectangle_23_shape" />
 
                                 <TextView
-                                    android:id="@+id/five_person3"
+                                    android:id="@+id/five_star3"
                                     android:layout_width="30dp"
                                     android:layout_height="30dp"
                                     android:layout_marginStart="5dp"
                                     android:layout_marginTop="5dp"
                                     android:text="5"
-                                    android:gravity="center"
-                                    android:textColor="@color/_10_color"
-                                    android:textSize="18sp" />
-
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/six_person1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="36dp">
-
-                                <View
-                                    android:id="@+id/six_person2"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginStart="0dp"
-                                    android:layout_marginTop="0dp"
-                                    android:background="@drawable/rectangle_23_shape" />
-
-                                <TextView
-                                    android:id="@+id/six_person3"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_marginStart="5dp"
-                                    android:layout_marginTop="5dp"
-                                    android:text="6"
-                                    android:gravity="center"
-                                    android:textColor="@color/_10_color"
-                                    android:textSize="18sp" />
-
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/seven_person1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="36dp">
-
-                                <View
-                                    android:id="@+id/seven_person2"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginStart="0dp"
-                                    android:layout_marginTop="0dp"
-                                    android:background="@drawable/rectangle_23_shape" />
-
-                                <TextView
-                                    android:id="@+id/seven_person3"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_marginStart="5dp"
-                                    android:layout_marginTop="5dp"
-                                    android:text="7"
-                                    android:gravity="center"
-                                    android:textColor="@color/_10_color"
-                                    android:textSize="18sp" />
-
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/eight_person1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="36dp">
-
-                                <View
-                                    android:id="@+id/eight_person2"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginStart="0dp"
-                                    android:layout_marginTop="0dp"
-                                    android:background="@drawable/rectangle_23_shape" />
-
-                                <TextView
-                                    android:id="@+id/eight_person3"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_marginStart="5dp"
-                                    android:layout_marginTop="5dp"
-                                    android:text="8"
-                                    android:gravity="center"
-                                    android:textColor="@color/_10_color"
-                                    android:textSize="18sp" />
-
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/nine_person1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="36dp">
-
-                                <View
-                                    android:id="@+id/nine_person2"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginStart="0dp"
-                                    android:layout_marginTop="0dp"
-                                    android:background="@drawable/rectangle_23_shape" />
-
-                                <TextView
-                                    android:id="@+id/nine_person3"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_marginStart="5dp"
-                                    android:layout_marginTop="5dp"
-                                    android:text="9"
-                                    android:gravity="center"
-                                    android:textColor="@color/_10_color"
-                                    android:textSize="18sp" />
-
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/ten_person1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="36dp">
-
-                                <View
-                                    android:id="@+id/ten_person2"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginStart="0dp"
-                                    android:layout_marginTop="0dp"
-                                    android:background="@drawable/rectangle_23_shape" />
-
-                                <TextView
-                                    android:id="@+id/ten_person3"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_marginStart="5dp"
-                                    android:layout_marginTop="5dp"
-                                    android:text="10"
-                                    android:gravity="center"
-                                    android:textColor="@color/_10_color"
-                                    android:textSize="18sp" />
-
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/eleven_person1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="36dp">
-
-                                <View
-                                    android:id="@+id/eleven_person2"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginStart="0dp"
-                                    android:layout_marginTop="0dp"
-                                    android:background="@drawable/rectangle_23_shape" />
-
-                                <TextView
-                                    android:id="@+id/eleven_person3"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_marginStart="5dp"
-                                    android:layout_marginTop="5dp"
-                                    android:text="11"
-                                    android:gravity="center"
-                                    android:textColor="@color/_10_color"
-                                    android:textSize="18sp" />
-
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/twelve_person1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="36dp">
-
-                                <View
-                                    android:id="@+id/twelve_person2"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginStart="0dp"
-                                    android:layout_marginTop="0dp"
-                                    android:background="@drawable/rectangle_23_shape" />
-
-                                <TextView
-                                    android:id="@+id/twelve_person3"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_marginStart="5dp"
-                                    android:layout_marginTop="5dp"
-                                    android:text="12"
-                                    android:gravity="center"
-                                    android:textColor="@color/_10_color"
-                                    android:textSize="18sp" />
-
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/thirteen_person1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="36dp">
-
-                                <View
-                                    android:id="@+id/thirteen_person2"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginStart="0dp"
-                                    android:layout_marginTop="0dp"
-                                    android:background="@drawable/rectangle_23_shape" />
-
-                                <TextView
-                                    android:id="@+id/thirteen_person3"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_marginStart="5dp"
-                                    android:layout_marginTop="5dp"
-                                    android:text="13"
-                                    android:gravity="center"
-                                    android:textColor="@color/_10_color"
-                                    android:textSize="18sp" />
-
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/fourteen_person1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="36dp">
-
-                                <View
-                                    android:id="@+id/fourteen_person2"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginStart="0dp"
-                                    android:layout_marginTop="0dp"
-                                    android:background="@drawable/rectangle_23_shape" />
-
-                                <TextView
-                                    android:id="@+id/fourteen_person3"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_marginStart="5dp"
-                                    android:layout_marginTop="5dp"
-                                    android:text="14"
-                                    android:gravity="center"
-                                    android:textColor="@color/_10_color"
-                                    android:textSize="18sp" />
-
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/fifteen_person1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="36dp">
-
-                                <View
-                                    android:id="@+id/fifteen_person2"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginStart="0dp"
-                                    android:layout_marginTop="0dp"
-                                    android:background="@drawable/rectangle_23_shape" />
-
-                                <TextView
-                                    android:id="@+id/fifteen_person3"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_marginStart="5dp"
-                                    android:layout_marginTop="5dp"
-                                    android:text="15"
-                                    android:gravity="center"
-                                    android:textColor="@color/_10_color"
-                                    android:textSize="18sp" />
-
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/sixteen_person1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="36dp">
-
-                                <View
-                                    android:id="@+id/sixteen_person2"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginStart="0dp"
-                                    android:layout_marginTop="0dp"
-                                    android:background="@drawable/rectangle_23_shape" />
-
-                                <TextView
-                                    android:id="@+id/sixteen_person3"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_marginStart="5dp"
-                                    android:layout_marginTop="5dp"
-                                    android:text="16"
                                     android:gravity="center"
                                     android:textColor="@color/_10_color"
                                     android:textSize="18sp" />
@@ -846,11 +584,11 @@
 
                         <TextView
                             android:id="@+id/persons_ek1"
-                            android:layout_width="88dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="35dp"
                             android:layout_marginLeft="0dp"
                             android:layout_marginTop="0dp"
-                            android:text="@string/persons_ek1_string"
+                            android:text="Rating (minimum stars)"
                             android:textColor="@color/_10_color"
                             android:textSize="18sp" />
 
@@ -877,7 +615,7 @@
                         android:id="@+id/max_budget"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Enter maximum budget in $"
+                        android:hint="Enter maximum budget ($) per night"
                         android:inputType="date"
                         android:layout_marginStart="32dp"
                         android:layout_marginEnd="32dp"
@@ -885,43 +623,15 @@
                 </RelativeLayout>
 
                 <!-- Checkbox Layout -->
-                <!-- Checkbox Layout -->
                 <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="19dp"
-                    android:layout_marginTop="20dp">
-
-                    <CheckBox android:id="@+id/rounded_trip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="18dp"
-                        android:width="18dp"
-                        android:height="18dp"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="0dp"
-                        android:background="#FF7D0D"
-                        android:buttonTint="@color/black"
-                        android:alpha="0.15000000596046" />
-
-                    <TextView
-                        android:textSize="18sp"
-                        android:textColor="@color/black"
-                        android:layout_marginLeft="27dp"
-                        android:layout_marginTop="0dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="25.5dp"
-                        android:text="I want a round trip (back and forth)" />
-                </RelativeLayout>
-
-                <!-- Checkbox Layout -->
-                <RelativeLayout
+                    android:id="@+id/star_trip_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginBottom="100dp">
+                    android:layout_marginBottom="0dp">
 
-                    <CheckBox android:id="@+id/allow_connection"
+                    <CheckBox android:id="@+id/star_trip"
                         android:layout_width="wrap_content"
                         android:layout_height="18dp"
                         android:width="18dp"
@@ -939,7 +649,191 @@
                         android:layout_marginTop="0dp"
                         android:layout_width="wrap_content"
                         android:layout_height="25.5dp"
-                        android:text="I don't mind connections" />
+                        android:text="I want a star trip (one accommodation)" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/number_of_stops"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="19dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="100dp"
+                    android:visibility="visible">
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="32dp"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+                            <RelativeLayout
+                                android:id="@+id/one_stop1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="36dp">
+
+                                <View
+                                    android:id="@+id/one_stop2"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:layout_marginStart="0dp"
+                                    android:layout_marginTop="0dp"
+                                    android:background="@drawable/rectangle_23_shape" />
+
+                                <TextView
+                                    android:id="@+id/one_stop3"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="1"
+                                    android:gravity="center"
+                                    android:textColor="@color/_10_color"
+                                    android:textSize="18sp" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/two_stop1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="36dp">
+
+                                <View
+                                    android:id="@+id/two_stop2"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:layout_marginStart="0dp"
+                                    android:layout_marginTop="0dp"
+                                    android:background="@drawable/rectangle_23_shape" />
+
+                                <TextView
+                                    android:id="@+id/two_stop3"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="2"
+                                    android:gravity="center"
+                                    android:textColor="@color/_10_color"
+                                    android:textSize="18sp" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/three_stop1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="36dp">
+
+                                <View
+                                    android:id="@+id/three_stop2"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:layout_marginStart="0dp"
+                                    android:layout_marginTop="0dp"
+                                    android:background="@drawable/rectangle_21_shape" />
+
+                                <TextView
+                                    android:id="@+id/three_stop3"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="3"
+                                    android:gravity="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="18sp" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/four_stop1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="36dp">
+
+                                <View
+                                    android:id="@+id/four_stop2"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:layout_marginStart="0dp"
+                                    android:layout_marginTop="0dp"
+                                    android:background="@drawable/rectangle_23_shape" />
+
+                                <TextView
+                                    android:id="@+id/four_stop3"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="4"
+                                    android:gravity="center"
+                                    android:textColor="@color/_10_color"
+                                    android:textSize="18sp" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/five_stop1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="36dp">
+
+                                <View
+                                    android:id="@+id/five_stop2"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:layout_marginStart="0dp"
+                                    android:layout_marginTop="0dp"
+                                    android:background="@drawable/rectangle_23_shape" />
+
+                                <TextView
+                                    android:id="@+id/five_stop3"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="5"
+                                    android:gravity="center"
+                                    android:textColor="@color/_10_color"
+                                    android:textSize="18sp" />
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:layout_marginLeft="32dp"
+                            android:layout_marginTop="0dp"
+                            android:text="Number Of Stops"
+                            android:textColor="@color/_10_color"
+                            android:textSize="18sp" />
+
+                    </RelativeLayout>
+
                 </RelativeLayout>
 
             </LinearLayout>
