@@ -48,12 +48,12 @@
                 <TextView
                     android:id="@+id/choice_date_ek3"
                     android:layout_width="wrap_content"
-                    android:layout_height="80dp"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="0dp"
                     android:layout_marginTop="0dp"
                     android:gravity="center"
-                    android:text="Accommodation Preferences"
+                    android:text="Restaurant Preferences"
                     android:textColor="@color/_10_color"
                     android:textSize="26sp" />
 
@@ -112,7 +112,7 @@
                         android:id="@+id/city"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="The city where I want to sleep"
+                        android:hint="The cities where I want to eat"
                         android:layout_marginStart="32dp"
                         android:layout_marginEnd="32dp"
                         android:layout_marginTop="25dp"
@@ -121,7 +121,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/distance_from_city"
+                    android:id="@+id/type_of_restaurant"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="19dp"
@@ -138,14 +138,14 @@
                             android:orientation="horizontal">
 
                             <RelativeLayout
-                                android:id="@+id/center1"
+                                android:id="@+id/asian1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="40dp">
 
                                 <View
-                                    android:id="@+id/center2"
+                                    android:id="@+id/asian2"
                                     android:layout_width="80dp"
                                     android:layout_height="50dp"
                                     android:layout_marginStart="0dp"
@@ -153,14 +153,14 @@
                                     android:background="@drawable/rectangle_21_shape" />
 
                                 <TextView
-                                    android:id="@+id/center3"
+                                    android:id="@+id/asian3"
                                     android:layout_width="60dp"
                                     android:layout_height="40dp"
                                     android:layout_gravity="center_horizontal|center"
                                     android:layout_marginLeft="10dp"
                                     android:layout_marginTop="5dp"
                                     android:gravity="center"
-                                    android:text="Center"
+                                    android:text="Asian"
                                     android:textColor="@color/white"
                                     android:textSize="16sp" />
 
@@ -168,14 +168,14 @@
 
 
                             <RelativeLayout
-                                android:id="@+id/suburb1"
+                                android:id="@+id/american1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="40dp">
 
                                 <View
-                                    android:id="@+id/suburb2"
+                                    android:id="@+id/american2"
                                     android:layout_width="80dp"
                                     android:layout_height="50dp"
                                     android:layout_marginStart="0dp"
@@ -183,203 +183,131 @@
                                     android:background="@drawable/rectangle_24_shape" />
 
                                 <TextView
-                                    android:id="@+id/suburb3"
-                                    android:layout_width="60dp"
-                                    android:layout_height="40dp"
-                                    android:layout_gravity="center_horizontal|center"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginTop="5dp"
-                                    android:gravity="center"
-                                    android:text="Suburb"
-                                    android:textColor="@color/_10_color"
-                                    android:textSize="16sp" />
-
-                            </RelativeLayout>
-
-
-                            <RelativeLayout
-                                android:id="@+id/outside1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="40dp">
-
-                                <View
-                                    android:id="@+id/outside2"
-                                    android:layout_width="80dp"
-                                    android:layout_height="50dp"
-                                    android:layout_marginStart="0dp"
-                                    android:layout_marginTop="0dp"
-                                    android:background="@drawable/rectangle_24_shape" />
-
-                                <TextView
-                                    android:id="@+id/outside3"
-                                    android:layout_width="60dp"
-                                    android:layout_height="40dp"
-                                    android:layout_gravity="center_horizontal|center"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginTop="5dp"
-                                    android:gravity="center"
-                                    android:text="Outside"
-                                    android:textColor="@color/_10_color"
-                                    android:textSize="16sp" />
-
-                            </RelativeLayout>
-
-                        </LinearLayout>
-                    </HorizontalScrollView>
-
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="0dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="35dp"
-                            android:layout_marginLeft="0dp"
-                            android:layout_marginTop="0dp"
-                            android:text="Distance From The City:"
-                            android:textColor="@color/_10_color"
-                            android:textSize="18sp" />
-
-                    </RelativeLayout>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="19dp"
-                    android:layout_marginTop="20dp">
-
-                    <HorizontalScrollView
-                        android:id="@+id/horizontalScrollView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:scrollbars="none">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <RelativeLayout
-                                android:id="@+id/hotel1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="40dp">
-
-                                <View
-                                    android:id="@+id/hotel2"
-                                    android:layout_width="80dp"
-                                    android:layout_height="50dp"
-                                    android:layout_marginStart="0dp"
-                                    android:layout_marginTop="0dp"
-                                    android:background="@drawable/rectangle_21_shape" />
-
-                                <TextView
-                                    android:id="@+id/hotel3"
-                                    android:layout_width="60dp"
-                                    android:layout_height="40dp"
-                                    android:layout_gravity="center_horizontal|center"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginTop="5dp"
-                                    android:gravity="center"
-                                    android:text="Hotel"
-                                    android:textColor="@color/white"
-                                    android:textSize="16sp" />
-
-                            </RelativeLayout>
-
-
-                            <RelativeLayout
-                                android:id="@+id/Cabbin1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="40dp">
-
-                                <View
-                                    android:id="@+id/Cabbin2"
-                                    android:layout_width="80dp"
-                                    android:layout_height="50dp"
-                                    android:layout_marginStart="0dp"
-                                    android:layout_marginTop="0dp"
-                                    android:background="@drawable/rectangle_24_shape" />
-
-                                <TextView
-                                    android:id="@+id/Cabbin3"
-                                    android:layout_width="60dp"
-                                    android:layout_height="40dp"
-                                    android:layout_gravity="center_horizontal|center"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginTop="5dp"
-                                    android:gravity="center"
-                                    android:text="Cabin"
-                                    android:textColor="@color/_10_color"
-                                    android:textSize="16sp" />
-
-                            </RelativeLayout>
-
-
-                            <RelativeLayout
-                                android:id="@+id/airbnb1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="40dp">
-
-                                <View
-                                    android:id="@+id/airbnb2"
-                                    android:layout_width="80dp"
-                                    android:layout_height="50dp"
-                                    android:layout_marginStart="0dp"
-                                    android:layout_marginTop="0dp"
-                                    android:background="@drawable/rectangle_24_shape" />
-
-                                <TextView
-                                    android:id="@+id/airbnb3"
-                                    android:layout_width="60dp"
-                                    android:layout_height="40dp"
-                                    android:layout_gravity="center_horizontal|center"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginTop="5dp"
-                                    android:gravity="center"
-                                    android:text="Airbnb"
-                                    android:textColor="@color/_10_color"
-                                    android:textSize="16sp" />
-
-                            </RelativeLayout>
-
-
-                            <RelativeLayout
-                                android:id="@+id/warehouse1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="40dp">
-
-                                <View
-                                    android:id="@+id/warehouse2"
-                                    android:layout_width="80dp"
-                                    android:layout_height="50dp"
-                                    android:layout_marginStart="0dp"
-                                    android:layout_marginTop="0dp"
-                                    android:background="@drawable/rectangle_24_shape" />
-
-                                <TextView
-                                    android:id="@+id/warehouse3"
+                                    android:id="@+id/american3"
                                     android:layout_width="80dp"
                                     android:layout_height="40dp"
                                     android:layout_gravity="center_horizontal|center"
                                     android:layout_marginLeft="0dp"
                                     android:layout_marginTop="5dp"
                                     android:gravity="center"
-                                    android:text="Warehouse"
+                                    android:text="American"
+                                    android:textColor="@color/_10_color"
+                                    android:textSize="16sp" />
+
+                            </RelativeLayout>
+
+
+                            <RelativeLayout
+                                android:id="@+id/italian1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="40dp">
+
+                                <View
+                                    android:id="@+id/italian2"
+                                    android:layout_width="80dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginStart="0dp"
+                                    android:layout_marginTop="0dp"
+                                    android:background="@drawable/rectangle_24_shape" />
+
+                                <TextView
+                                    android:id="@+id/italian3"
+                                    android:layout_width="60dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center_horizontal|center"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginTop="5dp"
+                                    android:gravity="center"
+                                    android:text="Italian"
+                                    android:textColor="@color/_10_color"
+                                    android:textSize="16sp" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/french1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="40dp">
+
+                                <View
+                                    android:id="@+id/french2"
+                                    android:layout_width="80dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginStart="0dp"
+                                    android:layout_marginTop="0dp"
+                                    android:background="@drawable/rectangle_24_shape" />
+
+                                <TextView
+                                    android:id="@+id/french3"
+                                    android:layout_width="60dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center_horizontal|center"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginTop="5dp"
+                                    android:gravity="center"
+                                    android:text="French"
+                                    android:textColor="@color/_10_color"
+                                    android:textSize="16sp" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/mexican1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="40dp">
+
+                                <View
+                                    android:id="@+id/mexican2"
+                                    android:layout_width="80dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginStart="0dp"
+                                    android:layout_marginTop="0dp"
+                                    android:background="@drawable/rectangle_24_shape" />
+
+                                <TextView
+                                    android:id="@+id/mexican3"
+                                    android:layout_width="80dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center_horizontal|center"
+                                    android:layout_marginLeft="0dp"
+                                    android:layout_marginTop="5dp"
+                                    android:gravity="center"
+                                    android:text="Mexican"
+                                    android:textColor="@color/_10_color"
+                                    android:textSize="16sp" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/mediterranean1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="40dp">
+
+                                <View
+                                    android:id="@+id/mediterranean2"
+                                    android:layout_width="110dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginStart="0dp"
+                                    android:layout_marginTop="0dp"
+                                    android:background="@drawable/rectangle_24_shape" />
+
+                                <TextView
+                                    android:id="@+id/mediterranean3"
+                                    android:layout_width="110dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center_horizontal|center"
+                                    android:layout_marginLeft="0dp"
+                                    android:layout_marginTop="5dp"
+                                    android:gravity="center"
+                                    android:text="Mediterranean"
                                     android:textColor="@color/_10_color"
                                     android:textSize="16sp" />
 
@@ -390,19 +318,17 @@
 
 
                     <RelativeLayout
-                        android:id="@+id/title_ek1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="0dp"
                         android:layout_marginTop="0dp">
 
                         <TextView
-                            android:id="@+id/type"
                             android:layout_width="wrap_content"
                             android:layout_height="35dp"
                             android:layout_marginLeft="0dp"
                             android:layout_marginTop="0dp"
-                            android:text="Type Of Accommodation"
+                            android:text="Types Of Restaurants:"
                             android:textColor="@color/_10_color"
                             android:textSize="18sp" />
 
@@ -615,232 +541,12 @@
                         android:id="@+id/max_budget"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Enter maximum budget ($) per night"
+                        android:hint="Enter max average cost per guest($)"
                         android:inputType="date"
                         android:layout_marginStart="32dp"
                         android:layout_marginEnd="32dp"
                         android:layout_marginTop="16dp" />
                 </RelativeLayout>
-
-                <!-- Checkbox Layout -->
-                <RelativeLayout
-                    android:id="@+id/star_trip_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="19dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="0dp">
-
-                    <CheckBox android:id="@+id/star_trip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="18dp"
-                        android:width="18dp"
-                        android:height="18dp"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="0dp"
-                        android:background="#FF7D0D"
-                        android:buttonTint="@color/black"
-                        android:alpha="0.15000000596046" />
-
-                    <TextView
-                        android:textSize="18sp"
-                        android:textColor="@color/black"
-                        android:layout_marginLeft="27dp"
-                        android:layout_marginTop="0dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="25.5dp"
-                        android:text="I want a star trip (one accommodation)" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/number_of_stops"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="19dp"
-                    android:layout_marginTop="20dp"
-                    android:visibility="visible">
-
-                    <HorizontalScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="32dp"
-                        android:scrollbars="none">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <RelativeLayout
-                                android:id="@+id/two_stop1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="36dp">
-
-                                <View
-                                    android:id="@+id/two_stop2"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginStart="0dp"
-                                    android:layout_marginTop="0dp"
-                                    android:background="@drawable/rectangle_23_shape" />
-
-                                <TextView
-                                    android:id="@+id/two_stop3"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_marginStart="5dp"
-                                    android:layout_marginTop="5dp"
-                                    android:text="2"
-                                    android:gravity="center"
-                                    android:textColor="@color/_10_color"
-                                    android:textSize="18sp" />
-
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/three_stop1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="36dp">
-
-                                <View
-                                    android:id="@+id/three_stop2"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginStart="0dp"
-                                    android:layout_marginTop="0dp"
-                                    android:background="@drawable/rectangle_21_shape" />
-
-                                <TextView
-                                    android:id="@+id/three_stop3"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_marginStart="5dp"
-                                    android:layout_marginTop="5dp"
-                                    android:text="3"
-                                    android:gravity="center"
-                                    android:textColor="@color/white"
-                                    android:textSize="18sp" />
-
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/four_stop1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="36dp">
-
-                                <View
-                                    android:id="@+id/four_stop2"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginStart="0dp"
-                                    android:layout_marginTop="0dp"
-                                    android:background="@drawable/rectangle_23_shape" />
-
-                                <TextView
-                                    android:id="@+id/four_stop3"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_marginStart="5dp"
-                                    android:layout_marginTop="5dp"
-                                    android:text="4"
-                                    android:gravity="center"
-                                    android:textColor="@color/_10_color"
-                                    android:textSize="18sp" />
-
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/five_stop1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="36dp">
-
-                                <View
-                                    android:id="@+id/five_stop2"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginStart="0dp"
-                                    android:layout_marginTop="0dp"
-                                    android:background="@drawable/rectangle_23_shape" />
-
-                                <TextView
-                                    android:id="@+id/five_stop3"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_marginStart="5dp"
-                                    android:layout_marginTop="5dp"
-                                    android:text="5"
-                                    android:gravity="center"
-                                    android:textColor="@color/_10_color"
-                                    android:textSize="18sp" />
-
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:id="@+id/six_stop1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:layout_marginTop="36dp">
-
-                                <View
-                                    android:id="@+id/six_stop2"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginStart="0dp"
-                                    android:layout_marginTop="0dp"
-                                    android:background="@drawable/rectangle_23_shape" />
-
-                                <TextView
-                                    android:id="@+id/six_stop3"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_marginStart="5dp"
-                                    android:layout_marginTop="5dp"
-                                    android:text="6"
-                                    android:gravity="center"
-                                    android:textColor="@color/_10_color"
-                                    android:textSize="18sp" />
-
-                            </RelativeLayout>
-
-                        </LinearLayout>
-                    </HorizontalScrollView>
-
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="0dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="35dp"
-                            android:layout_marginLeft="32dp"
-                            android:layout_marginTop="0dp"
-                            android:text="Number Of Stops"
-                            android:textColor="@color/_10_color"
-                            android:textSize="18sp" />
-
-                    </RelativeLayout>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="19dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="100dp"
-                    android:visibility="visible"/>
 
             </LinearLayout>
         </ScrollView>

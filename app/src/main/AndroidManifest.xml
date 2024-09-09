@@ -19,6 +19,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Attraction_Preferance_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Restaurant_Preferance_Activity"
+            android:exported="false" />
+        <activity
             android:name=".ReturnFlightsActivity"
             android:exported="false" />
         <activity

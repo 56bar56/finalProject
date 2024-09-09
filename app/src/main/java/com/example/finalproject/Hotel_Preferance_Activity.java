@@ -34,12 +34,11 @@ public class Hotel_Preferance_Activity extends AppCompatActivity {
     private int selectedIndexNumStars = 3; // Store the default index of the selected option
     EditText maxBudgetEditText;
     CheckBox starTripCheckBox;
-    private RelativeLayout starTripLayout;
     private RelativeLayout numberOfStopsLayout;
     private RelativeLayout[] numStopLayout;
     private View[] numStopViews;
     private TextView[] numStopTextViews;
-    private int selectedIndexNumStop = 2; // Store the default index of the selected option
+    private int selectedIndexNumStop = 1; // Store the default index of the selected option
     private Button next_button;
 
 
@@ -84,7 +83,8 @@ public class Hotel_Preferance_Activity extends AppCompatActivity {
             distanceLayout[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    updateStyles(distanceViews, distanceTextViews, index, selectedIndexDistance);
+                    updateStyles(distanceViews, distanceTextViews, index);
+                    selectedIndexDistance = index;
                 }
             });
         }
@@ -118,7 +118,8 @@ public class Hotel_Preferance_Activity extends AppCompatActivity {
             typeHouseLayout[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    updateStyles(typeHouseViews, typeHouseTextViews, index, selectedIndexType);
+                    updateStyles(typeHouseViews, typeHouseTextViews, index);
+                    selectedIndexType = index;
                 }
             });
         }
@@ -155,7 +156,8 @@ public class Hotel_Preferance_Activity extends AppCompatActivity {
             numStarsLayout[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    updateStyles(numStarsView, numStarsTextViews, index, selectedIndexNumStars);
+                    updateStyles(numStarsView, numStarsTextViews, index);
+                    selectedIndexNumStars = index;
                 }
             });
         }
@@ -166,42 +168,38 @@ public class Hotel_Preferance_Activity extends AppCompatActivity {
 
         // Taking care of number of stops
         // Taking care of disappearing the layout of number of stops
-        starTripLayout = findViewById(R.id.star_trip_layout);
         numberOfStopsLayout = findViewById(R.id.number_of_stops);
         starTripCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) starTripLayout.getLayoutParams();
             if (isChecked) {
                 numberOfStopsLayout.setVisibility(View.GONE);
-                layoutParams.bottomMargin = 0;
             } else {
                 numberOfStopsLayout.setVisibility(View.VISIBLE);
-                layoutParams.bottomMargin = (int) (100 * getResources().getDisplayMetrics().density);
             }
         });
 
         // Initialize views
         numStopLayout = new RelativeLayout[] {
-                findViewById(R.id.one_stop1),
                 findViewById(R.id.two_stop1),
                 findViewById(R.id.three_stop1),
                 findViewById(R.id.four_stop1),
-                findViewById(R.id.five_stop1)
+                findViewById(R.id.five_stop1),
+                findViewById(R.id.six_stop1)
         };
 
         numStopViews = new View[] {
-                findViewById(R.id.one_stop2),
                 findViewById(R.id.two_stop2),
                 findViewById(R.id.three_stop2),
                 findViewById(R.id.four_stop2),
-                findViewById(R.id.five_stop2)
+                findViewById(R.id.five_stop2),
+                findViewById(R.id.six_stop2)
         };
 
         numStopTextViews = new TextView[] {
-                ((TextView) findViewById(R.id.one_stop3)),
                 ((TextView) findViewById(R.id.two_stop3)),
                 ((TextView) findViewById(R.id.three_stop3)),
                 ((TextView) findViewById(R.id.four_stop3)),
-                ((TextView) findViewById(R.id.five_stop3))
+                ((TextView) findViewById(R.id.five_stop3)),
+                ((TextView) findViewById(R.id.six_stop3))
         };
 
         // Set OnClickListener for each RelativeLayout
@@ -210,7 +208,8 @@ public class Hotel_Preferance_Activity extends AppCompatActivity {
             numStopLayout[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    updateStyles(numStopViews, numStopTextViews, index, selectedIndexNumStop);
+                    updateStyles(numStopViews, numStopTextViews, index);
+                    selectedIndexNumStop = index;
                 }
             });
         }
@@ -227,7 +226,7 @@ public class Hotel_Preferance_Activity extends AppCompatActivity {
                 String rating = String.valueOf(selectedIndexNumStars + 1);
                 String maxBudget = maxBudgetEditText.getText().toString();
                 String isStarTrip = starTripCheckBox.isChecked() ? "true" : "false";
-                String numStops = starTripCheckBox.isChecked() ? "null" : String.valueOf(selectedIndexNumStop + 1);
+                String numStops = starTripCheckBox.isChecked() ? "null" : String.valueOf(selectedIndexNumStop + 2);
 
                 // Logging to check the values in the console
                 Log.d("FlightInfo", "Location: " + location);
@@ -239,7 +238,7 @@ public class Hotel_Preferance_Activity extends AppCompatActivity {
                 Log.d("FlightInfo", "Number of stops: " + numStops);
 
                 // Pass data to FlightsActivity using intent
-                Intent intent = new Intent(Hotel_Preferance_Activity.this, NewTripActivity.class); //TODO change to HotelsActivity.class
+                Intent intent = new Intent(Hotel_Preferance_Activity.this, Restaurant_Preferance_Activity.class); //TODO change to HotelsActivity.class
                 intent.putExtra("location", location);
                 intent.putExtra("kmFromCity", kmFromCity);
                 intent.putExtra("hotelOrCabbin", hotelOrCabbin);
@@ -253,10 +252,8 @@ public class Hotel_Preferance_Activity extends AppCompatActivity {
         });
     }
 
-    private void updateStyles(View[] views, TextView[] textViews, int selectedIndex, int selectedIndexStorage) {
+    private void updateStyles(View[] views, TextView[] textViews, int selectedIndex) {
         // Update the selected index
-        selectedIndexStorage = selectedIndex;
-
         for (int i = 0; i < views.length; i++) {
             if (i == selectedIndex) {
                 views[i].setBackgroundResource(R.drawable.rectangle_21_shape);

@@ -108,7 +108,7 @@ public class ReturnFlightsActivity extends AppCompatActivity {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             // Pass selected flight to ReturnFlightsActivity
                             Flight selectedReturnedFlight = returnFlightList.get(position);
-                            Intent intent = new Intent(ReturnFlightsActivity.this, NewTripActivity.class);
+                            Intent intent = new Intent(ReturnFlightsActivity.this, Hotel_Preferance_Activity.class);
                             intent.putExtra("selectedFlight", selectedFlight);
                             intent.putExtra("selectedReturnedFlight", selectedReturnedFlight);
 
