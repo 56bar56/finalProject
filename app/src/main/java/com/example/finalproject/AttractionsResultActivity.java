@@ -1,6 +1,8 @@
 package com.example.finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -11,8 +13,17 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.finalproject.adapters.AttractionListAdapter;
+import com.example.finalproject.adapters.RestaurantListAdapter;
+import com.example.finalproject.api.AttractionAPI;
+import com.example.finalproject.items.Attraction;
+import com.example.finalproject.items.Flight;
+import com.example.finalproject.items.Hotel;
+import com.example.finalproject.items.Restaurant;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,23 +33,43 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AttractionsResult extends AppCompatActivity {
-    private ListView attractionsListView;
+public class AttractionsResultActivity extends AppCompatActivity {
+
+
+    private ImageView backButton;
+    private TextView title;
+    private RecyclerView attractionRecyclerView;
     private List<Attraction> attractionList;
     private List<Attraction> selectedAttractions = new ArrayList<>(); // To store selected attractions
-    private Button doneChoosingButton;
+    private AttractionListAdapter adapter;
+    private Button nextButton;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_attractions_result);
+        setContentView(R.layout.restaurant_results_page); // same xml for attractions and restaurants
 
-        attractionsListView = findViewById(R.id.attractionsListView);
-        doneChoosingButton = findViewById(R.id.doneChoosingButton);
+        // Taking care of back button
+        backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(v -> {
+            finish();
+        });
+
+        // Set title
+        title = findViewById(R.id.title);
+        title.setText("Attractions");
+
+        // Set RecyclerView
+        attractionRecyclerView = findViewById(R.id.list);
+        attractionRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Set next button
+        nextButton = findViewById(R.id.next_button);
+        nextButton.setText("Finish");
 
         // Retrieve user data from AttractionPreferencesActivity
-        String averageCost = getIntent().getStringExtra("maxPriceForNight");
+        String averageCost = getIntent().getStringExtra("avgPrice");
         String location = getIntent().getStringExtra("location");
         String rating = getIntent().getStringExtra("rating");
         String attractionType = getIntent().getStringExtra("attractions");
@@ -63,22 +94,23 @@ public class AttractionsResult extends AppCompatActivity {
         );
 
         // Fetch attractions
-        fetchAttractions(filterRequest, selectedFlight, selectedReturnedFlight, selectedHotel, returnedRestaurants);
+        fetchAttractions(filterRequest);
 
         // Set "Done Choosing" button click listener
-        doneChoosingButton.setOnClickListener(v -> {
+        nextButton.setOnClickListener(v -> {
             // Pass selected attractions to another activity (e.g., SummaryActivity)
-            Intent intent = new Intent(AttractionsResult.this, MyTripsActivity.class);
+            selectedAttractions = adapter.getSelectedAttractions();
+            Intent intent = new Intent(AttractionsResultActivity.this, WelcomeActivity.class);
             intent.putExtra("selectedAttractions", new ArrayList<>(selectedAttractions));
-            intent.putExtra("selectedHotel", selectedHotel);
-            intent.putExtra("selectedFlight", selectedFlight);
-            intent.putExtra("selectedReturnedFlight", selectedReturnedFlight);
             intent.putExtra("selectedRestaurants", returnedRestaurants);
+            intent.putExtra("selectedHotel", selectedHotel);
+            intent.putExtra("selectedReturnedFlight", selectedReturnedFlight);
+            intent.putExtra("selectedFlight", selectedFlight);
             startActivity(intent);
         });
     }
 
-    private void fetchAttractions(AttractionFilterRequest request, Flight selectedFlight, Flight selectedReturnedFlight, Hotel selectedHotel, Restaurant returnedRestaurants) {
+    private void fetchAttractions(AttractionFilterRequest request) {
         AttractionAPI attractionAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(AttractionAPI.class);
 
         Call<List<Attraction>> call = attractionAPI.getFilteredAttractions(request);
@@ -92,38 +124,8 @@ public class AttractionsResult extends AppCompatActivity {
 
                 attractionList = response.body();
                 if (attractionList != null) {
-                    ArrayList<String> attractionDetails = new ArrayList<>();
-                    for (Attraction attraction : attractionList) {
-                        attractionDetails.add(
-                                "Attraction : " + attraction.getAttraction() + "\n" +
-                                        "Location: " + attraction.getLocation() + "\n" +
-                                        "Average Cost: $" + attraction.getAverageCost() + "\n" +
-                                        "Rating: " + attraction.getRating() + " stars");
-                    }
-
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(AttractionsResult.this,
-                            android.R.layout.simple_list_item_multiple_choice, attractionDetails) {
-                        @Override
-                        public View getView(int position, View convertView, ViewGroup parent) {
-                            View view = super.getView(position, convertView, parent);
-                            TextView textView = (TextView) view.findViewById(android.R.id.text1);
-                            textView.setTextSize(16); // Increase text size
-                            return view;
-                        }
-                    };
-                    attractionsListView.setAdapter(adapter);
-
-                    attractionsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Attraction selectedAttraction = attractionList.get(position);
-                            if (attractionsListView.isItemChecked(position)) {
-                                selectedAttractions.add(selectedAttraction); // Add selected attraction
-                            } else {
-                                selectedAttractions.remove(selectedAttraction); // Remove deselected attraction
-                            }
-                        }
-                    });
+                    adapter = new AttractionListAdapter(AttractionsResultActivity.this, attractionList);
+                    attractionRecyclerView.setAdapter(adapter);
                 }
             }
 

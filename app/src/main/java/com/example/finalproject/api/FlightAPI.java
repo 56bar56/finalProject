@@ -1,4 +1,7 @@
-package com.example.finalproject;
+package com.example.finalproject.api;
+
+import com.example.finalproject.FlightFilterRequest;
+import com.example.finalproject.items.Flight;
 
 import java.util.List;
 

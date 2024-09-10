@@ -1,6 +1,8 @@
 package com.example.finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -11,8 +13,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.finalproject.adapters.HotelListAdapter;
+import com.example.finalproject.adapters.RestaurantListAdapter;
+import com.example.finalproject.api.RestaurantAPI;
+import com.example.finalproject.items.Flight;
+import com.example.finalproject.items.Hotel;
+import com.example.finalproject.items.Restaurant;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,20 +30,29 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RestaurantsResult extends AppCompatActivity {
-    private ListView restaurantsListView;
+public class RestaurantsResultActivity extends AppCompatActivity {
+    private ImageView backButton;
+    private RecyclerView restaurantRecyclerView;
     private List<Restaurant> restaurantList;
     private List<Restaurant> selectedRestaurants = new ArrayList<>(); // To store selected restaurants
-    private Button doneChoosingButton;
+    private RestaurantListAdapter adapter;
+    private Button nextButton;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurant_results);
+        setContentView(R.layout.restaurant_results_page);
 
-        restaurantsListView = findViewById(R.id.restaurants_ListView);
-        doneChoosingButton = findViewById(R.id.doneChoosingButton);
+        // Taking care of back button
+        backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(v -> {
+            finish();
+        });
+
+        restaurantRecyclerView = findViewById(R.id.list);
+        restaurantRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        nextButton = findViewById(R.id.next_button);
 
         // Retrieve user data from RestaurantPreferencesActivity
         String averageCost = getIntent().getStringExtra("averageCost");
@@ -62,9 +80,10 @@ public class RestaurantsResult extends AppCompatActivity {
         fetchRestaurants(filterRequest, selectedFlight, selectedReturnedFlight, selectedHotel);
 
         // Set "Done Choosing" button click listener
-        doneChoosingButton.setOnClickListener(v -> {
+        nextButton.setOnClickListener(v -> {
             // Pass selected restaurants to another activity (e.g., RestaurantDetailsActivity)
-            Intent intent = new Intent(RestaurantsResult.this, Attraction_Preferance_Activity.class);
+            selectedRestaurants = adapter.getSelectedRestaurants();
+            Intent intent = new Intent(RestaurantsResultActivity.this, Attraction_Preferance_Activity.class);
             intent.putExtra("selectedRestaurants", new ArrayList<>(selectedRestaurants));
             intent.putExtra("selectedHotel", selectedHotel);
             intent.putExtra("selectedFlight", selectedFlight);
@@ -87,38 +106,8 @@ public class RestaurantsResult extends AppCompatActivity {
 
                 restaurantList = response.body();
                 if (restaurantList != null) {
-                    ArrayList<String> restaurantDetails = new ArrayList<>();
-                    for (Restaurant restaurant : restaurantList) {
-                        restaurantDetails.add("Restaurant: " + restaurant.getName() + "\n" +
-                                "Cuisine: " + restaurant.getCuisine() + "\n" +
-                                "Location: " + restaurant.getLocation() + "\n" +
-                                "Average Cost: $" + restaurant.getAverageCost() + "\n" +
-                                "Rating: " + restaurant.getRating() + " stars");
-                    }
-
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(RestaurantsResult.this,
-                            android.R.layout.simple_list_item_multiple_choice, restaurantDetails) {
-                        @Override
-                        public View getView(int position, View convertView, ViewGroup parent) {
-                            View view = super.getView(position, convertView, parent);
-                            TextView textView = (TextView) view.findViewById(android.R.id.text1);
-                            textView.setTextSize(16); // Increase text size
-                            return view;
-                        }
-                    };
-                    restaurantsListView.setAdapter(adapter);
-
-                    restaurantsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Restaurant selectedRestaurant = restaurantList.get(position);
-                            if (restaurantsListView.isItemChecked(position)) {
-                                selectedRestaurants.add(selectedRestaurant); // Add selected restaurant
-                            } else {
-                                selectedRestaurants.remove(selectedRestaurant); // Remove deselected restaurant
-                            }
-                        }
-                    });
+                    adapter = new RestaurantListAdapter(RestaurantsResultActivity.this, restaurantList);
+                    restaurantRecyclerView.setAdapter(adapter);
                 }
             }
 

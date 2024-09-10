@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.finalproject.items.Flight;
+
 public class Hotel_Preferance_Activity extends AppCompatActivity {
 
     private ImageView backButton;
@@ -242,7 +244,7 @@ public class Hotel_Preferance_Activity extends AppCompatActivity {
                 Log.d("FlightInfo", "Number of stops: " + numStops);
 
                 // Pass data to FlightsActivity using intent
-                Intent intent = new Intent(Hotel_Preferance_Activity.this, HotelResultsActivity.class); //TODO change to HotelsActivity.class
+                Intent intent = new Intent(Hotel_Preferance_Activity.this, HotelResultsActivity.class);
                 intent.putExtra("location", location);
                 intent.putExtra("kmFromCity", kmFromCity);
                 intent.putExtra("hotelOrCabbin", hotelOrCabbin);

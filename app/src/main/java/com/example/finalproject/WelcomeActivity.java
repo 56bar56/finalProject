@@ -51,7 +51,6 @@ public class WelcomeActivity extends AppCompatActivity {
         my_trips = findViewById(R.id.my_trips);
 
         // Get the intent and extract the name
-        //TODO fix the transition to contact page
         String username = globalVars.username;
         String password = globalVars.password;
         String[] displayName = {null};

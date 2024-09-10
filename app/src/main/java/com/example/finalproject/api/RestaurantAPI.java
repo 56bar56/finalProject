@@ -1,4 +1,7 @@
-package com.example.finalproject;
+package com.example.finalproject.api;
+
+import com.example.finalproject.RestaurantFilterRequest;
+import com.example.finalproject.items.Restaurant;
 
 import java.util.List;
 import retrofit2.Call;

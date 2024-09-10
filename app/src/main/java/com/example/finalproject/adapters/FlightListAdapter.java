@@ -10,10 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.finalproject.Flight;
 import com.example.finalproject.Hotel_Preferance_Activity;
 import com.example.finalproject.R;
 import com.example.finalproject.ReturnFlightsActivity;
+import com.example.finalproject.items.Flight;
 
 import java.util.List;
 

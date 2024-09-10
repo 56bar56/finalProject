@@ -15,8 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.finalproject.Flight;
-import com.example.finalproject.FlightAPI;
+import com.example.finalproject.api.FlightAPI;
+import com.example.finalproject.items.Flight;
 import com.example.finalproject.FlightFilterRequest;
 import com.example.finalproject.adapters.FlightListAdapter;
 

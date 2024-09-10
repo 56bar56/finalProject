@@ -1,4 +1,7 @@
-package com.example.finalproject;
+package com.example.finalproject.api;
+
+import com.example.finalproject.AttractionFilterRequest;
+import com.example.finalproject.items.Attraction;
 
 import java.util.List;
 import retrofit2.Call;

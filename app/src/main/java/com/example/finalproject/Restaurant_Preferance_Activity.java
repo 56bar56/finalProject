@@ -155,7 +155,7 @@ public class Restaurant_Preferance_Activity extends AppCompatActivity {
 
 
                 // Pass data to FlightsActivity using intent
-                Intent intent = new Intent(Restaurant_Preferance_Activity.this, RestaurantsResult.class);
+                Intent intent = new Intent(Restaurant_Preferance_Activity.this, RestaurantsResultActivity.class);
                 intent.putExtra("location", location);
                 intent.putExtra("cuisine", cuisine);
                 intent.putExtra("rating", rating);

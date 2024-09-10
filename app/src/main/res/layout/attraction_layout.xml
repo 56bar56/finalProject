@@ -13,7 +13,7 @@
         android:id="@+id/profileImg"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/hotel_default"
+        android:src="@drawable/attraction_default"
         android:scaleType="centerCrop"
         android:layout_gravity="center_vertical"
         android:layout_marginEnd="16dp"
@@ -22,7 +22,7 @@
 
     <!-- Contact Name and Last Message Section -->
     <LinearLayout
-        android:id="@+id/hotel_details"
+        android:id="@+id/attraction_details"
         android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_weight="1"
@@ -31,12 +31,21 @@
         android:layout_marginTop="4dp">
 
         <TextView
-            android:id="@+id/hotel_name"
+            android:id="@+id/attraction_name"
             android:textSize="13sp"
-            android:textColor="@color/susan_doolan_color"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hotel: Sunset Resort"/>
+            android:text="London Eye"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/type"
+            android:textColor="@color/_12_15_am_color"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type: Amusement Parks"/>
 
         <TextView
             android:id="@+id/location"
@@ -44,7 +53,7 @@
             android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Location: Los Angeles, California, USA"/>
+            android:text="Location: London, England"/>
 
         <TextView
             android:id="@+id/rating"
@@ -54,13 +63,6 @@
             android:layout_height="wrap_content"
             android:text="Rating: 4.2 stars"/>
 
-        <TextView
-            android:id="@+id/distance"
-            android:textColor="@color/_12_15_am_color"
-            android:layout_marginTop="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Distance from the Center: 7.7 km"/>
 
     </LinearLayout>
 
@@ -73,10 +75,19 @@
         android:orientation="vertical">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="About"
+            android:textColor="@color/black"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="259$"
+            android:text="40$"
             android:layout_gravity="center"
             android:textColor="@color/black"
             android:textSize="20dp"
@@ -87,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="per night"
+            android:text="per person"
             android:textColor="@color/black"
             android:textSize="12dp"
             android:textStyle="bold" />

@@ -1,4 +1,7 @@
-package com.example.finalproject;
+package com.example.finalproject.api;
+
+import com.example.finalproject.HotelFilterRequest;
+import com.example.finalproject.items.Hotel;
 
 import java.util.List;
 

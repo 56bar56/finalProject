@@ -168,11 +168,11 @@ public class Attraction_Preferance_Activity extends AppCompatActivity {
 
 
                 // Pass data to FlightsActivity using intent
-                Intent intent = new Intent(Attraction_Preferance_Activity.this, AttractionsResult.class);
+                Intent intent = new Intent(Attraction_Preferance_Activity.this, AttractionsResultActivity.class);
                 intent.putExtra("location", location);
                 intent.putExtra("attractions", attractions);
                 intent.putExtra("rating", rating);
-                intent.putExtra("maxPriceForNight", averageCost);
+                intent.putExtra("avgPrice", averageCost);
                 intent.putExtra("kidFriendly", kidFriendly);
                 intent.putExtra("selectedFlight", selectedFlight);
                 intent.putExtra("selectedReturnedFlight", selectedReturnedFlight);

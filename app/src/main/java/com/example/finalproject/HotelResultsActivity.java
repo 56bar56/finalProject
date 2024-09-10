@@ -7,9 +7,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.finalproject.adapters.FlightListAdapter;
+import com.example.finalproject.adapters.HotelListAdapter;
+import com.example.finalproject.api.HotelAPI;
+import com.example.finalproject.items.Flight;
+import com.example.finalproject.items.Hotel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,16 +30,29 @@ import retrofit2.Response;
 
 public class HotelResultsActivity extends AppCompatActivity {
 
-    private ListView hotelsListView;
+    private TextView title;
+    private ImageView backButton;
+    private RecyclerView hotelsRecyclerView;
     private List<Hotel> hotelList;
 
-    @SuppressLint("MissingInflatedId")
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hotel_results);
+        setContentView(R.layout.flight_outbound_page);
 
-        hotelsListView = findViewById(R.id.hotelsListView);
+        // Set title
+        title = findViewById(R.id.title);
+        title.setText("Accommodations:");
+
+        // Taking care of back button
+        backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(v -> {
+            finish();
+        });
+
+        hotelsRecyclerView = findViewById(R.id.lstFlights);
+        hotelsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Retrieve user data from HotelPreferenceActivity
         String maxPriceForNight = getIntent().getStringExtra("maxPriceForNight");
@@ -54,7 +77,7 @@ public class HotelResultsActivity extends AppCompatActivity {
         fetchHotels(filterRequest, selectedFlight, selectedReturnedFlight);
     }
 
-    private void fetchHotels(HotelFilterRequest request, Flight selectedFlight,Flight selectedReturnedFlight) {
+    private void fetchHotels(HotelFilterRequest request, Flight selectedFlight, Flight selectedReturnedFlight) {
         HotelAPI hotelAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(HotelAPI.class);
 
         Call<List<Hotel>> call = hotelAPI.filterHotels(request);
@@ -68,34 +91,8 @@ public class HotelResultsActivity extends AppCompatActivity {
 
                 hotelList = response.body();
                 if (hotelList != null) {
-                    ArrayList<String> hotelDetails = new ArrayList<>();
-                    for (Hotel hotel : hotelList) {
-                        hotelDetails.add("Hotel: " + hotel.getName() + "\n" +
-                                "Location: " + hotel.getLocation() + "\n" +
-                                "Price Per Night: $" + hotel.getPricePerNight() + "\n" +
-                                "Rating: " + hotel.getRating() + " stars\n" +
-                                "Distance from City: " + hotel.getDistanceFromCenterKm() + " km\n" +
-                                "Type: " + hotel.getType());
-                    }
-
-
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(HotelResultsActivity.this,
-                            android.R.layout.simple_list_item_1, hotelDetails);
-                    hotelsListView.setAdapter(adapter);
-
-                    hotelsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            // Pass selected hotel to another activity (e.g., HotelDetailsActivity)
-                            Hotel selectedHotel = hotelList.get(position);
-                            Intent intent = new Intent(HotelResultsActivity.this, Restaurant_Preferance_Activity.class);
-                            intent.putExtra("selectedHotel", selectedHotel);
-
-                            intent.putExtra("selectedFlight", selectedFlight);
-                            intent.putExtra("selectedReturnedFlight", selectedReturnedFlight);
-                            startActivity(intent);
-                        }
-                    });
+                    HotelListAdapter adapter = new HotelListAdapter(HotelResultsActivity.this, hotelList, selectedFlight, selectedReturnedFlight);
+                    hotelsRecyclerView.setAdapter(adapter);
                 }
             }
 
