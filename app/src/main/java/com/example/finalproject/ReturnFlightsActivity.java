@@ -6,8 +6,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.finalproject.adapters.FlightListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,15 +27,28 @@ import java.util.Calendar;
 import java.util.Date;
 public class ReturnFlightsActivity extends AppCompatActivity {
 
-    private ListView flightsListView;
-    private List<Flight> returnFlightList;
+    private TextView title;
+    private ImageView backButton;
+    private RecyclerView flightsRecyclerView;
+    private List<Flight> flightList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_flights);
+        setContentView(R.layout.flight_outbound_page);
 
-        flightsListView = findViewById(R.id.flightsListView);
+        // Set title
+        title = findViewById(R.id.title);
+        title.setText("Outbound Flight");
+
+        // Taking care of back button
+        backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(v -> {
+            finish();
+        });
+
+        flightsRecyclerView = findViewById(R.id.lstFlights);
+        flightsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Retrieve selected flight and user's return trip information
         Flight selectedFlight = (Flight) getIntent().getSerializableExtra("selectedFlight");
@@ -89,32 +109,10 @@ public class ReturnFlightsActivity extends AppCompatActivity {
                     return;
                 }
 
-                returnFlightList = response.body();
-                if (returnFlightList != null) {
-                    ArrayList<String> flightDetails = new ArrayList<>();
-                    for (Flight flight : returnFlightList) {
-                        flightDetails.add("Flight: " + flight.getFlightNumber() + "\n" +
-                                "Departure: " + flight.getDeparture() + "\n" +
-                                "Arrival: " + flight.getArrival() + "\n" +
-                                "Price: $" + flight.getPrice() + "\n" +
-                                "Company: " + flight.getCompany());
-                    }
-
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(ReturnFlightsActivity.this,
-                            android.R.layout.simple_list_item_1, flightDetails);
-                    flightsListView.setAdapter(adapter);
-                    flightsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            // Pass selected flight to ReturnFlightsActivity
-                            Flight selectedReturnedFlight = returnFlightList.get(position);
-                            Intent intent = new Intent(ReturnFlightsActivity.this, Hotel_Preferance_Activity.class);
-                            intent.putExtra("selectedFlight", selectedFlight);
-                            intent.putExtra("selectedReturnedFlight", selectedReturnedFlight);
-
-                            startActivity(intent);
-                        }
-                    });
+                flightList = response.body();
+                if (flightList != null) {
+                    FlightListAdapter adapter = new FlightListAdapter(ReturnFlightsActivity.this, flightList, "none", "none", "none", selectedFlight);
+                    flightsRecyclerView.setAdapter(adapter);
                 }
             }
 

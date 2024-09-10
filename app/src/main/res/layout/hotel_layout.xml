@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:background="@color/white"
+    android:clickable="true"
+    android:orientation="horizontal"
+    android:id="@+id/one_contact">
+
+    <!-- ImageView for the logo -->
+    <ImageView
+        android:id="@+id/profileImg"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/emirates_logo"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="16dp"
+        android:visibility="visible" /> <!-- Default visible -->
+
+    <!-- Fallback TextView -->
+    <TextView
+        android:id="@+id/fallbackText"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:text="Emirates"
+        android:textColor="@color/_12_15_am_color"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:layout_marginEnd="16dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone" /> <!-- Initially hidden -->
+
+    <!-- Contact Name and Last Message Section -->
+    <LinearLayout
+        android:id="@+id/flight_details"
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp">
+
+        <TextView
+            android:id="@+id/flight_number"
+            android:textSize="13sp"
+            android:textColor="@color/susan_doolan_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Flight Number: 5678"/>
+
+        <TextView
+            android:id="@+id/departure"
+            android:textColor="@color/_12_15_am_color"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Departure: 22/05/25 07:35"/>
+
+        <TextView
+            android:id="@+id/arrival"
+            android:textColor="@color/_12_15_am_color"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Arrival: 22/05/25 15:19"/>
+
+    </LinearLayout>
+
+    <!-- Date and Time Section -->
+    <LinearLayout
+        android:id="@+id/price_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="259$"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

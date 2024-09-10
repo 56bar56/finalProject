@@ -7,12 +7,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalproject.Flight;
 import com.example.finalproject.FlightAPI;
 import com.example.finalproject.FlightFilterRequest;
+import com.example.finalproject.adapters.FlightListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,17 +27,24 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FlightsActivity extends AppCompatActivity {
-
-    private ListView flightsListView;
+    private ImageView backButton;
+    private RecyclerView flightsRecyclerView;
     private List<Flight> flightList;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_flights);
+        setContentView(R.layout.flight_outbound_page);
 
-        flightsListView = findViewById(R.id.flightsListView);
+        // Taking care of back button
+        backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(v -> {
+            finish();
+        });
+
+        flightsRecyclerView = findViewById(R.id.lstFlights);
+        flightsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
         // Retrieve user data from MainActivity
         String maxPrice = getIntent().getStringExtra("maxPrice");
@@ -70,33 +83,8 @@ public class FlightsActivity extends AppCompatActivity {
 
                 flightList = response.body();
                 if (flightList != null) {
-                    ArrayList<String> flightDetails = new ArrayList<>();
-                    for (Flight flight : flightList) {
-                        flightDetails.add("Flight: " + flight.getFlightNumber() + "\n" +
-                                "Departure: " + flight.getDeparture() + "\n" +
-                                "Arrival: " + flight.getArrival() + "\n" +
-                                "Price: $" + flight.getPrice() + "\n" +
-                                "Company: " + flight.getCompany());
-                    }
-
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(FlightsActivity.this,
-                            android.R.layout.simple_list_item_1, flightDetails);
-                    flightsListView.setAdapter(adapter);
-
-                    flightsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            // Pass selected flight to ReturnFlightsActivity
-                            Flight selectedFlight = flightList.get(position);
-                            Intent intent = new Intent(FlightsActivity.this, ReturnFlightsActivity.class);
-                            intent.putExtra("selectedFlight", selectedFlight);
-                            intent.putExtra("tripDays", days);
-                            intent.putExtra("tripDaysMin", daysMin);
-                            intent.putExtra("maxPrice", maxPrice);
-
-                            startActivity(intent);
-                        }
-                    });
+                    FlightListAdapter adapter = new FlightListAdapter(FlightsActivity.this, flightList, days, daysMin, maxPrice, null);
+                    flightsRecyclerView.setAdapter(adapter);
                 }
             }
 
