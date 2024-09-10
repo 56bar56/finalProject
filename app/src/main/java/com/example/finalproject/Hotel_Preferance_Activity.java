@@ -26,7 +26,7 @@ public class Hotel_Preferance_Activity extends AppCompatActivity {
     private RelativeLayout[] typeHouseLayout;
     private View[] typeHouseViews;
     private TextView[] typeHouseTextViews;
-    private String[] typeOfHouse = {"Hotel", "Cabbin", "Airbnb", "Warehouse"};
+    private String[] typeOfHouse = {"hotel", "cabbin", "airbnb", "warehouse"};
     private int selectedIndexType = 0; // Store the default index of the selected option
     private RelativeLayout[] numStarsLayout;
     private View[] numStarsView;
@@ -46,6 +46,10 @@ public class Hotel_Preferance_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hotel_preferance_page);
+
+
+        Flight selectedFlight = (Flight) getIntent().getSerializableExtra("selectedFlight");
+        Flight selectedReturnedFlight = (Flight) getIntent().getSerializableExtra("selectedReturnedFlight");
 
         // Taking care of back button
         // Set onClickListener for the back button to go to Flights_Activity
@@ -238,7 +242,7 @@ public class Hotel_Preferance_Activity extends AppCompatActivity {
                 Log.d("FlightInfo", "Number of stops: " + numStops);
 
                 // Pass data to FlightsActivity using intent
-                Intent intent = new Intent(Hotel_Preferance_Activity.this, Restaurant_Preferance_Activity.class); //TODO change to HotelsActivity.class
+                Intent intent = new Intent(Hotel_Preferance_Activity.this, HotelResultsActivity.class); //TODO change to HotelsActivity.class
                 intent.putExtra("location", location);
                 intent.putExtra("kmFromCity", kmFromCity);
                 intent.putExtra("hotelOrCabbin", hotelOrCabbin);
@@ -247,13 +251,16 @@ public class Hotel_Preferance_Activity extends AppCompatActivity {
                 intent.putExtra("isStarTrip", isStarTrip);
                 intent.putExtra("numStops", numStops);
 
+
+                intent.putExtra("selectedFlight", selectedFlight);
+                intent.putExtra("selectedReturnedFlight", selectedReturnedFlight);
+
                 startActivity(intent);
             }
         });
     }
 
     private void updateStyles(View[] views, TextView[] textViews, int selectedIndex) {
-        // Update the selected index
         for (int i = 0; i < views.length; i++) {
             if (i == selectedIndex) {
                 views[i].setBackgroundResource(R.drawable.rectangle_21_shape);

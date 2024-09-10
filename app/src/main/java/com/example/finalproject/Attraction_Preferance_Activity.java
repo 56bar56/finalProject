@@ -153,7 +153,7 @@ public class Attraction_Preferance_Activity extends AppCompatActivity {
                 String attractions = getSelectedAttractions();
                 String rating = String.valueOf(selectedIndexNumStars + 1);
                 String averageCost = maxBudgetEditText.getText().toString();
-                String kidFriendly = kidFriendlyCheckBox.isChecked() ? "true" : "false";
+                String kidFriendly = kidFriendlyCheckBox.isChecked() ? "yes" : "no";
 
                 // Logging to check the values in the console
                 Log.d("FlightInfo", "Location: " + location);
@@ -168,7 +168,7 @@ public class Attraction_Preferance_Activity extends AppCompatActivity {
 
 
                 // Pass data to FlightsActivity using intent
-                Intent intent = new Intent(Attraction_Preferance_Activity.this, NewTripActivity.class); //TODO change to AttractionsActivity.class
+                Intent intent = new Intent(Attraction_Preferance_Activity.this, AttractionsResult.class);
                 intent.putExtra("location", location);
                 intent.putExtra("attractions", attractions);
                 intent.putExtra("rating", rating);

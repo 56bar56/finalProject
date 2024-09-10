@@ -6,10 +6,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.finalproject.api.UsersApiToken;
+import com.example.finalproject.api.WebServiceAPI;
+import com.example.finalproject.items.UserToGet;
+import com.example.finalproject.items.logInSave;
+
 import org.w3c.dom.Text;
+
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class WelcomeActivity extends AppCompatActivity {
     TextView hello_name;
@@ -17,6 +32,11 @@ public class WelcomeActivity extends AppCompatActivity {
     ImageView profile;
     Button new_trip;
     Button my_trips;
+    private WebServiceAPI webServiceAPI;
+    private Retrofit retrofit;
+
+    private UsersApiToken user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +52,54 @@ public class WelcomeActivity extends AppCompatActivity {
 
         // Get the intent and extract the name
         //TODO fix the transition to contact page
-        //TODO get the display name from the server with the global vars
-        Intent intent = getIntent();
-        String displayName = intent.getStringExtra("displayName");
-        String profilePic = intent.getStringExtra("profilePic");
+        String username = globalVars.username;
+        String password = globalVars.password;
+        String[] displayName = {null};
+        user = new UsersApiToken();
+        retrofit = new Retrofit.Builder()
+                .baseUrl(globalVars.server)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        webServiceAPI = retrofit.create(WebServiceAPI.class);
+        Callback<ResponseBody> callbackForGetUserInfo = new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    if (!response.isSuccessful()) {
+                        Toast.makeText(WelcomeActivity.this, "Incorrect username and/or password", Toast.LENGTH_LONG).show();
+                    } else {
+                        String token = response.body().string();
+                        String authorizationHeader = "Bearer " + token;
+                        //logInSaveDao.insert(new logInSave(globalVars.username,globalVars.password));
+                        String funcUserName = username;
+                        Call<UserToGet> call2 = webServiceAPI.getUser(authorizationHeader, funcUserName);
+                        call2.enqueue(new Callback<UserToGet>() {
+                            @Override
+                            public void onResponse(Call<UserToGet> call2, Response<UserToGet> response2) {
+                                UserToGet serverReturn = response2.body();
+                                displayName[0] = serverReturn.getDisplayName();
+                                hello_name.setText("Hello " + displayName[0] + ",");
+                            }
 
-        // Update the TextView with the user's name
-        hello_name.setText("Hello " + displayName + ",");
+                            @Override
+                            public void onFailure(Call<UserToGet> call2, Throwable t) {
+                                Toast.makeText(WelcomeActivity.this, "problem with connecting to the server", Toast.LENGTH_LONG).show();
 
-        // Set onClickListener for the new_trip button to go to NewTripActivity
+                            }
+                        });
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(WelcomeActivity.this, "problem with connecting to the server", Toast.LENGTH_LONG).show();
+            }
+        };
+        user.getUser(username, password, callbackForGetUserInfo);
+
         new_trip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
