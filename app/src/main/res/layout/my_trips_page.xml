@@ -1,25 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- res/layout/my_trips_page.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <RelativeLayout
-        android:id="@+id/title_ek2"
-        android:layout_marginTop="250dp"
-        android:layout_marginStart="146dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <ListView
+        android:id="@+id/tripsListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-        <TextView
-            android:textSize="30sp"
-            android:textColor="@color/black"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_width="wrap_content"
-            android:layout_height="59dp"
-            android:text="My trips page" />
-    </RelativeLayout>
-
-
-
-</RelativeLayout>
+</LinearLayout>
