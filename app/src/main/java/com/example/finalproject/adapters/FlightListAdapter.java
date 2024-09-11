@@ -22,14 +22,16 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
     private Context context;
     private String days, daysMin, maxPrice;  // extra data in case we are in FlightActivity.java
     private Flight selectedFlight;  // extra data in case we are in ReturnFlightActivity.java
+    private boolean isRoundedTrip;
 
-    public FlightListAdapter(Context context, List<Flight> flightList, String days, String daysMin, String maxPrice, Flight selectedFlight) {
+    public FlightListAdapter(Context context, List<Flight> flightList, String days, String daysMin, String maxPrice, Flight selectedFlight, boolean isRoundedTrip) {
         this.context = context;
         this.flightList = flightList;
         this.days = days;
         this.daysMin = daysMin;
         this.maxPrice = maxPrice;
         this.selectedFlight = selectedFlight;
+        this.isRoundedTrip = isRoundedTrip;
     }
 
     @NonNull
@@ -47,7 +49,9 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
         holder.flightNumber.setText("Flight Number: " + flight.getFlightNumber());
         holder.departure.setText("Departure: " + flight.getDeparture());
         holder.arrival.setText("Arrival: " + flight.getArrival());
-        holder.price.setText(flight.getPrice() + "$");
+        // Format price as an integer
+        int priceAsInt = (int) flight.getPrice();  // Cast the double price to an integer
+        holder.price.setText(priceAsInt + "$");  // Display price as integer
 
         // Logic to handle company logo or fallback text
         int logoResId = getCompanyLogoResId(flight.getCompany());
@@ -69,6 +73,9 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
                 intent.putExtra("tripDays", days);  // Use days from constructor
                 intent.putExtra("tripDaysMin", daysMin);  // Use daysMin from constructor
                 intent.putExtra("maxPrice", maxPrice);  // Use maxPrice from constructor
+                if(!isRoundedTrip){
+                    intent = new Intent(context, Hotel_Preferance_Activity.class);
+                }
                 context.startActivity(intent);
             }
             else {

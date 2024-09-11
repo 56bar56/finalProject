@@ -14,6 +14,12 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.finalproject.items.Flight;
+import com.example.finalproject.items.Hotel;
+import com.example.finalproject.items.Restaurant;
+
+import java.util.ArrayList;
+
 public class Attraction_Preferance_Activity extends AppCompatActivity {
 
     private ImageView backButton;
@@ -137,10 +143,10 @@ public class Attraction_Preferance_Activity extends AppCompatActivity {
 
         // Taking care of selected flights (back and forth) and hotel and restaurants
         Intent intent = getIntent();
-        String selectedFlight = intent.getStringExtra("selectedFlight");
-        String selectedReturnedFlight = intent.getStringExtra("selectedReturnedFlight");
-        String selectedHotel = intent.getStringExtra("selectedHotel");
-        String selectedRestaurants = intent.getStringExtra("selectedRestaurants");
+        Flight selectedFlight = (Flight) getIntent().getSerializableExtra("selectedFlight");
+        Flight selectedReturnedFlight = (Flight) getIntent().getSerializableExtra("selectedReturnedFlight");
+        Hotel selectedHotel = (Hotel) getIntent().getSerializableExtra("selectedHotel");
+        ArrayList<Restaurant> selectedRestaurants = (ArrayList<Restaurant>) getIntent().getSerializableExtra("selectedRestaurants");
 
 
         // Taking care of clicking on next

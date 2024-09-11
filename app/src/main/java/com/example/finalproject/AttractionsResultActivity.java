@@ -8,22 +8,18 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.finalproject.adapters.AttractionListAdapter;
-import com.example.finalproject.adapters.RestaurantListAdapter;
 import com.example.finalproject.api.AttractionAPI;
+import com.example.finalproject.api.TripAPI;
 import com.example.finalproject.items.Attraction;
 import com.example.finalproject.items.Flight;
 import com.example.finalproject.items.Hotel;
 import com.example.finalproject.items.Restaurant;
+import com.example.finalproject.items.Trip;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,7 +35,7 @@ public class AttractionsResultActivity extends AppCompatActivity {
     private ImageView backButton;
     private TextView title;
     private RecyclerView attractionRecyclerView;
-    private List<Attraction> attractionList;
+    private ArrayList<Attraction> attractionList;
     private List<Attraction> selectedAttractions = new ArrayList<>(); // To store selected attractions
     private AttractionListAdapter adapter;
     private Button nextButton;
@@ -77,7 +73,7 @@ public class AttractionsResultActivity extends AppCompatActivity {
         Flight selectedFlight = (Flight) getIntent().getSerializableExtra("selectedFlight");
         Flight selectedReturnedFlight = (Flight) getIntent().getSerializableExtra("selectedReturnedFlight");
         Hotel selectedHotel = (Hotel) getIntent().getSerializableExtra("selectedHotel");
-        Restaurant returnedRestaurants = (Restaurant) getIntent().getSerializableExtra("selectedRestaurants");
+        ArrayList<Restaurant> returnedRestaurants = (ArrayList<Restaurant>) getIntent().getSerializableExtra("selectedRestaurants");
 
 
         // Parse multiple attraction types from comma-separated string
@@ -106,6 +102,7 @@ public class AttractionsResultActivity extends AppCompatActivity {
             intent.putExtra("selectedHotel", selectedHotel);
             intent.putExtra("selectedReturnedFlight", selectedReturnedFlight);
             intent.putExtra("selectedFlight", selectedFlight);
+            sendTripToServer(selectedFlight, selectedReturnedFlight, selectedHotel, returnedRestaurants, selectedAttractions);
             startActivity(intent);
         });
     }
@@ -122,7 +119,7 @@ public class AttractionsResultActivity extends AppCompatActivity {
                     return;
                 }
 
-                attractionList = response.body();
+                attractionList = (ArrayList<Attraction>) response.body();
                 if (attractionList != null) {
                     adapter = new AttractionListAdapter(AttractionsResultActivity.this, attractionList);
                     attractionRecyclerView.setAdapter(adapter);
@@ -131,6 +128,26 @@ public class AttractionsResultActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Attraction>> call, Throwable t) {
+                Log.e("AttractionsActivity", "Request failed: " + t.getMessage());
+            }
+        });
+    }
+    private void sendTripToServer(Flight selectedFlight, Flight selectedReturnedFlight, Hotel selectedHotel, ArrayList<Restaurant> returnedRestaurants, List<Attraction> selectedAttractions) {
+        // Send a request to the server to create the trip (use Retrofit, Volley, or another library)
+        // This is a placeholder to show where you would put the network request
+        Trip myTrip = new Trip(selectedFlight, selectedReturnedFlight, selectedHotel, returnedRestaurants, selectedAttractions, "bar", "bar12$");
+        TripAPI tripAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(TripAPI.class);
+        Call<Trip> call = tripAPI.createTrip(myTrip);
+        call.enqueue(new Callback<Trip>() {
+            @Override
+            public void onResponse(Call<Trip> call, Response<Trip> response) {
+                if (!response.isSuccessful()) {
+                    Log.e("AttractionsResult", "Response error: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Trip> call, Throwable t) {
                 Log.e("AttractionsActivity", "Request failed: " + t.getMessage());
             }
         });

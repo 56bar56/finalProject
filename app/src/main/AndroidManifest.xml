@@ -77,9 +77,6 @@
             android:name=".MyTripsActivity"
             android:exported="false" />
         <activity
-            android:name=".NewTripActivity"
-            android:exported="false" />
-        <activity
             android:name=".ChooseConNameActivity"
             android:exported="false" />
         <activity
