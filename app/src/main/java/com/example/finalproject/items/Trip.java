@@ -1,9 +1,10 @@
 package com.example.finalproject.items;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Trip {
+public class Trip implements Serializable {
     private Flight selectedFlight;
     private Flight selectedReturnedFlight;
     private Hotel selectedHotel;

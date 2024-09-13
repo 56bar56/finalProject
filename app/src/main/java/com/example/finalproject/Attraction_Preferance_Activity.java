@@ -142,7 +142,6 @@ public class Attraction_Preferance_Activity extends AppCompatActivity {
         kidFriendlyCheckBox = findViewById(R.id.kid_friendly);
 
         // Taking care of selected flights (back and forth) and hotel and restaurants
-        Intent intent = getIntent();
         Flight selectedFlight = (Flight) getIntent().getSerializableExtra("selectedFlight");
         Flight selectedReturnedFlight = (Flight) getIntent().getSerializableExtra("selectedReturnedFlight");
         Hotel selectedHotel = (Hotel) getIntent().getSerializableExtra("selectedHotel");

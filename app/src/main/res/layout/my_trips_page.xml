@@ -1,13 +1,203 @@
-<!-- res/layout/my_trips_page.xml -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    tools:context=".contacts_pageActivity"
+    android:id="@+id/contactPageRelativeLayout">
 
-    <ListView
-        android:id="@+id/tripsListView"
+
+    <RelativeLayout
+        android:id="@+id/page_chat_ek1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-54dp"
+        tools:layout_editor_absoluteY="-138dp">
 
-</LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_trips"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="200dp"
+            android:contentDescription="Add Contact"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvChatRoom"
+            app:layout_constraintVertical_bias="0.529" />
+
+        <RelativeLayout
+            android:id="@+id/search_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="133dp">
+
+
+            <RelativeLayout
+                android:id="@+id/icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="295dp"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/bg_shape">
+
+                <ImageView
+                    android:id="@+id/vector"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:contentDescription="vector"
+                    android:padding="4dp"
+                    android:src="@drawable/search_icon" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/search_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp">
+
+                <View
+                    android:id="@+id/search_area"
+                    android:layout_width="275dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/bg_ek1_shape" />
+
+                <TextView
+                    android:id="@+id/search_message___"
+                    android:layout_width="255dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="11dp"
+                    android:text="Search trip by destination..."
+                    android:textColor="@color/search_message____color"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <!--
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="3dp"
+            android:backgroundTint="#74CFA0"
+            android:contentDescription="Settings Button"
+            android:src="@drawable/settings_foreground"
+            app:maxImageSize="48dp"
+            app:tint="#F7F1AE" />
+
+        -->
+
+        <RelativeLayout
+            android:id="@+id/tvChatRoom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="44dp"
+            android:layout_centerHorizontal="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.47"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+            <!-- app:layout_constraintBottom_toTopOf="@id/btnAdd" -->
+
+            <RelativeLayout
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="149dp"
+                android:layout_marginTop="6dp">
+
+                <TextView
+                    android:id="@+id/chat_ek3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="0dp"
+                    android:text="My Trips"
+                    android:textColor="@color/susan_doolan_color"
+                    android:textSize="26sp" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="295dp"
+                android:layout_marginTop="0dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/author_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp">
+
+                    <ImageView
+                        android:id="@+id/ava_7_1"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="-4dp"
+                        android:layout_marginTop="-4dp"
+                        android:contentDescription="ava_7_1"
+                        android:src="@drawable/ava_7_1" />
+
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/active"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_marginStart="29dp"
+                    android:layout_marginTop="35dp"
+                    android:background="@drawable/active_shape" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/notification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="11dp">
+
+                <ImageView
+                    android:id="@+id/back_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="5dp"
+                    android:contentDescription="vector_ek28"
+                    android:src="@drawable/vector_ek28" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

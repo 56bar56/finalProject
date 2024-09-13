@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/tour_details_page">
+    <!--tools:context=".contacts_pageActivity" -->
+
+
+    <RelativeLayout
+        android:id="@+id/page_chat_ek1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_trips"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="563dp"
+            android:contentDescription="Add Contact"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/service_bar"
+            app:layout_constraintVertical_bias="0.529" />
+
+
+        <RelativeLayout
+            android:id="@+id/service_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_marginTop="481dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <!-- Title "Service" -->
+            <RelativeLayout
+                android:id="@+id/service_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:layout_marginStart="0dp">
+
+                <TextView
+                    android:id="@+id/service"
+                    android:textSize="18sp"
+                    android:textColor="@color/service_ek1_color"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:text="@string/service_ek1_string" />
+            </RelativeLayout>
+
+            <!-- Icon Layout -->
+            <LinearLayout
+                android:id="@+id/icon_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/service_title"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <!-- Flight Icon -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/bg_shape" />
+
+                        <ImageView
+                            android:id="@+id/flight_icon"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/flight_icon" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <!-- Accommodation Icon -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/bg_shape" />
+
+                        <ImageView
+                            android:id="@+id/accommodation_icon"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/accommodation_icon" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <!-- Restaurant Icon -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/bg_shape" />
+
+                        <ImageView
+                            android:id="@+id/restaurant_icon"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/restaurant_icon" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <!-- Attraction Icon -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/bg_shape" />
+
+                        <ImageView
+                            android:id="@+id/attraction_icon"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/attraction_icon" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout android:id="@+id/image_info"
+            android:layout_marginTop="112dp"
+            android:paddingRight="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <RelativeLayout android:id="@+id/image_details"
+                android:layout_marginTop="248dp"
+                android:paddingRight="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+
+                <RelativeLayout android:id="@+id/weather"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="260dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+
+                    <RelativeLayout
+                        android:layout_marginTop="0dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView android:id="@+id/weather_icon"
+                            android:src="@drawable/vector_ek24"
+                            android:contentDescription="vector_ek24"
+                            android:layout_marginStart="0dp"
+                            android:layout_marginTop="0dp"
+                            android:layout_width="20dp"
+                            android:layout_height="14.45dp" />
+
+                        <ImageView android:id="@+id/weather_icon2"
+                            android:src="@drawable/vector_ek25"
+                            android:contentDescription="vector_ek25"
+                            android:layout_marginStart="7dp"
+                            android:layout_marginTop="9dp"
+                            android:layout_width="5.45dp"
+                            android:layout_height="10.91dp" />
+
+                    </RelativeLayout>
+
+                    <TextView android:id="@+id/celsius"
+                        android:textSize="11sp"
+                        android:textColor="@color/_30_c_color"
+                        android:layout_marginLeft="27dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_30_c_string"
+                        />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout android:id="@+id/price_button"
+                    android:layout_marginTop="70dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <View
+                        android:id="@+id/rectangle_6"
+                        android:background="@drawable/rectangle_6_shape"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_width="60dp"
+                        android:layout_height="25dp" />
+
+                    <TextView
+                        android:id="@+id/price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="10,000$"
+                        android:textColor="@color/_bg__tour_details_ek2_color"
+                        android:textSize="11sp" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout android:id="@+id/location_bar"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView android:id="@+id/icon"
+                        android:src="@drawable/icon"
+                        android:contentDescription="icon"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_width="10dp"
+                        android:layout_height="12dp" />
+
+
+                    <RelativeLayout
+                        android:layout_marginTop="0dp"
+                        android:layout_marginStart="19dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView android:id="@+id/location"
+                            android:textSize="13sp"
+                            android:textColor="@color/_30_c_color"
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginTop="0dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/bangkok__thailand_string" />
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_marginTop="0dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <TextView android:id="@+id/attraction_name"
+                        android:textSize="16sp"
+                        android:textColor="@color/service_ek1_color"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/capital_of_thailand_string"
+                        />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout android:id="@+id/next_slider"
+                android:layout_marginTop="215dp"
+                android:layout_marginStart="138dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <View   android:id="@+id/dot1"
+                    android:background="@drawable/ellipse_15_shape"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_width="5dp"
+                    android:layout_height="5dp" />
+
+                <View   android:id="@+id/dot2"
+                    android:background="@drawable/ellipse_15_shape"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_width="5dp"
+                    android:layout_height="5dp" />
+
+                <View   android:id="@+id/dot3"
+                    android:background="@drawable/ellipse_15_shape"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_width="5dp"
+                    android:layout_height="5dp" />
+
+                <View   android:id="@+id/dot4"
+                    android:background="@drawable/rectangle_9_shape"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_width="20dp"
+                    android:layout_height="3dp" />
+
+                <View   android:id="@+id/dot5"
+                    android:background="@drawable/ellipse_15_shape"
+                    android:layout_marginStart="55dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_width="5dp"
+                    android:layout_height="5dp" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/place_image"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginStart="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <RelativeLayout
+                    android:id="@+id/image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp">
+
+
+                    <!-- Swiping Image ViewPager -->
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/image_view_pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginStart="0dp" />
+                    <!--
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tab_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/image_view_pager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:tabIndicatorColor="@android:color/transparent"
+                        app:tabSelectedTextColor="@android:color/black"
+                        app:tabTextColor="@android:color/darker_gray"
+                        app:tabGravity="center"
+                        app:tabMode="fixed" />
+
+
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/image_on_screen"
+                        android:background="@drawable/top3number3"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        app:shapeAppearanceOverlay="@style/roundImageView"/>
+                        -->
+
+                </RelativeLayout>
+
+
+                <RelativeLayout android:id="@+id/book_mark"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginStart="289dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <ImageView android:id="@+id/vector_ek26"
+                        android:src="@drawable/vector_ek26"
+                        android:contentDescription="vector_ek26"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_width="16dp"
+                        android:layout_height="24dp" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/menu_bar"
+            android:layout_marginTop="44dp"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <RelativeLayout
+                android:layout_marginTop="0dp"
+                android:layout_marginStart="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true">
+
+                <ImageView android:id="@+id/back_button"
+                    android:src="@drawable/vector_ek28"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="7dp"
+                    android:layout_height="14dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+
+                <TextView
+                    android:id="@+id/title_destination"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bangkok, Thailand"
+                    android:textColor="@color/black"
+                    android:textSize="26sp" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

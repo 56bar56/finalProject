@@ -3,13 +3,19 @@ package com.example.finalproject;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalproject.RetrofitClient;
+import com.example.finalproject.adapters.HotelListAdapter;
+import com.example.finalproject.adapters.TripListAdapter;
 import com.example.finalproject.api.TripAPI;
+import com.example.finalproject.items.Hotel;
 import com.example.finalproject.items.Trip;
 
 import java.util.ArrayList;
@@ -20,14 +26,22 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MyTripsActivity extends AppCompatActivity {
-    private ListView tripsListView;
+    private ImageView backButton;
+    private RecyclerView tripsRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_trips_page);
 
-        tripsListView = findViewById(R.id.tripsListView);
+        // Taking care of back button
+        backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(v -> {
+            finish();
+        });
+
+        tripsRecyclerView = findViewById(R.id.list_trips);
+        tripsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Send request to the server to get user's trips
         getUserTrips();
@@ -48,19 +62,10 @@ public class MyTripsActivity extends AppCompatActivity {
                     return;
                 }
 
-                List<Trip> trips = response.body();
-                if (trips != null) {
-                    List<String> tripDetails = new ArrayList<>();
-                    for (Trip trip : trips) {
-                        tripDetails.add("Flight: " + trip.getSelectedFlight().getFlightNumber() + "\n" +
-                                "Hotel: " + trip.getSelectedHotel().getName() + "\n" +
-                                "Restaurants: " + trip.getSelectedRestaurants().size() + " selected\n" +
-                                "Attractions: " + trip.getSelectedAttractions().size() + " selected");
-                    }
-
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(MyTripsActivity.this,
-                            android.R.layout.simple_list_item_1, tripDetails);
-                    tripsListView.setAdapter(adapter);
+                List<Trip> tripList = response.body();
+                if (tripList != null) {
+                    TripListAdapter adapter = new TripListAdapter(MyTripsActivity.this, tripList);
+                    tripsRecyclerView.setAdapter(adapter);
                 }
             }
 

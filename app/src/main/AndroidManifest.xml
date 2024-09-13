@@ -19,6 +19,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".TourDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".AttractionsResultActivity"
             android:exported="false" />
         <activity
@@ -44,9 +47,6 @@
             android:exported="false" />
         <activity
             android:name=".Flight_Preferance_Activity"
-            android:exported="false" />
-        <activity
-            android:name=".questionnaireActivity"
             android:exported="false" />
 
         <service

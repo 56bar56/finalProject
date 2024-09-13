@@ -102,7 +102,7 @@ public class AttractionsResultActivity extends AppCompatActivity {
             intent.putExtra("selectedHotel", selectedHotel);
             intent.putExtra("selectedReturnedFlight", selectedReturnedFlight);
             intent.putExtra("selectedFlight", selectedFlight);
-            sendTripToServer(selectedFlight, selectedReturnedFlight, selectedHotel, returnedRestaurants, selectedAttractions);
+            sendTripToServer(selectedFlight, selectedReturnedFlight, selectedHotel, returnedRestaurants, selectedAttractions, globalVars.username, globalVars.password);
             startActivity(intent);
         });
     }
@@ -132,10 +132,10 @@ public class AttractionsResultActivity extends AppCompatActivity {
             }
         });
     }
-    private void sendTripToServer(Flight selectedFlight, Flight selectedReturnedFlight, Hotel selectedHotel, ArrayList<Restaurant> returnedRestaurants, List<Attraction> selectedAttractions) {
+    private void sendTripToServer(Flight selectedFlight, Flight selectedReturnedFlight, Hotel selectedHotel, ArrayList<Restaurant> returnedRestaurants, List<Attraction> selectedAttractions, String username, String password) {
         // Send a request to the server to create the trip (use Retrofit, Volley, or another library)
         // This is a placeholder to show where you would put the network request
-        Trip myTrip = new Trip(selectedFlight, selectedReturnedFlight, selectedHotel, returnedRestaurants, selectedAttractions, "bar", "bar12$");
+        Trip myTrip = new Trip(selectedFlight, selectedReturnedFlight, selectedHotel, returnedRestaurants, selectedAttractions, username, password);
         TripAPI tripAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(TripAPI.class);
         Call<Trip> call = tripAPI.createTrip(myTrip);
         call.enqueue(new Callback<Trip>() {
