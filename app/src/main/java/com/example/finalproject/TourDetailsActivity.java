@@ -1,6 +1,8 @@
 package com.example.finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
@@ -11,11 +13,19 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.finalproject.adapters.AttractionListAdapter;
+import com.example.finalproject.adapters.FlightListAdapter;
+import com.example.finalproject.adapters.HotelListAdapter;
 import com.example.finalproject.adapters.ImagePagerAdapter;
+import com.example.finalproject.adapters.RestaurantListAdapter;
 import com.example.finalproject.items.Attraction;
+import com.example.finalproject.items.Flight;
+import com.example.finalproject.items.Hotel;
+import com.example.finalproject.items.Restaurant;
 import com.example.finalproject.items.Trip;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,6 +39,16 @@ public class TourDetailsActivity extends AppCompatActivity {
     private View[] dots;
     private List<Integer> imageList;
     private int previousPosition = -1; // Track the current image
+
+    private RecyclerView recyclerView;
+    private FlightListAdapter flightAdapter;
+    private HotelListAdapter hotelAdapter;
+    private RestaurantListAdapter restaurantAdapter;
+    private AttractionListAdapter attractionAdapter;
+    private List<Flight> flightList;
+    private List<Hotel> hotelList;
+    private List<Restaurant> restaurantList;
+    private List<Attraction> attractionList;
 
 
     @Override
@@ -52,7 +72,6 @@ public class TourDetailsActivity extends AppCompatActivity {
         //attractions = selectedTrip.getSelectedAttractions();
 
 
-
         // Initialize images
         imageList = Arrays.asList(R.drawable.top3number2, R.drawable.top3number3, R.drawable.ashim_d_silva_ihjohaud8ry_unsplash_1_ek1,
                 R.drawable.ashim_d_silva_ihjohaud8ry_unsplash_1, R.drawable.top3number3);
@@ -61,15 +80,13 @@ public class TourDetailsActivity extends AppCompatActivity {
 
         ImagePagerAdapter adapter = new ImagePagerAdapter(this, imageList);
         imageViewPager.setAdapter(adapter);
+        //imageViewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
 
         // Initialize dots
         dots = new View[] {
                 findViewById(R.id.dot1), findViewById(R.id.dot2),
                 findViewById(R.id.dot3), findViewById(R.id.dot4), findViewById(R.id.dot5)
         };
-
-
-        // Connect TabLayout with ViewPager2
 
         // Set a PageTransformer to handle page change updates
         imageViewPager.setPageTransformer(new ViewPager2.PageTransformer() {
@@ -84,6 +101,43 @@ public class TourDetailsActivity extends AppCompatActivity {
             }
         });
 
+
+        // Taking care of the service bar
+        // Initialize RecyclerView
+        recyclerView = findViewById(R.id.list_trips);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Initialize your lists (fetch data or use dummy data)
+        flightList = new ArrayList<>();
+        flightList.add(selectedTrip.getSelectedFlight());
+        flightList.add(selectedTrip.getSelectedReturnedFlight());
+        hotelList = new ArrayList<>();
+        hotelList.add(selectedTrip.getSelectedHotel());
+        restaurantList = selectedTrip.getSelectedRestaurants();
+        attractionList = selectedTrip.getSelectedAttractions();
+
+        // Initialize adapters
+        flightAdapter = new FlightListAdapter(this, flightList, null, null, null, null, false, false);
+        hotelAdapter = new HotelListAdapter(this, hotelList, null, null, false);
+        restaurantAdapter = new RestaurantListAdapter(this, restaurantList, false);
+        attractionAdapter = new AttractionListAdapter(this, attractionList, false);
+
+        // Set click listeners for buttons
+        findViewById(R.id.flight_icon).setOnClickListener(v -> {
+            recyclerView.setAdapter(flightAdapter);
+        });
+
+        findViewById(R.id.accommodation_icon).setOnClickListener(v -> {
+            recyclerView.setAdapter(hotelAdapter);
+        });
+
+        findViewById(R.id.restaurant_icon).setOnClickListener(v -> {
+            recyclerView.setAdapter(restaurantAdapter);
+        });
+
+        findViewById(R.id.attraction_icon).setOnClickListener(v -> {
+            recyclerView.setAdapter(attractionAdapter);
+        });
     }
 
 

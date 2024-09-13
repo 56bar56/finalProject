@@ -21,10 +21,12 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
     private List<Restaurant> restaurantList;
     private List<Restaurant> selectedRestaurants = new ArrayList<>();
     private Context context;
+    Boolean needOnClick; // Just on Activity pages needed, on TourDetailsActivity there is no need.
 
-    public RestaurantListAdapter(Context context, List<Restaurant> restaurantList) {
+    public RestaurantListAdapter(Context context, List<Restaurant> restaurantList, boolean needOnClick) {
         this.context = context;
         this.restaurantList = restaurantList;
+        this.needOnClick = needOnClick;
     }
 
     @NonNull
@@ -59,16 +61,19 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
             holder.itemView.setBackgroundColor(Color.WHITE);  // Default white
         }
 
-        // Set OnClickListener to handle selection/deselection
-        holder.itemView.setOnClickListener(v -> {
-            if (selectedRestaurants.contains(restaurant)) {
-                selectedRestaurants.remove(restaurant);
-                holder.itemView.setBackgroundColor(Color.WHITE);  // Deselect
-            } else {
-                selectedRestaurants.add(restaurant);
-                holder.itemView.setBackgroundColor(Color.parseColor("#FFE3CA"));  // Select
-            }
-        });
+        if(needOnClick) {
+            // Set OnClickListener to handle selection/deselection
+            holder.itemView.setOnClickListener(v -> {
+                if (selectedRestaurants.contains(restaurant)) {
+                    selectedRestaurants.remove(restaurant);
+                    holder.itemView.setBackgroundColor(Color.WHITE);  // Deselect
+                } else {
+                    selectedRestaurants.add(restaurant);
+                    holder.itemView.setBackgroundColor(Color.parseColor("#FFE3CA"));  // Select
+                }
+            });
+
+        }
     }
 
     @Override

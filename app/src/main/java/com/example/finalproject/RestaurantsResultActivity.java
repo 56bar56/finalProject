@@ -106,7 +106,7 @@ public class RestaurantsResultActivity extends AppCompatActivity {
 
                 restaurantList = response.body();
                 if (restaurantList != null) {
-                    adapter = new RestaurantListAdapter(RestaurantsResultActivity.this, restaurantList);
+                    adapter = new RestaurantListAdapter(RestaurantsResultActivity.this, restaurantList, true);
                     restaurantRecyclerView.setAdapter(adapter);
                 }
             }

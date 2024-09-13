@@ -23,10 +23,12 @@ public class AttractionListAdapter extends RecyclerView.Adapter<AttractionListAd
     private List<Attraction> selectedAttractions = new ArrayList<>();
     private Context context;
     private HashMap<String, String> mapType = new HashMap<>();
+    Boolean needOnClick; // Just on Activity pages needed, on TourDetailsActivity there is no need.
 
-    public AttractionListAdapter(Context context, List<Attraction> attractionList) {
+    public AttractionListAdapter(Context context, List<Attraction> attractionList, boolean needOnClick) {
         this.context = context;
         this.attractionList = attractionList;
+        this.needOnClick = needOnClick;
         mapType.put("historical", "Historical Sites");
         mapType.put("museum", "Museums and Art Galleries");
         mapType.put("park", "Amusement Parks");
@@ -70,16 +72,19 @@ public class AttractionListAdapter extends RecyclerView.Adapter<AttractionListAd
             holder.itemView.setBackgroundColor(Color.WHITE);  // Default white
         }
 
-        // Set OnClickListener to handle selection/deselection
-        holder.itemView.setOnClickListener(v -> {
-            if (selectedAttractions.contains(attraction)) {
-                selectedAttractions.remove(attraction);
-                holder.itemView.setBackgroundColor(Color.WHITE);  // Deselect
-            } else {
-                selectedAttractions.add(attraction);
-                holder.itemView.setBackgroundColor(Color.parseColor("#FFE3CA"));  // Select
-            }
-        });
+        if(needOnClick) {
+            // Set OnClickListener to handle selection/deselection
+            holder.itemView.setOnClickListener(v -> {
+                if (selectedAttractions.contains(attraction)) {
+                    selectedAttractions.remove(attraction);
+                    holder.itemView.setBackgroundColor(Color.WHITE);  // Deselect
+                } else {
+                    selectedAttractions.add(attraction);
+                    holder.itemView.setBackgroundColor(Color.parseColor("#FFE3CA"));  // Select
+                }
+            });
+
+        }
     }
 
     @Override

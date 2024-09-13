@@ -83,7 +83,7 @@ public class FlightsActivity extends AppCompatActivity {
 
                 flightList = response.body();
                 if (flightList != null) {
-                    FlightListAdapter adapter = new FlightListAdapter(FlightsActivity.this, flightList, days, daysMin, maxPrice, null, Boolean.parseBoolean(isRoundedTrip));
+                    FlightListAdapter adapter = new FlightListAdapter(FlightsActivity.this, flightList, days, daysMin, maxPrice, null, Boolean.parseBoolean(isRoundedTrip), true);
                     flightsRecyclerView.setAdapter(adapter);
                 }
             }

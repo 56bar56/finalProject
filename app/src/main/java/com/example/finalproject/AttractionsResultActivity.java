@@ -121,7 +121,7 @@ public class AttractionsResultActivity extends AppCompatActivity {
 
                 attractionList = (ArrayList<Attraction>) response.body();
                 if (attractionList != null) {
-                    adapter = new AttractionListAdapter(AttractionsResultActivity.this, attractionList);
+                    adapter = new AttractionListAdapter(AttractionsResultActivity.this, attractionList, true);
                     attractionRecyclerView.setAdapter(adapter);
                 }
             }

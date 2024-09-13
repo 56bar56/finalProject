@@ -22,12 +22,14 @@ public class HotelListAdapter extends RecyclerView.Adapter<HotelListAdapter.Hote
     private List<Hotel> hotelList;
     private Context context;
     private Flight selectedFlight, selectedReturnFlight;  // extra data of the selected flights
+    Boolean needOnClick; // Just on Activity pages needed, on TourDetailsActivity there is no need.
 
-    public HotelListAdapter(Context context, List<Hotel> hotelList, Flight selectedFlight, Flight selectedReturnFlight) {
+    public HotelListAdapter(Context context, List<Hotel> hotelList, Flight selectedFlight, Flight selectedReturnFlight, boolean needOnClick) {
         this.context = context;
         this.hotelList = hotelList;
         this.selectedFlight = selectedFlight;
         this.selectedReturnFlight = selectedReturnFlight;
+        this.needOnClick = needOnClick;
     }
 
     @NonNull
@@ -57,15 +59,17 @@ public class HotelListAdapter extends RecyclerView.Adapter<HotelListAdapter.Hote
                 .into(holder.profileImg);
 
 
-        // Set OnClickListener for each hotel item
-        holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, Restaurant_Preferance_Activity.class);
-            intent.putExtra("selectedHotel", hotel);
-            intent.putExtra("selectedFlight", selectedFlight);
-            intent.putExtra("selectedReturnedFlight", selectedReturnFlight);
-            context.startActivity(intent);
+        if(needOnClick) {
+            // Set OnClickListener for each hotel item
+            holder.itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(context, Restaurant_Preferance_Activity.class);
+                intent.putExtra("selectedHotel", hotel);
+                intent.putExtra("selectedFlight", selectedFlight);
+                intent.putExtra("selectedReturnedFlight", selectedReturnFlight);
+                context.startActivity(intent);
 
-        });
+            });
+        }
     }
 
     @Override

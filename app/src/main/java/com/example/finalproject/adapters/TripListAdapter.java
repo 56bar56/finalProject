@@ -74,12 +74,14 @@ public class TripListAdapter extends RecyclerView.Adapter<TripListAdapter.TripVi
                 .error(R.drawable.top3number2)    // Optional error placeholder
                 .into(holder.profileImg);
 
+
         // Set OnClickListener for each trip item
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, TourDetailsActivity.class);
             intent.putExtra("selectedTrip", trip);
             context.startActivity(intent);
         });
+
     }
 
     @Override

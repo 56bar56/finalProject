@@ -91,7 +91,7 @@ public class HotelResultsActivity extends AppCompatActivity {
 
                 hotelList = response.body();
                 if (hotelList != null) {
-                    HotelListAdapter adapter = new HotelListAdapter(HotelResultsActivity.this, hotelList, selectedFlight, selectedReturnedFlight);
+                    HotelListAdapter adapter = new HotelListAdapter(HotelResultsActivity.this, hotelList, selectedFlight, selectedReturnedFlight, true);
                     hotelsRecyclerView.setAdapter(adapter);
                 }
             }

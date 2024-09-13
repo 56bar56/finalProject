@@ -2,8 +2,10 @@ package com.example.finalproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,8 +36,13 @@ public class WelcomeActivity extends AppCompatActivity {
     Button my_trips;
     private WebServiceAPI webServiceAPI;
     private Retrofit retrofit;
-
     private UsersApiToken user;
+    private HorizontalScrollView horizontalScrollView;
+    private Handler handler;
+    private Runnable runnable;
+    private int scrollAmount = 5; // Adjust the scroll speed
+    private int scrollDelay = 30; // delay in ms between each scroll step
+    private boolean scrollRight = true; // To control direction of the scroll
 
 
     @Override
@@ -99,6 +106,29 @@ public class WelcomeActivity extends AppCompatActivity {
         };
         user.getUser(username, password, callbackForGetUserInfo);
 
+        horizontalScrollView = findViewById(R.id.horizontalScrollView);
+        handler = new Handler();
+
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (scrollRight) {
+                    horizontalScrollView.scrollBy(scrollAmount, 0);
+                    if (horizontalScrollView.getScrollX() >= horizontalScrollView.getChildAt(0).getWidth() - horizontalScrollView.getWidth()) {
+                        scrollRight = false;
+                    }
+                } else {
+                    horizontalScrollView.scrollBy(-scrollAmount, 0);
+                    if (horizontalScrollView.getScrollX() <= 0) {
+                        scrollRight = true;
+                    }
+                }
+                handler.postDelayed(this, 30); // Repeat every 30ms for smooth scrolling
+            }
+        };
+
+        handler.post(runnable);
+
         new_trip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,6 +151,7 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(WelcomeActivity.this, ProfileActivity.class);
+                intent.putExtra("displayName", displayName[0]);
                 startActivity(intent);
             }
         });
@@ -141,5 +172,11 @@ public class WelcomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(runnable); // Stop scrolling when the activity is destroyed
     }
 }

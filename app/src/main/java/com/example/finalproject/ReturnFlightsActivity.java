@@ -113,7 +113,7 @@ public class ReturnFlightsActivity extends AppCompatActivity {
 
                 flightList = response.body();
                 if (flightList != null) {
-                    FlightListAdapter adapter = new FlightListAdapter(ReturnFlightsActivity.this, flightList, "none", "none", "none", selectedFlight, true);
+                    FlightListAdapter adapter = new FlightListAdapter(ReturnFlightsActivity.this, flightList, "none", "none", "none", selectedFlight, true, true);
                     flightsRecyclerView.setAdapter(adapter);
                 }
             }

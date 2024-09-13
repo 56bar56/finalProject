@@ -1,25 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/settings_page">
+
 
     <RelativeLayout
-        android:id="@+id/title_ek2"
-        android:layout_marginTop="250dp"
-        android:layout_marginStart="146dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:id="@+id/page_chat_ek1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <TextView
-            android:textSize="30sp"
-            android:textColor="@color/black"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="0dp"
+
+        <RelativeLayout android:id="@+id/profile"
+            android:layout_marginTop="115dp"
+            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
-            android:layout_height="59dp"
-            android:text="Profile page" />
+            android:layout_height="wrap_content">
+
+
+            <!--
+            <RelativeLayout android:id="@+id/button"
+                android:layout_marginTop="130dp"
+                android:layout_marginStart="236dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:id="@+id/bg"
+                    android:background="@drawable/bg_shape"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_width="80dp"
+                    android:layout_height="25dp" />
+
+                <TextView
+                    android:id="@+id/edit_profile"
+                    android:textSize="11sp"
+                    android:textColor="@color/_bg__profile_ek2_color"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_width="70.5dp"
+                    android:layout_height="21.5dp"
+                    android:text="@string/edit_profile_string" />
+
+            </RelativeLayout>
+            -->
+
+
+            <RelativeLayout android:id="@+id/author_name"
+                android:layout_marginTop="172dp"
+                android:layout_marginStart="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView android:id="@+id/name"
+                    android:textSize="16sp"
+                    android:textColor="@color/hasan_mahmud_color"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yael Cohen" />
+
+                <TextView android:id="@+id/username"
+                    android:textSize="13sp"
+                    android:textColor="#666666"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="yael$21" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout android:id="@+id/cover"
+                android:layout_marginTop="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/background_img"
+                    android:src="@drawable/ishan_seefromthesky_ekxpfov7vf4_unsplash_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout android:id="@+id/author_image"
+                android:layout_marginTop="100dp"
+                android:layout_marginStart="21dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView android:id="@+id/ava_7_2"
+                    android:src="@drawable/ava_7_2"
+                    android:contentDescription="ava_7_2"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp" />
+
+                <View   android:id="@+id/active"
+                    android:background="@drawable/active_shape"
+                    android:layout_marginStart="45dp"
+                    android:layout_marginTop="48dp"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/menu_bar"
+            android:layout_marginTop="37dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <RelativeLayout
+                android:layout_marginStart="321dp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <!--
+
+                <ImageView
+                    android:id="@+id/settings"
+                    android:src="@drawable/vector_ek35"
+                    android:layout_marginStart="2dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+                    -->
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_marginTop="0dp"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:textSize="26sp"
+                    android:textColor="@color/hasan_mahmud_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile_ek3_string" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="0dp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/back_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/vector_ek28" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/logout_button"
+            android:layout_width="335dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="30dp"
+            android:layout_centerHorizontal="true"
+            app:backgroundTint="@null"
+            android:background="@drawable/bg_shape"
+            android:text="Logout"
+            android:textColor="@color/_bg__log_in_page_ek2_color"
+            android:textSize="16sp"
+            android:layout_alignParentBottom="true"/>
+
     </RelativeLayout>
-
-
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
