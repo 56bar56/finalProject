@@ -51,6 +51,7 @@ public class Hotel_Preferance_Activity extends AppCompatActivity {
 
 
         Flight selectedFlight = (Flight) getIntent().getSerializableExtra("selectedFlight");
+        String peopleNumber = getIntent().getStringExtra("peopleNumber");
         Flight selectedReturnedFlight = (Flight) getIntent().getSerializableExtra("selectedReturnedFlight");
 
         // Taking care of back button
@@ -254,7 +255,10 @@ public class Hotel_Preferance_Activity extends AppCompatActivity {
                 intent.putExtra("numStops", numStops);
 
 
+
+
                 intent.putExtra("selectedFlight", selectedFlight);
+                intent.putExtra("peopleNumber", peopleNumber);
                 intent.putExtra("selectedReturnedFlight", selectedReturnedFlight);
 
                 startActivity(intent);

@@ -22,6 +22,9 @@
             android:name=".TourDetailsActivity"
             android:exported="false" />
         <activity
+            android:name=".FinishTripActivity"
+            android:exported="false" />
+        <activity
             android:name=".AttractionsResultActivity"
             android:exported="false" />
         <activity

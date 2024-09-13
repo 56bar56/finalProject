@@ -51,7 +51,7 @@ public class TripListAdapter extends RecyclerView.Adapter<TripListAdapter.TripVi
 
         // Set flight details
         String middle;
-        if(trip.getSelectedReturnedFlight() == null)
+        if (trip.getSelectedReturnedFlight() == null)
             holder.arrowType.setImageResource(R.drawable.arrow_icon);
         else
             holder.arrowType.setImageResource(R.drawable.double_arrow);
@@ -63,8 +63,8 @@ public class TripListAdapter extends RecyclerView.Adapter<TripListAdapter.TripVi
         holder.numDays.setText(calculateDaysBetween(dateStart, dateEnd) + " days");
         //holder.numPeople.setText(trip.getNumberOfPeople() + " people"); TODO
         // Format price as an integer
-        //int price = (int) trip.getPriceForTrip(); TODO
-        //holder.price.setText(priceAsInt + "$");  TODO
+        int price = (int) trip.getPriceForTrip();
+        holder.price.setText(price + "$");
 
         String imageUrl = "https://www.torontopho.com/images/blog/2023/09/Vietnam_A_Journey_Through_History_Cuisine_and_Natural_Wonders2.jpg";
         //TODO change to the hotel img
@@ -143,6 +143,4 @@ public class TripListAdapter extends RecyclerView.Adapter<TripListAdapter.TripVi
             return -1;
         }
     }
-
-
 }

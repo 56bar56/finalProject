@@ -145,6 +145,7 @@ public class Attraction_Preferance_Activity extends AppCompatActivity {
         Flight selectedFlight = (Flight) getIntent().getSerializableExtra("selectedFlight");
         Flight selectedReturnedFlight = (Flight) getIntent().getSerializableExtra("selectedReturnedFlight");
         Hotel selectedHotel = (Hotel) getIntent().getSerializableExtra("selectedHotel");
+        String peopleNumber = getIntent().getStringExtra("peopleNumber");
         ArrayList<Restaurant> selectedRestaurants = (ArrayList<Restaurant>) getIntent().getSerializableExtra("selectedRestaurants");
 
 
@@ -183,6 +184,7 @@ public class Attraction_Preferance_Activity extends AppCompatActivity {
                 intent.putExtra("selectedReturnedFlight", selectedReturnedFlight);
                 intent.putExtra("selectedHotel", selectedHotel);
                 intent.putExtra("selectedRestaurants", selectedRestaurants);
+                intent.putExtra("peopleNumber", peopleNumber);
 
                 startActivity(intent);
             }

@@ -62,6 +62,7 @@ public class RestaurantsResultActivity extends AppCompatActivity {
         Flight selectedFlight = (Flight) getIntent().getSerializableExtra("selectedFlight");
         Flight selectedReturnedFlight = (Flight) getIntent().getSerializableExtra("selectedReturnedFlight");
         Hotel selectedHotel = (Hotel) getIntent().getSerializableExtra("selectedHotel");
+        String peopleNumber = getIntent().getStringExtra("peopleNumber");
 
         // Parse multiple cuisines from comma-separated string
         List<String> cuisineList = Arrays.asList(cuisine.split(",\\s*"));
@@ -88,6 +89,8 @@ public class RestaurantsResultActivity extends AppCompatActivity {
             intent.putExtra("selectedHotel", selectedHotel);
             intent.putExtra("selectedFlight", selectedFlight);
             intent.putExtra("selectedReturnedFlight", selectedReturnedFlight);
+            intent.putExtra("peopleNumber", peopleNumber);
+
             startActivity(intent);
         });
     }

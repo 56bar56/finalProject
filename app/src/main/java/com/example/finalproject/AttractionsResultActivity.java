@@ -70,6 +70,7 @@ public class AttractionsResultActivity extends AppCompatActivity {
         String rating = getIntent().getStringExtra("rating");
         String attractionType = getIntent().getStringExtra("attractions");
         String kidFriendly = getIntent().getStringExtra("kidFriendly");
+        String peopleNumber = getIntent().getStringExtra("peopleNumber");
         Flight selectedFlight = (Flight) getIntent().getSerializableExtra("selectedFlight");
         Flight selectedReturnedFlight = (Flight) getIntent().getSerializableExtra("selectedReturnedFlight");
         Hotel selectedHotel = (Hotel) getIntent().getSerializableExtra("selectedHotel");
@@ -96,13 +97,13 @@ public class AttractionsResultActivity extends AppCompatActivity {
         nextButton.setOnClickListener(v -> {
             // Pass selected attractions to another activity (e.g., SummaryActivity)
             selectedAttractions = adapter.getSelectedAttractions();
-            Intent intent = new Intent(AttractionsResultActivity.this, WelcomeActivity.class);
+            Intent intent = new Intent(AttractionsResultActivity.this, FinishTripActivity.class);
             intent.putExtra("selectedAttractions", new ArrayList<>(selectedAttractions));
             intent.putExtra("selectedRestaurants", returnedRestaurants);
             intent.putExtra("selectedHotel", selectedHotel);
             intent.putExtra("selectedReturnedFlight", selectedReturnedFlight);
             intent.putExtra("selectedFlight", selectedFlight);
-            sendTripToServer(selectedFlight, selectedReturnedFlight, selectedHotel, returnedRestaurants, selectedAttractions, globalVars.username, globalVars.password);
+            intent.putExtra("peopleNumber", peopleNumber);
             startActivity(intent);
         });
     }
@@ -128,26 +129,6 @@ public class AttractionsResultActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Attraction>> call, Throwable t) {
-                Log.e("AttractionsActivity", "Request failed: " + t.getMessage());
-            }
-        });
-    }
-    private void sendTripToServer(Flight selectedFlight, Flight selectedReturnedFlight, Hotel selectedHotel, ArrayList<Restaurant> returnedRestaurants, List<Attraction> selectedAttractions, String username, String password) {
-        // Send a request to the server to create the trip (use Retrofit, Volley, or another library)
-        // This is a placeholder to show where you would put the network request
-        Trip myTrip = new Trip(selectedFlight, selectedReturnedFlight, selectedHotel, returnedRestaurants, selectedAttractions, username, password);
-        TripAPI tripAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(TripAPI.class);
-        Call<Trip> call = tripAPI.createTrip(myTrip);
-        call.enqueue(new Callback<Trip>() {
-            @Override
-            public void onResponse(Call<Trip> call, Response<Trip> response) {
-                if (!response.isSuccessful()) {
-                    Log.e("AttractionsResult", "Response error: " + response.code());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Trip> call, Throwable t) {
                 Log.e("AttractionsActivity", "Request failed: " + t.getMessage());
             }
         });

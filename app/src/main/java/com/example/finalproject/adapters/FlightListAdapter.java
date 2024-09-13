@@ -28,7 +28,10 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
     private boolean isRoundedTrip;
     Boolean needOnClick; // Just on Activity pages needed, on TourDetailsActivity there is no need.
 
-    public FlightListAdapter(Context context, List<Flight> flightList, String days, String daysMin, String maxPrice, Flight selectedFlight, boolean isRoundedTrip, boolean needOnClick) {
+    private String peopleNumber;
+
+
+    public FlightListAdapter(Context context, List<Flight> flightList, String days, String daysMin, String maxPrice, Flight selectedFlight, boolean isRoundedTrip, boolean needOnClick, String peopleNumber) {
         this.context = context;
         this.flightList = flightList;
         this.days = days;
@@ -37,6 +40,8 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
         this.selectedFlight = selectedFlight;
         this.isRoundedTrip = isRoundedTrip;
         this.needOnClick = needOnClick;
+        this.peopleNumber = peopleNumber;
+
     }
 
     @NonNull
@@ -81,6 +86,7 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
                     intent.putExtra("tripDays", days);  // Use days from constructor
                     intent.putExtra("tripDaysMin", daysMin);  // Use daysMin from constructor
                     intent.putExtra("maxPrice", maxPrice);  // Use maxPrice from constructor
+                    intent.putExtra("peopleNumber", peopleNumber);  // Use maxPrice from constructor
                     if (!isRoundedTrip) {
                         intent = new Intent(context, Hotel_Preferance_Activity.class);
                     }
@@ -89,6 +95,7 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
                     Intent intent = new Intent(context, Hotel_Preferance_Activity.class);
                     intent.putExtra("selectedFlight", selectedFlight);  // Pass the selected outbound flight
                     intent.putExtra("selectedReturnedFlight", flight);  // Pass the selected return flight
+                    intent.putExtra("peopleNumber", peopleNumber);  // Use maxPrice from constructor
                     context.startActivity(intent);
                 }
             });

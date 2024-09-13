@@ -49,10 +49,9 @@ public class MyTripsActivity extends AppCompatActivity {
 
     private void getUserTrips() {
         String username = globalVars.username;
-        String password = globalVars.password;
 
         TripAPI tripAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(TripAPI.class);
-        Call<List<Trip>> call = tripAPI.getUserTrips(username, password);
+        Call<List<Trip>> call = tripAPI.getUserTrips(username);
 
         call.enqueue(new Callback<List<Trip>>() {
             @Override

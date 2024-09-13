@@ -55,6 +55,9 @@ public class FlightsActivity extends AppCompatActivity {
         String days = getIntent().getStringExtra("maxDay");
         String daysMin = getIntent().getStringExtra("minDay");
         String isRoundedTrip  = getIntent().getStringExtra("ROUNDED_TRIP");
+        String peopleNumber = getIntent().getStringExtra("peopleNumber");
+
+
 
         // Create filter request
         FlightFilterRequest filterRequest = new FlightFilterRequest(
@@ -66,10 +69,10 @@ public class FlightsActivity extends AppCompatActivity {
         );
 
         // Fetch flights
-        fetchFlights(filterRequest, days, daysMin, maxPrice, isRoundedTrip);
+        fetchFlights(filterRequest, days, daysMin, maxPrice, isRoundedTrip, peopleNumber);
     }
 
-    private void fetchFlights(FlightFilterRequest request, String days, String daysMin, String maxPrice, String isRoundedTrip) {
+    private void fetchFlights(FlightFilterRequest request, String days, String daysMin, String maxPrice, String isRoundedTrip, String peopleNumber) {
         FlightAPI flightAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(FlightAPI.class);
 
         Call<List<Flight>> call = flightAPI.filterFlights(request);
@@ -83,7 +86,7 @@ public class FlightsActivity extends AppCompatActivity {
 
                 flightList = response.body();
                 if (flightList != null) {
-                    FlightListAdapter adapter = new FlightListAdapter(FlightsActivity.this, flightList, days, daysMin, maxPrice, null, Boolean.parseBoolean(isRoundedTrip), true);
+                    FlightListAdapter adapter = new FlightListAdapter(FlightsActivity.this, flightList, days, daysMin, maxPrice, null, Boolean.parseBoolean(isRoundedTrip),true, peopleNumber);
                     flightsRecyclerView.setAdapter(adapter);
                 }
             }

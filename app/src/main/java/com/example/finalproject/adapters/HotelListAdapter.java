@@ -23,12 +23,14 @@ public class HotelListAdapter extends RecyclerView.Adapter<HotelListAdapter.Hote
     private Context context;
     private Flight selectedFlight, selectedReturnFlight;  // extra data of the selected flights
     Boolean needOnClick; // Just on Activity pages needed, on TourDetailsActivity there is no need.
+    private String peopleNumber;
 
-    public HotelListAdapter(Context context, List<Hotel> hotelList, Flight selectedFlight, Flight selectedReturnFlight, boolean needOnClick) {
+    public HotelListAdapter(Context context, String peopleNumber, List<Hotel> hotelList, Flight selectedFlight, Flight selectedReturnFlight, boolean needOnClick) {
         this.context = context;
         this.hotelList = hotelList;
         this.selectedFlight = selectedFlight;
         this.selectedReturnFlight = selectedReturnFlight;
+        this.peopleNumber = peopleNumber;
         this.needOnClick = needOnClick;
     }
 
@@ -66,6 +68,7 @@ public class HotelListAdapter extends RecyclerView.Adapter<HotelListAdapter.Hote
                 intent.putExtra("selectedHotel", hotel);
                 intent.putExtra("selectedFlight", selectedFlight);
                 intent.putExtra("selectedReturnedFlight", selectedReturnFlight);
+                intent.putExtra("peopleNumber", peopleNumber);
                 context.startActivity(intent);
 
             });

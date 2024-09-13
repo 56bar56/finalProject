@@ -59,6 +59,7 @@ public class ReturnFlightsActivity extends AppCompatActivity {
         String days = getIntent().getStringExtra("tripDays");
         String daysMin = getIntent().getStringExtra("tripDaysMin");
         String maxPrice = getIntent().getStringExtra("maxPrice");
+        String peopleNumber = getIntent().getStringExtra("peopleNumber");
 
         String returnDate = calculateReturnDate(selectedFlight.getTakeoff(), days);  // Calculate return date by adding the user's stay duration
         String returnDateMin = calculateReturnDate(selectedFlight.getTakeoff(), daysMin);  // Calculate return date by adding the user's stay duration
@@ -72,7 +73,7 @@ public class ReturnFlightsActivity extends AppCompatActivity {
                 returnDate
         );
 
-        fetchReturnFlights(filterRequest, selectedFlight);
+        fetchReturnFlights(filterRequest, selectedFlight, peopleNumber);
     }
 
     private String calculateReturnDate(String departureDate, String days) {
@@ -99,7 +100,7 @@ public class ReturnFlightsActivity extends AppCompatActivity {
         }
     }
 
-    private void fetchReturnFlights(FlightFilterRequest request, Flight selectedFlight) {
+    private void fetchReturnFlights(FlightFilterRequest request, Flight selectedFlight, String peopleNumber) {
         FlightAPI flightAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(FlightAPI.class);
 
         Call<List<Flight>> call = flightAPI.filterFlights(request);
@@ -113,7 +114,7 @@ public class ReturnFlightsActivity extends AppCompatActivity {
 
                 flightList = response.body();
                 if (flightList != null) {
-                    FlightListAdapter adapter = new FlightListAdapter(ReturnFlightsActivity.this, flightList, "none", "none", "none", selectedFlight, true, true);
+                    FlightListAdapter adapter = new FlightListAdapter(ReturnFlightsActivity.this, flightList, "none", "none", "none", selectedFlight, true, true, peopleNumber);
                     flightsRecyclerView.setAdapter(adapter);
                 }
             }

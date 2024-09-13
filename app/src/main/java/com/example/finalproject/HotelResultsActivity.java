@@ -60,6 +60,8 @@ public class HotelResultsActivity extends AppCompatActivity {
         String rating = getIntent().getStringExtra("rating");
         String kmFromCity = getIntent().getStringExtra("kmFromCity");
         String hotelOrCabbin = getIntent().getStringExtra("hotelOrCabbin");
+        String peopleNumber = getIntent().getStringExtra("peopleNumber");
+
         Flight selectedFlight = (Flight) getIntent().getSerializableExtra("selectedFlight");
         Flight selectedReturnedFlight = (Flight) getIntent().getSerializableExtra("selectedReturnedFlight");
 
@@ -74,10 +76,10 @@ public class HotelResultsActivity extends AppCompatActivity {
         );
 
         // Fetch hotels
-        fetchHotels(filterRequest, selectedFlight, selectedReturnedFlight);
+        fetchHotels(filterRequest, selectedFlight, selectedReturnedFlight, peopleNumber);
     }
 
-    private void fetchHotels(HotelFilterRequest request, Flight selectedFlight, Flight selectedReturnedFlight) {
+    private void fetchHotels(HotelFilterRequest request, Flight selectedFlight, Flight selectedReturnedFlight, String peopleNumber) {
         HotelAPI hotelAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(HotelAPI.class);
 
         Call<List<Hotel>> call = hotelAPI.filterHotels(request);
@@ -91,7 +93,7 @@ public class HotelResultsActivity extends AppCompatActivity {
 
                 hotelList = response.body();
                 if (hotelList != null) {
-                    HotelListAdapter adapter = new HotelListAdapter(HotelResultsActivity.this, hotelList, selectedFlight, selectedReturnedFlight, true);
+                    HotelListAdapter adapter = new HotelListAdapter(HotelResultsActivity.this, peopleNumber, hotelList, selectedFlight, selectedReturnedFlight, true);
                     hotelsRecyclerView.setAdapter(adapter);
                 }
             }

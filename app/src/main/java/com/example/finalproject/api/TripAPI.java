@@ -15,5 +15,5 @@ public interface TripAPI {
     @POST("/api/trips/createTrip")
     Call<Trip> createTrip(@Body Trip trip);
     @GET("/api/trips/getUserTrips")
-    Call<List<Trip>> getUserTrips(@Query("username") String username, @Query("password") String password);
+    Call<List<Trip>> getUserTrips(@Query("username") String username);
 }

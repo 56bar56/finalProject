@@ -1,7 +1,10 @@
 package com.example.finalproject.items;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Trip implements Serializable {
@@ -11,19 +14,17 @@ public class Trip implements Serializable {
     private ArrayList<Restaurant> selectedRestaurants;
     private List<Attraction> selectedAttractions;
     private String username;  // Added username
-    private String password;  // Added password
 
     // Constructor with username and password
     public Trip(Flight selectedFlight, Flight selectedReturnedFlight, Hotel selectedHotel,
                 ArrayList<Restaurant> selectedRestaurants, List<Attraction> selectedAttractions,
-                String username, String password) {
+                String username) {
         this.selectedFlight = selectedFlight;
         this.selectedReturnedFlight = selectedReturnedFlight;
         this.selectedHotel = selectedHotel;
         this.selectedRestaurants = selectedRestaurants;
         this.selectedAttractions = selectedAttractions;
         this.username = username;
-        this.password = password;
     }
 
     // Getters and setters
@@ -76,11 +77,51 @@ public class Trip implements Serializable {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+
+    public int getPriceForTrip() {
+        double totalPrice = 0;
+        for(Restaurant r: selectedRestaurants){
+            totalPrice += r.getAverageCost();
+        }
+        for(Attraction a: selectedAttractions){
+            totalPrice += a.getAverageCost();
+        }
+        int numberOfDays = 30;
+        if(this.selectedReturnedFlight != null) {
+            numberOfDays = (int) calculateDaysBetween(this.selectedFlight.getDeparture(), this.selectedReturnedFlight.getArrival()); //something
+        }
+        totalPrice += numberOfDays * this.selectedHotel.getPricePerNight();
+        totalPrice += this.selectedFlight.getPrice();
+        if(this.selectedReturnedFlight != null){
+            totalPrice += this.selectedReturnedFlight.getPrice();
+        }
+        return (int)totalPrice;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    // Function gets 2 dates and return the number of days in between.
+    public static long calculateDaysBetween(String string1, String string2) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            // Extract only the date part from the strings
+            String datePart1 = string1.substring(0, 10);
+            String datePart2 = string2.substring(0, 10);
+
+            // Parse the date strings
+            Date date1 = sdf.parse(datePart1);
+            Date date2 = sdf.parse(datePart2);
+
+            // Calculate the difference in milliseconds
+            long diffInMillies = date2.getTime() - date1.getTime();
+
+            // Convert milliseconds to days
+            long daysBetween = diffInMillies / (1000 * 60 * 60 * 24);
+
+            return daysBetween;
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 }

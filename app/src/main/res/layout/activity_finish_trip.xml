@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- ListView to display the list of names -->
+    <ListView
+        android:id="@+id/names_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:choiceMode="multipleChoice" />
+
+    <!-- TextView to show the remaining number of selections -->
+    <TextView
+        android:id="@+id/selection_count_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selections remaining: 3"
+        android:textSize="16sp"
+        android:layout_gravity="center" />
+
+    <!-- Done button -->
+    <Button
+        android:id="@+id/done_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Done Choosing"
+        android:enabled="false" /> <!-- initially disabled -->
+
+</LinearLayout>

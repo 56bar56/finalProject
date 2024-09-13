@@ -49,5 +49,6 @@ public interface WebServiceAPI {
     Call<List<MessageToGet>> getMessages(@Header("authorization") String authorization, @Path("id") String id);
 
 
+    Call<ResponseBody> getTokenFromServer(String username, String password);
 }
 

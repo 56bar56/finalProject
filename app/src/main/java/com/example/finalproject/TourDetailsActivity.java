@@ -117,8 +117,8 @@ public class TourDetailsActivity extends AppCompatActivity {
         attractionList = selectedTrip.getSelectedAttractions();
 
         // Initialize adapters
-        flightAdapter = new FlightListAdapter(this, flightList, null, null, null, null, false, false);
-        hotelAdapter = new HotelListAdapter(this, hotelList, null, null, false);
+        flightAdapter = new FlightListAdapter(this, flightList, null, null, null, null, false, false, null);
+        hotelAdapter = new HotelListAdapter(this, null ,hotelList, null, null,  false);
         restaurantAdapter = new RestaurantListAdapter(this, restaurantList, false);
         attractionAdapter = new AttractionListAdapter(this, attractionList, false);
 
