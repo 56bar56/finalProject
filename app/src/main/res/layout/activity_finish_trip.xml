@@ -1,34 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:id="@+id/contactPageRelativeLayout">
 
-    <!-- ListView to display the list of names -->
+    <RelativeLayout
+        android:id="@+id/menu_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="8dp"
+        android:paddingHorizontal="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <RelativeLayout
+            android:id="@+id/title_ek3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="104dp"
+            android:layout_marginTop="0dp">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:gravity="center"
+                android:text="Add Friends"
+                android:textColor="@color/_10_color"
+                android:textSize="26sp" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="5dp">
+
+            <ImageView
+                android:id="@+id/back_button"
+                android:layout_width="7dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="7dp"
+                android:contentDescription="vector_ek28"
+                android:src="@drawable/vector_ek28" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+    <!-- ListView to display the list of names
     <ListView
         android:id="@+id/names_list_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:choiceMode="multipleChoice" />
+         -->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/contacts_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="115dp"
+        android:contentDescription="Flights list"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menu_bar"
+        app:layout_constraintVertical_bias="1.0" />
 
     <!-- TextView to show the remaining number of selections -->
-    <TextView
-        android:id="@+id/selection_count_text"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Selections remaining: 3"
-        android:textSize="16sp"
-        android:layout_gravity="center" />
+        android:layout_marginBottom="90dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/selection_count_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remaining selections: 3"
+            android:textSize="16sp"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
 
     <!-- Done button -->
-    <Button
-        android:id="@+id/done_button"
+    <RelativeLayout
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Done Choosing"
-        android:enabled="false" /> <!-- initially disabled -->
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-</LinearLayout>
+        <Button
+            android:id="@+id/done_button"
+            android:layout_width="335dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            app:backgroundTint="@null"
+            android:background="@drawable/bg_shape"
+            android:text="Done"
+            android:textColor="@color/_bg__log_in_page_ek2_color"
+            android:textSize="16sp"
+            android:enabled="false"/>
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
