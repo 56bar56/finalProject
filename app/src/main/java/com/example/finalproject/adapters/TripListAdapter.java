@@ -32,13 +32,13 @@ import java.util.concurrent.TimeUnit;
 
 public class TripListAdapter extends RecyclerView.Adapter<TripListAdapter.TripViewHolder> {
     private List<Trip> tripList;
-    private List<Trip> filteredTripList;  // The list of trips filtered by the search query
+    private List<Trip> fullTripList; // To keep the full trip list for restoring after filtering
     private Context context;
 
     public TripListAdapter(Context context, List<Trip> tripList) {
         this.context = context;
-        this.tripList = tripList != null ? new ArrayList<>(tripList) : new ArrayList<>();
-        this.filteredTripList = tripList;  // Initially show the full list
+        this.tripList = new ArrayList<>(tripList); // Initialize with the full list
+        this.fullTripList = new ArrayList<>(tripList); // Save the full list for later
     }
 
     @NonNull
@@ -51,7 +51,7 @@ public class TripListAdapter extends RecyclerView.Adapter<TripListAdapter.TripVi
     @Override
     public void onBindViewHolder(@NonNull TripViewHolder holder, int position) {
         if (tripList != null && position < tripList.size()) {
-            Trip trip = filteredTripList.get(position);
+            Trip trip = tripList.get(position);
 
             // Set flight details
             if (trip.getSelectedReturnedFlight() == null)
@@ -103,22 +103,23 @@ public class TripListAdapter extends RecyclerView.Adapter<TripListAdapter.TripVi
         return tripList.size();
     }
 
-    // Method to filter the list by destination
+    // Method to filter trips
     public void filter(String query) {
-        if (query == null || query.isEmpty()) {
-            // If search query is empty, show the full list
-            filteredTripList = new ArrayList<>(tripList);
+        if (query.isEmpty()) {
+            // Restore the original list when the search query is empty
+            tripList.clear();
+            tripList.addAll(fullTripList);
         } else {
-            // Filter the list
             List<Trip> filteredList = new ArrayList<>();
-            for (Trip trip : tripList) {
+            for (Trip trip : fullTripList) {
                 if (trip.getSelectedFlight().getArrival().toLowerCase().contains(query.toLowerCase())) {
                     filteredList.add(trip);
                 }
             }
-            filteredTripList = filteredList;
+            tripList.clear();
+            tripList.addAll(filteredList); // Add filtered trips to the list
         }
-        notifyDataSetChanged();  // Refresh the RecyclerView
+        notifyDataSetChanged(); // Notify adapter about the updated data
     }
 
 
