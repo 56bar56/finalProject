@@ -32,7 +32,7 @@
     <string name="or_string">Or</string>
     <string name="log_in_string">Log In</string>
     <string name="log_in_with_google_string">LOG IN WITH GOOGLE</string>
-    <string name="password_ek1_string">Password</string>
+    <string name="password_ek1_string">Password (Numbers ans Letters)</string>
     <string name="davidwolion_gmail_com_string">davidwolion@gmail.com</string>
     <string name="email_ek1_string">Email</string>
     <string name="log_in_ek1_string">Log In</string>

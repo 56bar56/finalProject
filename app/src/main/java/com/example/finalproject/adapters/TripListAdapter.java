@@ -22,6 +22,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.time.LocalDateTime;
@@ -31,11 +32,13 @@ import java.util.concurrent.TimeUnit;
 
 public class TripListAdapter extends RecyclerView.Adapter<TripListAdapter.TripViewHolder> {
     private List<Trip> tripList;
+    private List<Trip> filteredTripList;  // The list of trips filtered by the search query
     private Context context;
 
     public TripListAdapter(Context context, List<Trip> tripList) {
         this.context = context;
-        this.tripList = tripList;
+        this.tripList = tripList != null ? new ArrayList<>(tripList) : new ArrayList<>();
+        this.filteredTripList = tripList;  // Initially show the full list
     }
 
     @NonNull
@@ -47,47 +50,66 @@ public class TripListAdapter extends RecyclerView.Adapter<TripListAdapter.TripVi
 
     @Override
     public void onBindViewHolder(@NonNull TripViewHolder holder, int position) {
-        Trip trip = tripList.get(position);
+        if (tripList != null && position < tripList.size()) {
+            Trip trip = filteredTripList.get(position);
 
-        // Set flight details
-        String middle;
-        if (trip.getSelectedReturnedFlight() == null)
-            holder.arrowType.setImageResource(R.drawable.arrow_icon);
-        else
-            holder.arrowType.setImageResource(R.drawable.double_arrow);
-        holder.fromAirport.setText(extractCityCountry(trip.getSelectedFlight().getDeparture()));
-        holder.toAirport.setText(extractCityCountry(trip.getSelectedFlight().getArrival()));
-        String dateStart = trip.getSelectedFlight().getTakeoff().substring(0, 10);
-        String dateEnd = trip.getSelectedReturnedFlight().getLanding().substring(0, 10);
-        holder.date.setText(dateStart + " - " + dateEnd);
-        holder.numDays.setText(calculateDaysBetween(dateStart, dateEnd) + " days");
-        //holder.numPeople.setText(trip.getNumberOfPeople() + " people"); TODO
-        // Format price as an integer
-        int price = (int) trip.getPriceForTrip();
-        holder.price.setText(price + "$");
+            // Set flight details
+            if (trip.getSelectedReturnedFlight() == null)
+                holder.arrowType.setImageResource(R.drawable.arrow_icon);
+            else
+                holder.arrowType.setImageResource(R.drawable.double_arrow);
+            holder.fromAirport.setText(extractCityCountry(trip.getSelectedFlight().getDeparture()));
+            holder.toAirport.setText(extractCityCountry(trip.getSelectedFlight().getArrival()));
+            String dateStart = trip.getSelectedFlight().getTakeoff().substring(0, 10);
+            String dateEnd = trip.getSelectedReturnedFlight().getLanding().substring(0, 10);
+            holder.date.setText(dateStart + " - " + dateEnd);
+            holder.numDays.setText(calculateDaysBetween(dateStart, dateEnd) + " days");
+            //holder.numPeople.setText(trip.getNumberOfPeople() + " people"); TODO
+            // Format price as an integer
+            int price = (int) trip.getPriceForTrip();
+            holder.price.setText(price + "$");
 
-        String imageUrl = "https://www.torontopho.com/images/blog/2023/09/Vietnam_A_Journey_Through_History_Cuisine_and_Natural_Wonders2.jpg";
-        //TODO change to the hotel img
-        Glide.with(context)
-                .load(imageUrl)
-                .placeholder(R.drawable.top3number2)  // Optional placeholder while loading
-                .error(R.drawable.top3number2)    // Optional error placeholder
-                .into(holder.profileImg);
+            String imageUrl = "https://www.torontopho.com/images/blog/2023/09/Vietnam_A_Journey_Through_History_Cuisine_and_Natural_Wonders2.jpg";
+            //TODO change to the hotel img
+            Glide.with(context)
+                    .load(imageUrl)
+                    .placeholder(R.drawable.top3number2)  // Optional placeholder while loading
+                    .error(R.drawable.top3number2)    // Optional error placeholder
+                    .into(holder.profileImg);
 
 
-        // Set OnClickListener for each trip item
-        holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, TourDetailsActivity.class);
-            intent.putExtra("selectedTrip", trip);
-            context.startActivity(intent);
-        });
-
+            // Set OnClickListener for each trip item
+            holder.itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(context, TourDetailsActivity.class);
+                intent.putExtra("selectedTrip", trip);
+                context.startActivity(intent);
+            });
+        }
     }
 
     @Override
     public int getItemCount() {
         return tripList.size();
     }
+
+    // Method to filter the list by destination
+    public void filter(String query) {
+        if (query == null || query.isEmpty()) {
+            // If search query is empty, show the full list
+            filteredTripList = new ArrayList<>(tripList);
+        } else {
+            // Filter the list
+            List<Trip> filteredList = new ArrayList<>();
+            for (Trip trip : tripList) {
+                if (trip.getSelectedFlight().getArrival().toLowerCase().contains(query.toLowerCase())) {
+                    filteredList.add(trip);
+                }
+            }
+            filteredTripList = filteredList;
+        }
+        notifyDataSetChanged();  // Refresh the RecyclerView
+    }
+
 
     public static class TripViewHolder extends RecyclerView.ViewHolder {
         TextView fromAirport, toAirport, date, numDays, numPeople, price;

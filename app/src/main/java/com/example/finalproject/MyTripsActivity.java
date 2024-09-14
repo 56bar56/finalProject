@@ -2,7 +2,9 @@ package com.example.finalproject;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -28,6 +30,11 @@ import retrofit2.Response;
 public class MyTripsActivity extends AppCompatActivity {
     private ImageView backButton;
     private RecyclerView tripsRecyclerView;
+    private TripListAdapter adapter;
+    private List<Trip> tripList;
+    private EditText searchEditText;
+    private ImageView searchIcon;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +52,19 @@ public class MyTripsActivity extends AppCompatActivity {
 
         // Send request to the server to get user's trips
         getUserTrips();
+
+        // Taking care of the searching bar
+        searchEditText = findViewById(R.id.search_message);
+        searchIcon = findViewById(R.id.search_icon);
+
+        // Set up search icon click listener
+        searchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String query = searchEditText.getText().toString();
+                adapter.filter(query);  // Call the filter method
+            }
+        });
     }
 
     private void getUserTrips() {
@@ -61,10 +81,16 @@ public class MyTripsActivity extends AppCompatActivity {
                     return;
                 }
 
-                List<Trip> tripList = response.body();
+                tripList = response.body();
                 if (tripList != null) {
-                    TripListAdapter adapter = new TripListAdapter(MyTripsActivity.this, tripList);
+                    adapter = new TripListAdapter(MyTripsActivity.this, tripList);
                     tripsRecyclerView.setAdapter(adapter);
+                } else {
+                    // Handle the case when tripList is null or empty
+                    tripList = new ArrayList<>();
+                    adapter = new TripListAdapter(MyTripsActivity.this, tripList);
+                    tripsRecyclerView.setAdapter(adapter);
+                    Toast.makeText(MyTripsActivity.this, "No trips found", Toast.LENGTH_SHORT).show();
                 }
             }
 

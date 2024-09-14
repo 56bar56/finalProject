@@ -7,11 +7,14 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,6 +68,10 @@ public class registerPage extends AppCompatActivity {
     private UsersApiToken user;
     private AppDB db2;
     private LogInSaveDao logInSaveDao;
+    private EditText passwordEditText;
+    private ImageView eyeIcon;
+    private boolean isPasswordVisible = false; // Track if the password is currently visible
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,31 +131,26 @@ public class registerPage extends AppCompatActivity {
                 String errorMsg="";
                 if (password.length() > 16 || password.length() < 4) {
                     informationOk = false;
-                    errorMsg+="Password is not valid\n";
+                    errorMsg += "Password must be between 4 and 16 characters\n";
                 } else {
-                    boolean have$ = false;
                     boolean haveNum = false;
                     boolean haveLet = false;
-                    boolean haveEmpjy = false;
+
                     for (int i = 0; i < password.length(); i++) {
-                        if (password.charAt(i) == '$') {
-                            have$ = true;
-                        }
                         if (Character.isDigit(password.charAt(i))) {
                             haveNum = true;
                         }
                         if (Character.isLetter(password.charAt(i))) {
                             haveLet = true;
                         }
-                        if (password.charAt(i) >= 0x1F300 && password.charAt(i) <= 0x1FFFF) {
-                            haveEmpjy = true;
-                        }
                     }
-                    if (!have$ || !haveNum || !haveLet || haveEmpjy) {
+
+                    if (!haveNum || !haveLet) {
                         informationOk = false;
-                        errorMsg+="Password is not valid\n";
+                        errorMsg += "Password must contain both letters and numbers\n";
                     }
                 }
+
                 if(username.isEmpty()) {
                     informationOk = false;
                     errorMsg+="Username is not valid\n";
@@ -205,6 +207,36 @@ public class registerPage extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), loginActivity.class));
             }
         });
+
+
+        // Taking care of showing the password if clicking on the eye icon
+        passwordEditText = findViewById(R.id.registerPassword);
+        eyeIcon = findViewById(R.id.eye);
+
+        // Set onClickListener on the eye icon
+        eyeIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isPasswordVisible) {
+                    // Show password and change the eye icon
+                    passwordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    eyeIcon.setImageResource(R.drawable.open_eye); // Use open eye drawable
+                    isPasswordVisible = true;
+
+                    // Revert back to password mode after 2 seconds
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                            passwordEditText.setSelection(passwordEditText.length()); // Move cursor to the end
+                            eyeIcon.setImageResource(R.drawable.closed_eye); // Use closed eye drawable
+                            isPasswordVisible = false;
+                        }
+                    }, 2000); // 2 seconds delay
+                }
+            }
+        });
+
     }
 
     private void function() {

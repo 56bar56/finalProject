@@ -2,6 +2,7 @@ package com.example.finalproject.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,11 +68,12 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
 
         // Logic to handle company logo or fallback text
         int logoResId = getCompanyLogoResId(flight.getCompany());
-        if (logoResId != 0) {
+        try {
             holder.profileImg.setImageResource(logoResId);
             holder.profileImg.setVisibility(View.VISIBLE);
             holder.fallbackText.setVisibility(View.GONE);
-        } else {
+        } catch (Exception e) {
+            Log.e("ProfileImgError", "Failed to set image resource: " + e.getMessage());
             holder.profileImg.setVisibility(View.GONE);
             holder.fallbackText.setText(flight.getCompany());
             holder.fallbackText.setVisibility(View.VISIBLE);

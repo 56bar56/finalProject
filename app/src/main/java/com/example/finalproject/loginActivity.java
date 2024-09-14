@@ -3,9 +3,12 @@ package com.example.finalproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +50,9 @@ public class loginActivity extends AppCompatActivity {
     private UsersApiToken user;
     private AppDB db2;
     private LogInSaveDao logInSaveDao;
+    private EditText passwordEditText;
+    private ImageView eyeIcon;
+    private boolean isPasswordVisible = false; // Track if the password is currently visible
 
 
     @Override
@@ -131,13 +137,45 @@ public class loginActivity extends AppCompatActivity {
         toRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent newIntent= null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-                    newIntent = new Intent(getApplicationContext(), registerPage.class);
+                // Ensure the intent is only created and used if SDK version condition is met
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) { //TODO fix
+                    Intent newIntent = new Intent(getApplicationContext(), registerPage.class);
+                    startActivity(newIntent); // Only start activity if intent is not null
+                } else {
+                    // Optionally handle cases for older versions if needed
+                    Toast.makeText(getApplicationContext(), "Unsupported Android version", Toast.LENGTH_SHORT).show();
                 }
-                startActivity(newIntent);
             }
         });
+
+        // Taking care of showing the password if clicking on the eye icon
+        passwordEditText = findViewById(R.id.LoginPassword);
+        eyeIcon = findViewById(R.id.eye);
+
+        // Set onClickListener on the eye icon
+        eyeIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isPasswordVisible) {
+                    // Show password and change the eye icon
+                    passwordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    eyeIcon.setImageResource(R.drawable.open_eye); // Use open eye drawable
+                    isPasswordVisible = true;
+
+                    // Revert back to password mode after 2 seconds
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            passwordEditText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                            passwordEditText.setSelection(passwordEditText.length()); // Move cursor to the end
+                            eyeIcon.setImageResource(R.drawable.closed_eye); // Use closed eye drawable
+                            isPasswordVisible = false;
+                        }
+                    }, 2000); // 2 seconds delay
+                }
+            }
+        });
+
     }
 
     public void dbInfo(Intent intent, String username, String password) {

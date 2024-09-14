@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             loginBtn = findViewById(R.id.loginPage);
             registerBtn = findViewById(R.id.registerPage);
             loginBtn.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), loginActivity.class)));
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) { //TODO fix
                 registerBtn.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), registerPage.class)));
             }
         } else {
