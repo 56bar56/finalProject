@@ -15,4 +15,7 @@ public interface FlightAPI {
     Call<List<Flight>> getFlights();
     @POST("/api/Flights/filter")
     Call<List<Flight>> filterFlights(@Body FlightFilterRequest request);
+
+    @POST("/api/Flights/sort")
+    Call<List<Flight>> sortFlights(@Body List<Flight> flightList);
 }

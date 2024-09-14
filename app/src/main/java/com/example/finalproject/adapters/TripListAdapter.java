@@ -61,9 +61,20 @@ public class TripListAdapter extends RecyclerView.Adapter<TripListAdapter.TripVi
             holder.fromAirport.setText(extractCityCountry(trip.getSelectedFlight().getDeparture()));
             holder.toAirport.setText(extractCityCountry(trip.getSelectedFlight().getArrival()));
             String dateStart = trip.getSelectedFlight().getTakeoff().substring(0, 10);
-            String dateEnd = trip.getSelectedReturnedFlight().getLanding().substring(0, 10);
+            String dateEnd = "";
+            if (trip.getSelectedReturnedFlight() != null){
+                dateEnd = trip.getSelectedReturnedFlight().getLanding().substring(0, 10);
+            }
+            else {
+                dateEnd = "None";
+            }
             holder.date.setText(dateStart + " - " + dateEnd);
-            holder.numDays.setText(calculateDaysBetween(dateStart, dateEnd) + " days");
+            if (trip.getSelectedReturnedFlight() != null) {
+                holder.numDays.setText(calculateDaysBetween(dateStart, dateEnd) + " days");
+            }
+            else{
+                holder.numDays.setText("no return flight scheduled");
+            }
             //holder.numPeople.setText(trip.getNumberOfPeople() + " people"); TODO
             // Format price as an integer
             int price = (int) trip.getPriceForTrip();

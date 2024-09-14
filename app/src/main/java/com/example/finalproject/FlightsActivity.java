@@ -86,8 +86,12 @@ public class FlightsActivity extends AppCompatActivity {
 
                 flightList = response.body();
                 if (flightList != null) {
-                    FlightListAdapter adapter = new FlightListAdapter(FlightsActivity.this, flightList, days, daysMin, maxPrice, null, Boolean.parseBoolean(isRoundedTrip),true, peopleNumber);
-                    flightsRecyclerView.setAdapter(adapter);
+                    if (flightList != null && flightList.size() > 3) {
+                        sendFlightsToChatGPT(flightList, days, daysMin, maxPrice, isRoundedTrip, peopleNumber);
+                    } else {
+                        // Show flights directly if there are 3 or fewer flights
+                        displayFlights(flightList, days, daysMin, maxPrice, isRoundedTrip, peopleNumber);
+                    }
                 }
             }
 
@@ -96,5 +100,35 @@ public class FlightsActivity extends AppCompatActivity {
                 Log.e("FlightsActivity", "Request failed: " + t.getMessage());
             }
         });
+    }
+    private void sendFlightsToChatGPT(List<Flight> flightList, String days, String daysMin, String maxPrice, String isRoundedTrip, String peopleNumber) {
+        // Assuming you have a backend endpoint to process this
+        FlightAPI flightAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(FlightAPI.class);
+
+        Call<List<Flight>> call = flightAPI.sortFlights(flightList);
+        call.enqueue(new Callback<List<Flight>>() {
+            @Override
+            public void onResponse(Call<List<Flight>> call, Response<List<Flight>> response) {
+                if (!response.isSuccessful()) {
+                    Log.e("FlightsActivity", "Sorting API error: " + response.code());
+                    return;
+                }
+
+                // Get sorted flights from ChatGPT response
+                List<Flight> sortedFlights = response.body();
+                if (sortedFlights != null) {
+                    displayFlights(sortedFlights, days, daysMin, maxPrice, isRoundedTrip, peopleNumber);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Flight>> call, Throwable t) {
+                Log.e("FlightsActivity", "Request failed: " + t.getMessage());
+            }
+        });
+    }
+    private void displayFlights(List<Flight> flights, String days, String daysMin, String maxPrice, String isRoundedTrip, String peopleNumber) {
+        FlightListAdapter adapter = new FlightListAdapter(FlightsActivity.this, flights, days, daysMin, maxPrice, null, Boolean.parseBoolean(isRoundedTrip), true, peopleNumber);
+        flightsRecyclerView.setAdapter(adapter);
     }
 }
