@@ -4,17 +4,23 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import com.example.finalproject.adapters.ContactsList2Adapter;
+import com.example.finalproject.adapters.RestaurantListAdapter;
 import com.example.finalproject.api.TripAPI;
 import com.example.finalproject.api.UsersApiToken;
 import com.example.finalproject.api.WebServiceAPI;
 import com.example.finalproject.items.Attraction;
+import com.example.finalproject.items.Contact;
 import com.example.finalproject.items.Flight;
 import com.example.finalproject.items.Hotel;
 import com.example.finalproject.items.Restaurant;
@@ -33,34 +39,41 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FinishTripActivity extends AppCompatActivity {
+public class FinishTripActivity extends AppCompatActivity implements ContactsList2Adapter.SelectionCountUpdateListener {
 
-    private ListView namesListView;
-    private TextView selectionCountText;
-    private Button doneButton;
-
-    private ArrayList<String> namesList;  // List of names
-    private ArrayList<String> selectedItems; // List of selected names
-
-    private int maxSelections;
     private WebServiceAPI webServiceAPI;
     private PostDao postDao;
     private AppDB db;
     private UsersApiToken user;
     private Retrofit retrofit;
-    private ArrayAdapter<String> adapter; // Adapter for the ListView
+
+    private ImageView backButton;
+    private RecyclerView contactRecyclerView;
+    private List<Contact> contactList;
+    private int maxSelections;
+    private ContactsList2Adapter adapter;
+    private TextView selectionCountText;
+    private Button doneButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finish_trip);
 
-        namesListView = findViewById(R.id.names_list_view);
+        // Taking care of back button
+        backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(v -> {
+            finish();
+        });
+
+        contactRecyclerView = findViewById(R.id.contacts_list);
+        contactRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         selectionCountText = findViewById(R.id.selection_count_text);
-        doneButton = findViewById(R.id.done_button);
         String peopleNumber = getIntent().getStringExtra("peopleNumber");
         maxSelections = Integer.parseInt(peopleNumber) - 1;
         selectionCountText.setText("Selections remaining: " + maxSelections);
+        doneButton = findViewById(R.id.done_button);
 
         Flight selectedFlight = (Flight) getIntent().getSerializableExtra("selectedFlight");
         Flight selectedReturnedFlight = (Flight) getIntent().getSerializableExtra("selectedReturnedFlight");
@@ -77,79 +90,41 @@ public class FinishTripActivity extends AppCompatActivity {
                 .build();
         webServiceAPI = retrofit.create(WebServiceAPI.class);
 
-        // Sample data: List of names
-        namesList = new ArrayList<>();
+        // Sample data: List of contacts
+        contactList = new ArrayList<>();
         List<DbObject> l = postDao.index();
         for (DbObject dbobj : l) {
-            namesList.add(dbobj.getContactName().getUser().getUsername());
+            contactList.add(dbobj.getContactName());
         }
-        if(namesList.isEmpty()){
-
+        if(contactList.isEmpty()){
             sendTripToServer(selectedFlight, selectedReturnedFlight, selectedHotel, returnedRestaurants, returnedAttractions, globalVars.username);
-
             Intent intent = new Intent(FinishTripActivity.this, WelcomeActivity.class);
             startActivity(intent);
         }
-        selectedItems = new ArrayList<>();
 
-        // Set up the ListView adapter
-        adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_multiple_choice, namesList);
-        namesListView.setAdapter(adapter);
-        namesListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        adapter = new ContactsList2Adapter(this, contactList, maxSelections, this);  // Pass 'this' as the listener
+        contactRecyclerView.setAdapter(adapter);
 
-        // Set up ListView item click listener
-        namesListView.setOnItemClickListener((parent, view, position, id) -> {
-            String selectedItem = namesList.get(position);
-
-            // Check if the item is already selected
-            if (selectedItems.contains(selectedItem)) {
-                // Remove the selection
-                selectedItems.remove(selectedItem);
-                namesListView.setItemChecked(position, false);  // Uncheck the item
-            } else {
-                // Only add a new selection if under the max limit
-                if (selectedItems.size() < maxSelections) {
-                    selectedItems.add(selectedItem);
-                    namesListView.setItemChecked(position, true);  // Check the item
-                } else {
-                    // Show a message if the user tries to select more than allowed
-                    Toast.makeText(FinishTripActivity.this, "You can only select " + maxSelections + " items.", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            // Update the remaining selections and button state
-            updateSelectionCount();
-        });
 
         // Handle the Done button click to navigate back to the welcome page
         doneButton.setOnClickListener(v -> {
-            if (selectedItems.size() == maxSelections || selectedItems.size() == namesList.size()) {
-                for(String usern: selectedItems){
-                    sendTripToServer(selectedFlight, selectedReturnedFlight, selectedHotel, returnedRestaurants, returnedAttractions, usern);
-                }
-                sendTripToServer(selectedFlight, selectedReturnedFlight, selectedHotel, returnedRestaurants, returnedAttractions, globalVars.username);
-                Intent intent = new Intent(FinishTripActivity.this, WelcomeActivity.class);
-                startActivity(intent);
-            } else {
-                // Show a message if not enough people are selected
-                Toast.makeText(FinishTripActivity.this, "You must select exactly " + maxSelections + " people.", Toast.LENGTH_SHORT).show();
+            for(Contact contact: adapter.getSelectedContacts()){
+                String username = contact.getUser().getUsername();
+                sendTripToServer(selectedFlight, selectedReturnedFlight, selectedHotel, returnedRestaurants, returnedAttractions, username);
             }
+            sendTripToServer(selectedFlight, selectedReturnedFlight, selectedHotel, returnedRestaurants, returnedAttractions, globalVars.username);
+            Intent intent = new Intent(FinishTripActivity.this, WelcomeActivity.class);
+            startActivity(intent);
         });
     }
 
-    // Update the selection count text and button state
-    private void updateSelectionCount() {
-        int remainingSelections = maxSelections - selectedItems.size();
+
+    // Update the selection count text and button state when the selection changes
+    @Override
+    public void onSelectionCountUpdated(int remainingSelections) {
         selectionCountText.setText("Selections remaining: " + remainingSelections);
-
         // Enable the done button only if the exact number of maxSelections is reached
-        doneButton.setEnabled(selectedItems.size() == maxSelections);
-    }
-
-    // Disable further selections in the ListView
-    private void disableFurtherSelection() {
-        namesListView.setEnabled(false);  // Disable the ListView to prevent more selections
+        doneButton.setEnabled(adapter.getSelectedContacts().size() <= maxSelections);
     }
 
     private void sendTripToServer(Flight selectedFlight, Flight selectedReturnedFlight, Hotel selectedHotel, ArrayList<Restaurant> returnedRestaurants, List<Attraction> selectedAttractions, String username) {
