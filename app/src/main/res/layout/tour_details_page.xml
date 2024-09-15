@@ -202,31 +202,23 @@
                         android:layout_height="wrap_content">
 
                         <ImageView android:id="@+id/weather_icon"
-                            android:src="@drawable/vector_ek24"
+                            android:src="@drawable/chat_gpt_icon"
                             android:contentDescription="vector_ek24"
                             android:layout_marginStart="0dp"
                             android:layout_marginTop="0dp"
-                            android:layout_width="20dp"
-                            android:layout_height="14.45dp" />
-
-                        <ImageView android:id="@+id/weather_icon2"
-                            android:src="@drawable/vector_ek25"
-                            android:contentDescription="vector_ek25"
-                            android:layout_marginStart="7dp"
-                            android:layout_marginTop="9dp"
-                            android:layout_width="5.45dp"
-                            android:layout_height="10.91dp" />
+                            android:layout_width="22dp"
+                            android:layout_height="22dp" />
 
                     </RelativeLayout>
 
                     <TextView android:id="@+id/celsius"
-                        android:textSize="11sp"
+                        android:textSize="13sp"
                         android:textColor="@color/_30_c_color"
                         android:layout_marginLeft="27dp"
                         android:layout_marginTop="3dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/_30_c_string"
+                        android:text="Ask AI"
                         />
 
                 </RelativeLayout>
