@@ -85,12 +85,6 @@ public class MyTripsActivity extends AppCompatActivity {
                 if (tripList != null) {
                     adapter = new TripListAdapter(MyTripsActivity.this, tripList);
                     tripsRecyclerView.setAdapter(adapter);
-                } else {
-                    // Handle the case when tripList is null or empty
-                    tripList = new ArrayList<>();
-                    adapter = new TripListAdapter(MyTripsActivity.this, tripList);
-                    tripsRecyclerView.setAdapter(adapter);
-                    Toast.makeText(MyTripsActivity.this, "No trips found", Toast.LENGTH_SHORT).show();
                 }
             }
 
