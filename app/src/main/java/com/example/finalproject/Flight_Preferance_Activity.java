@@ -322,7 +322,46 @@ public class Flight_Preferance_Activity extends AppCompatActivity {
                 String isRoundedTrip = roundedTripCheckBox.isChecked() ? "true" : "false";
                 String isAllowConnection = allowConnectionCheckBox.isChecked() ? "true" : "false";
 
+                // Input validation
+                // Check if the start location and destination are the same
+                if (departureLocation.isEmpty() || arrivalLocation.isEmpty()) {
+                    Toast.makeText(Flight_Preferance_Activity.this, "Please enter both departure and destination locations", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
+                if (departureLocation.equals(arrivalLocation)) {
+                    Toast.makeText(Flight_Preferance_Activity.this, "Start and destination locations cannot be the same", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Check if the dates are not empty
+                if (departureDate.isEmpty() || arrivalDate.isEmpty()) {
+                    Toast.makeText(Flight_Preferance_Activity.this, "Please select both start and end dates", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Check if endDate is not before startDate
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                try {
+                    Calendar startDate = Calendar.getInstance();
+                    Calendar endDate = Calendar.getInstance();
+
+                    startDate.setTime(dateFormat.parse(departureDate));
+                    endDate.setTime(dateFormat.parse(arrivalDate));
+
+                    if (endDate.before(startDate)) {
+                        Toast.makeText(Flight_Preferance_Activity.this, "End date cannot be before start date", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                // Check if max budget is empty
+                if (maxBudget.isEmpty()) {
+                    Toast.makeText(Flight_Preferance_Activity.this, "Please enter a maximum budget", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 // Logging to check the values in the console
                 Log.d("FlightInfo", "departureLocation: " + departureLocation);

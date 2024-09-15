@@ -3,6 +3,7 @@ package com.example.finalproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -34,7 +35,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class contacts_pageActivity extends AppCompatActivity {
     private FloatingActionButton btnAdd;
     private FloatingActionButton btnLogout;
-    //private FloatingActionButton btnSettings;
     private ImageView back_button;
     private List<Contact> contacts;
     private AppDB db;
@@ -45,6 +45,9 @@ public class contacts_pageActivity extends AppCompatActivity {
     private UsersApiToken user;
     private List<Contact> newCon;
     private MyService myService;
+
+    private EditText searchMessage;
+    private ImageView searchButton;
 
 
     /**
@@ -82,15 +85,15 @@ public class contacts_pageActivity extends AppCompatActivity {
         db = Room.databaseBuilder(getApplicationContext(), AppDB.class, "PostsDB").allowMainThreadQueries().build();
         postDao = db.postDao();
         List<DbObject> DbObj = postDao.index();
-        List<Contact> chats = new ArrayList<>();
+        contacts = new ArrayList<>();
         for(int i = 0; i < DbObj.size(); i++){
             Contact con = DbObj.get(i).getContactName();
             if(con.getLastMessage() == null){
                 con.setLastMessage(new MessageLast("", "", ""));
             }
-            chats.add(con);
+            contacts.add(con);
         }
-        adapter.setContacts(chats);
+        adapter.setContacts(contacts);
         myService.setAdapterCon(adapter);
 
         // Set onClickListener for the back button to go to WelcomeActivity
@@ -237,21 +240,60 @@ public class contacts_pageActivity extends AppCompatActivity {
             user.getChats(globalVars.username, globalVars.password, callbackForGetUserChatsInfo);
         }
 
+        // Initialize search components
+        searchMessage = findViewById(R.id.search_message);
+        searchButton = findViewById(R.id.search_icon);
+
+        // Click listener for search button
+        searchButton.setOnClickListener(v -> performSearch());
+
+        // Show the whole contact list by default
+        performSearch();
+
+    }
+
+    private void performSearch() {
+        String query = searchMessage.getText().toString().trim().toLowerCase();
+
+        if (query.isEmpty()) {
+            // If search is empty, show the whole list
+            adapter.setContacts(contacts);
+        } else {
+            // Filter contacts by display name (partial match)
+            List<Contact> filteredContacts = new ArrayList<>();
+            for (Contact contact : contacts) {
+                if (contact.getUser().getDisplayName().toLowerCase().contains(query)) {
+                    filteredContacts.add(contact);
+                }
+            }
+
+            // Show the filtered list
+            adapter.setContacts(filteredContacts);
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        List<DbObject> DbObj = postDao.index();
+
+        List<DbObject> dbObjects = postDao.index();
         List<Contact> chats = new ArrayList<>();
-        for(int i = 0; i < DbObj.size(); i++){
-            Contact con = DbObj.get(i).getContactName();
-            if(con.getLastMessage() == null){
-                con.setLastMessage(new MessageLast("", "", ""));
+
+        for (DbObject dbObject : dbObjects) {
+            Contact contact = dbObject.getContactName();
+            if (contact != null) {
+                if (contact.getLastMessage() == null) {
+                    contact.setLastMessage(new MessageLast("", "", ""));
+                }
+                chats.add(contact);
             }
-            chats.add(con);
         }
+
+        // Update the adapter with the contact list
         adapter.setContacts(chats);
+
+        // Perform the search operation
+        performSearch();
     }
     public void getAllMessagesForLogin(String userName, String password) {
         Callback<ResponseBody> getAllMessagesCallback =new Callback<ResponseBody>() {

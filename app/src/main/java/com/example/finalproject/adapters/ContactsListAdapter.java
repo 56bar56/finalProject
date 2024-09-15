@@ -24,6 +24,7 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
 
     class ContactViewHolder extends RecyclerView.ViewHolder {
         private final TextView dissplayName;
+        private final TextView lastMessage;
         private final TextView date;
         private final ImageView profileImg;
 
@@ -31,6 +32,7 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
             super(itemView);
             dissplayName = itemView.findViewById(R.id.displayName);
             date = itemView.findViewById(R.id.date);
+            lastMessage = itemView.findViewById(R.id.last_message);
             profileImg = itemView.findViewById(R.id.profileImg);
         }
     }
@@ -71,6 +73,12 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
                 holder.date.setText(date);
             else
                 holder.date.setText(current.getLastMessage().getCreated());
+
+            String lastMessage = current.getLastMessage().getContent();
+            if(lastMessage != null)
+                holder.lastMessage.setText(lastMessage);
+            else
+                holder.lastMessage.setText("");
 
             String profilePicName = current.getUser().getProfilePic();
             try {
