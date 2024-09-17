@@ -232,10 +232,10 @@ public class TourDetailsActivity extends AppCompatActivity {
     private void updateImageDetails(int position) {
         Attraction attraction = attractions.get(position);  // Get the selected attraction
 
-        TextView location = findViewById(R.id.location);
-        TextView attractionName = findViewById(R.id.attraction_name);
-        TextView price = findViewById(R.id.price);
-        TextView kidFriendly = findViewById(R.id.kid_friendly);
+        TextView location = findViewById(R.id.location2);
+        TextView attractionName = findViewById(R.id.attraction_name2);
+        TextView price = findViewById(R.id.price2);
+        TextView kidFriendly = findViewById(R.id.kid_friendly2);
 
         location.setText(attraction.getLocation());
         attractionName.setText(attraction.getName());
