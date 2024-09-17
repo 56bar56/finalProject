@@ -238,7 +238,7 @@ public class bestChoiceActivity extends AppCompatActivity {
     private void getUserTrips() {
         String username = globalVars.username;
 
-        TripAPI tripAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(TripAPI.class);
+        TripAPI tripAPI = RetrofitClient.getClient("http://192.168.1.41:5000").create(TripAPI.class);
         Call<List<Trip>> call = tripAPI.getUserTrips(username);
 
         call.enqueue(new Callback<List<Trip>>() {
@@ -258,7 +258,7 @@ public class bestChoiceActivity extends AppCompatActivity {
     private void sendTripToServer(Trip myTrip) {
         // Send a request to the server to create the trip (use Retrofit, Volley, or another library)
         // This is a placeholder to show where you would put the network request
-        TripAPI tripAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(TripAPI.class);
+        TripAPI tripAPI = RetrofitClient.getClient("http://192.168.1.41:5000").create(TripAPI.class);
         Call<Trip> call = tripAPI.createTrip(myTrip);
         call.enqueue(new Callback<Trip>() {
             @Override
@@ -300,7 +300,7 @@ public class bestChoiceActivity extends AppCompatActivity {
 
 
         // Call the API to get filtered flights
-        FlightAPI flightAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(FlightAPI.class);
+        FlightAPI flightAPI = RetrofitClient.getClient("http://192.168.1.41:5000").create(FlightAPI.class);
         Call<List<Flight>> call = flightAPI.filterFlights(filterRequest);
 
         call.enqueue(new Callback<List<Flight>>() {
@@ -343,7 +343,7 @@ public class bestChoiceActivity extends AppCompatActivity {
         );
 
         // Call the API to get filtered flights
-        FlightAPI flightAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(FlightAPI.class);
+        FlightAPI flightAPI = RetrofitClient.getClient("http://192.168.1.41:5000").create(FlightAPI.class);
         Call<List<Flight>> call = flightAPI.filterFlights(filterRequest);
 
         call.enqueue(new Callback<List<Flight>>() {
@@ -427,7 +427,7 @@ public class bestChoiceActivity extends AppCompatActivity {
         );
 
         // Call the API to get filtered hotels
-        HotelAPI hotelAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(HotelAPI.class);
+        HotelAPI hotelAPI = RetrofitClient.getClient("http://192.168.1.41:5000").create(HotelAPI.class);
         Call<List<Hotel>> call = hotelAPI.filterHotels(filterRequest);
 
         call.enqueue(new Callback<List<Hotel>>() {
@@ -576,7 +576,7 @@ public class bestChoiceActivity extends AppCompatActivity {
         );
 
         // Call the API to get filtered restaurants
-        RestaurantAPI restaurantAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(RestaurantAPI.class);
+        RestaurantAPI restaurantAPI = RetrofitClient.getClient("http://192.168.1.41:5000").create(RestaurantAPI.class);
         Call<List<Restaurant>> call = restaurantAPI.getFilteredRestaurants(filterRequest);
 
         call.enqueue(new Callback<List<Restaurant>>() {
@@ -722,7 +722,7 @@ public class bestChoiceActivity extends AppCompatActivity {
         );
 
         // Call the API to get filtered attractions
-        AttractionAPI attractionAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(AttractionAPI.class);
+        AttractionAPI attractionAPI = RetrofitClient.getClient("http://192.168.1.41:5000").create(AttractionAPI.class);
         Call<List<Attraction>> call = attractionAPI.getFilteredAttractions(filterRequest);
 
         call.enqueue(new Callback<List<Attraction>>() {

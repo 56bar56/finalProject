@@ -20,7 +20,7 @@
             android:id="@+id/next_button"
             android:layout_width="335dp"
             android:layout_height="40dp"
-            android:layout_marginTop="641dp"
+            android:layout_marginTop="680dp"
             android:layout_centerHorizontal="true"
             app:backgroundTint="@null"
             android:background="@drawable/bg_shape"

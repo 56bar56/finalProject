@@ -108,15 +108,15 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
             case "Asian":
                 return "https://images.prismic.io/facility-websites/Zk56Niol0Zci9Xx0_asian_food.png?auto=format%2Ccompress&rect=0%2C28%2C1792%2C968&w=1000&h=540"; // good
             case "American":
-                return "https://thumbs.dreamstime.com/b/celebration-th-july-american-food-hamburger-bacon-cheese-tomato-onion-sausages-corn-cob-flags-generative-ai-311825121.jpg"; // good
+                return "https://americajosh.com/wp-content/uploads/2022/10/What-I-Learned-from%E2%80%A6-American-Food_.jpg"; // good
             case "Italian":
                 return "https://cdn.vox-cdn.com/thumbor/9Pqb6itdo3bYKyfN7-jCKwYCrTM=/0x0:2000x1333/1200x900/filters:focal(840x507:1160x827)/cdn.vox-cdn.com/uploads/chorus_image/image/73240096/2023_04_26_Funke_031.0.jpg"; //good
             case "French":
                 return "https://d2lswn7b0fl4u2.cloudfront.net/photos/pg-french-foods-1628267961.jpg"; // good
             case "Mexican":
-                return "https://www.ibnbattutamall.com/uploads/blogs/intro-1674486308.jpg"; // good
+                return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsY9KrU7aUCAlXG4b8PqSqOFxPFfKoQm9ZYA&s"; // good
             case "Mediterranean":
-                return "https://www.sfoasisgrill.com/wp-content/uploads/2021/12/Mediterranean-Restaurants-1.jpg"; // good
+                return "https://popmenucloud.com/cdn-cgi/image/width%3D1200%2Cheight%3D1200%2Cfit%3Dscale-down%2Cformat%3Dauto%2Cquality%3D60/umgxckeq/c99b7ca7-dffa-4419-ae2d-41891ce8d548.jpg"; // good
             default:
                 return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgxXwf-aqJyL94fRvQSwBc90U-u5wMMFFl3A&s"; // good
         }
