@@ -28,6 +28,7 @@ import retrofit2.Response;
 
 public class FlightsActivity extends AppCompatActivity {
     private ImageView backButton;
+    private TextView instructions;
     private RecyclerView flightsRecyclerView;
     private List<Flight> flightList;
 
@@ -69,6 +70,14 @@ public class FlightsActivity extends AppCompatActivity {
 
         // Fetch flights
         fetchFlights(filterRequest, days, daysMin, maxPrice, isRoundedTrip, peopleNumber);
+
+        // Taking care of instructions text
+        instructions = findViewById(R.id.instructions);
+        if (flightList == null && flightList.isEmpty()){
+            instructions.setText("No flights where found, please go back and change your preferences");
+        } else {
+            instructions.setText("Please pick an outbound flight");
+        }
     }
 
     private void fetchFlights(FlightFilterRequest request, String days, String daysMin, String maxPrice, String isRoundedTrip, String peopleNumber) {

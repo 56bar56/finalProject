@@ -167,9 +167,8 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
                 return R.drawable.airfrance_logo;
             case "Lufthansa":
                 return R.drawable.lufthansa_logo;
-            // Add other airlines and their logos
             default:
-                return 0;  // 0 means no logo found
+                return 0;  // no logo found
         }
     }
 }

@@ -31,6 +31,7 @@ public class ReturnFlightsActivity extends AppCompatActivity {
 
     private TextView title;
     private ImageView backButton;
+    private TextView instructions;
     private RecyclerView flightsRecyclerView;
     private List<Flight> flightList;
 
@@ -74,6 +75,14 @@ public class ReturnFlightsActivity extends AppCompatActivity {
         );
 
         fetchReturnFlights(filterRequest, selectedFlight, peopleNumber);
+
+        // Taking care of instructions text
+        instructions = findViewById(R.id.instructions);
+        if (flightList == null && flightList.isEmpty()){
+            instructions.setText("No flights where found, please go back and change your preferences");
+        } else {
+            instructions.setText("Please pick a return flight");
+        }
     }
 
     private String calculateReturnDate(String departureDate, String days) {

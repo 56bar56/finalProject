@@ -100,9 +100,7 @@ public class TourDetailsActivity extends AppCompatActivity {
         imageList = new ArrayList<>();
         AttractionUtils attractionUtils = new AttractionUtils();
         for (Attraction attraction : attractions) {
-            //imageList.add(attraction.getImageResource());  // Assuming each attraction has an image resource
             String url = attractionUtils.getRandomUrlByType(attraction.getAttraction());
-            Log.d("tourImg", url);
             imageList.add(url);
         }
 

@@ -34,6 +34,7 @@ public class AttractionsResultActivity extends AppCompatActivity {
 
     private ImageView backButton;
     private TextView title;
+    private TextView instructions;
     private RecyclerView attractionRecyclerView;
     private ArrayList<Attraction> attractionList;
     private List<Attraction> selectedAttractions = new ArrayList<>(); // To store selected attractions
@@ -92,6 +93,14 @@ public class AttractionsResultActivity extends AppCompatActivity {
 
         // Fetch attractions
         fetchAttractions(filterRequest);
+
+        // Taking care of instructions text
+        instructions = findViewById(R.id.instructions);
+        if (attractionList == null && attractionList.isEmpty()){
+            instructions.setText("No attractions where found, please click next or go back and change your preferences");
+        } else {
+            instructions.setText("Please pick attractions");
+        }
 
         // Set "Done Choosing" button click listener
         nextButton.setOnClickListener(v -> {

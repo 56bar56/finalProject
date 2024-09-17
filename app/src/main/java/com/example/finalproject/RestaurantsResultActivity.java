@@ -32,6 +32,7 @@ import retrofit2.Response;
 
 public class RestaurantsResultActivity extends AppCompatActivity {
     private ImageView backButton;
+    private TextView instructions;
     private RecyclerView restaurantRecyclerView;
     private List<Restaurant> restaurantList;
     private List<Restaurant> selectedRestaurants = new ArrayList<>(); // To store selected restaurants
@@ -79,6 +80,14 @@ public class RestaurantsResultActivity extends AppCompatActivity {
 
         // Fetch restaurants
         fetchRestaurants(filterRequest, selectedFlight, selectedReturnedFlight, selectedHotel);
+
+        // Taking care of instructions text
+        instructions = findViewById(R.id.instructions);
+        if (restaurantList == null && restaurantList.isEmpty()){
+            instructions.setText("No restaurants where found, please click next or go back and change your preferences");
+        } else {
+            instructions.setText("Please pick restaurants");
+        }
 
         // Set "Done Choosing" button click listener
         nextButton.setOnClickListener(v -> {

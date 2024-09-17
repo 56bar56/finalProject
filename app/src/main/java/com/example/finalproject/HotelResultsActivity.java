@@ -32,6 +32,7 @@ public class HotelResultsActivity extends AppCompatActivity {
 
     private TextView title;
     private ImageView backButton;
+    private TextView instructions;
     private RecyclerView hotelsRecyclerView;
     private List<Hotel> hotelList;
 
@@ -77,6 +78,14 @@ public class HotelResultsActivity extends AppCompatActivity {
 
         // Fetch hotels
         fetchHotels(filterRequest, selectedFlight, selectedReturnedFlight, peopleNumber);
+
+        // Taking care of instructions text
+        instructions = findViewById(R.id.instructions);
+        if (hotelList == null && hotelList.isEmpty()){
+            instructions.setText("No hotels where found, please go back and change your preferences");
+        } else {
+            instructions.setText("Please pick a hotel");
+        }
     }
 
     private void fetchHotels(HotelFilterRequest request, Flight selectedFlight, Flight selectedReturnedFlight, String peopleNumber) {
