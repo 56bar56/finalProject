@@ -64,12 +64,18 @@ public class bestChoiceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_best_choice);
         getUserTrips();
+        x = findViewById(R.id.delete_button);
+
+        x.setOnClickListener(v -> {
+            Intent intent = new Intent(bestChoiceActivity.this, WelcomeActivity.class);
+            startActivity(intent);
+        });
+
     }
     private void createTripRecommendations(List<Trip> userTrips) {
         if (userTrips == null || userTrips.isEmpty()) {
             title = findViewById(R.id.title);
-            title.setText("you don't have previous trips, we cant create your trip");
-            Toast.makeText(this, "No previous trips found to base recommendations on.", Toast.LENGTH_SHORT).show();
+            title.setText("cant create trip - no previous trips");
             return;
         }
 
@@ -239,10 +245,7 @@ public class bestChoiceActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Trip>> call, Response<List<Trip>> response) {
                 tripList = response.body();
-                if (tripList != null) {
-                    // Now that we have the trips, let's create recommendations
-                    createTripRecommendations(tripList);
-                }
+                createTripRecommendations(tripList);
             }
 
             @Override

@@ -58,7 +58,7 @@ public class AttractionListAdapter extends RecyclerView.Adapter<AttractionListAd
         holder.rating.setText("Rating: " + attraction.getRating() + " stars");
         holder.price.setText(attraction.getAverageCost() + "$");
 
-        String imageURL = "https://www.usnews.com/object/image/0000016a-e02a-df3a-a36b-fffa11610000/14-mount-rushmore-getty.jpg?update-time=1572431129200&size=responsive640";
+        String imageURL = attraction.getUrl();
         Glide.with(context)
                 .load(imageURL)
                 .placeholder(R.drawable.attraction_default)  // Optional placeholder while loading

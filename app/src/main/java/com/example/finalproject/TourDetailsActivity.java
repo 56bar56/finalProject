@@ -98,9 +98,8 @@ public class TourDetailsActivity extends AppCompatActivity {
         attractions = selectedTrip.getSelectedAttractions();
 
         imageList = new ArrayList<>();
-        AttractionUtils attractionUtils = new AttractionUtils();
         for (Attraction attraction : attractions) {
-            String url = attractionUtils.getRandomUrlByType(attraction.getAttraction());
+            String url = attraction.getUrl();
             imageList.add(url);
         }
 
@@ -134,40 +133,6 @@ public class TourDetailsActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-        /*
-        // Initialize images
-        imageList = Arrays.asList(R.drawable.top3number2, R.drawable.top3number3, R.drawable.ashim_d_silva_ihjohaud8ry_unsplash_1_ek1,
-                R.drawable.ashim_d_silva_ihjohaud8ry_unsplash_1, R.drawable.top3number3);
-
-        imageViewPager = findViewById(R.id.image_view_pager);
-
-        ImagePagerAdapter adapter = new ImagePagerAdapter(this, imageList);
-        imageViewPager.setAdapter(adapter);
-        //imageViewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
-
-        // Initialize dots
-        dots = new View[] {
-                findViewById(R.id.dot1), findViewById(R.id.dot2),
-                findViewById(R.id.dot3), findViewById(R.id.dot4), findViewById(R.id.dot5)
-        };
-
-        // Set a PageTransformer to handle page change updates
-        imageViewPager.setPageTransformer(new ViewPager2.PageTransformer() {
-            @Override
-            public void transformPage(View page, float position) {
-                int currentItem = imageViewPager.getCurrentItem();
-                if (currentItem != previousPosition) {
-                    updateDots(currentItem % imageList.size());
-                    updateImageDetails(currentItem % imageList.size());
-                    previousPosition = currentItem;
-                }
-            }
-        });
-
-         */
-
 
         // Taking care of the service bar
         // Initialize RecyclerView

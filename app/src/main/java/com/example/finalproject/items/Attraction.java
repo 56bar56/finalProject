@@ -9,14 +9,16 @@ public class Attraction implements Serializable {
     private double averageCost;
     private float rating;
     private String kidFriendly;
+    private String url;
 
-    public Attraction(String name, String location, String type, double averageCost, float rating, String kidFriendly) {
+    public Attraction(String name, String location, String type, double averageCost, float rating, String kidFriendly, String link) {
         this.name = name;
         this.location = location;
         this.attraction = type;
         this.averageCost = averageCost;
         this.rating = rating;
         this.kidFriendly = kidFriendly;
+        this.url = link;
     }
 
     // Getters and Setters
@@ -37,4 +39,12 @@ public class Attraction implements Serializable {
 
     public String getKidFriendly() { return kidFriendly; }
     public void setKidFriendly(String kidFriendly) { this.kidFriendly = kidFriendly; }
+
+    public void setUrl(String link) {
+        this.url = link;
+    }
+
+    public String getUrl() {
+        return url;
+    }
 }
