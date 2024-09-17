@@ -132,7 +132,7 @@ public class FinishTripActivity extends AppCompatActivity implements ContactsLis
         // This is a placeholder to show where you would put the network request
 
         Trip myTrip = new Trip(selectedFlight, selectedReturnedFlight, selectedHotel, returnedRestaurants, selectedAttractions, username);
-        TripAPI tripAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(TripAPI.class);
+        TripAPI tripAPI = RetrofitClient.getClient("http://192.168.1.41:5000").create(TripAPI.class);
         Call<Trip> call = tripAPI.createTrip(myTrip);
         call.enqueue(new Callback<Trip>() {
             @Override

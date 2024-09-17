@@ -919,7 +919,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="19dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginBottom="100dp">
+                    android:layout_marginBottom="0dp">
 
                     <CheckBox android:id="@+id/allow_connection"
                         android:layout_width="wrap_content"
@@ -940,6 +940,35 @@
                         android:layout_width="wrap_content"
                         android:layout_height="25.5dp"
                         android:text="I don't mind connections" />
+                </RelativeLayout>
+
+                <!-- Checkbox Layout -->
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="19dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="100dp">
+
+                    <CheckBox android:id="@+id/greedy_algorithm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="18dp"
+                        android:width="18dp"
+                        android:height="18dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        android:background="#FF7D0D"
+                        android:buttonTint="@color/black"
+                        android:alpha="0.15000000596046" />
+
+                    <TextView
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="27dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Let GOTOUR choose the best option for me" />
                 </RelativeLayout>
 
             </LinearLayout>

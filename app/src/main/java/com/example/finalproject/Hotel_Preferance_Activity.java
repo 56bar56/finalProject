@@ -19,10 +19,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.finalproject.adapters.HotelListAdapter;
 import com.example.finalproject.api.GeoNamesApi;
+import com.example.finalproject.api.HotelAPI;
+import com.example.finalproject.api.TripAPI;
 import com.example.finalproject.items.Flight;
 import com.example.finalproject.items.GeoNameResult;
 import com.example.finalproject.items.GeoNamesResponse;
+import com.example.finalproject.items.Hotel;
+import com.example.finalproject.items.Trip;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,6 +75,8 @@ public class Hotel_Preferance_Activity extends AppCompatActivity {
     private View[] numStopViews;
     private TextView[] numStopTextViews;
     private int selectedIndexNumStop = 1; // Store the default index of the selected option
+    CheckBox greedyAlgorithm;
+    private List<Trip> tripList = new ArrayList<>();
     private Button next_button;
 
 
@@ -347,6 +354,9 @@ public class Hotel_Preferance_Activity extends AppCompatActivity {
             });
         }
 
+        // Taking care of greedy algorithm
+        greedyAlgorithm = findViewById(R.id.greedy_algorithm);
+
         // Taking care of clicking on next
         next_button = findViewById(R.id.next_button);
         next_button.setOnClickListener(new View.OnClickListener() {
@@ -383,20 +393,34 @@ public class Hotel_Preferance_Activity extends AppCompatActivity {
                 Log.d("FlightInfo", "Is a star trip: " + isStarTrip);
                 Log.d("FlightInfo", "Number of stops: " + numStops);
 
-                // Pass data to FlightsActivity using intent
-                Intent intent = new Intent(Hotel_Preferance_Activity.this, HotelResultsActivity.class);
-                intent.putExtra("location", location);
-                intent.putExtra("kmFromCity", kmFromCity);
-                intent.putExtra("hotelOrCabbin", hotelOrCabbin);
-                intent.putExtra("rating", rating);
-                intent.putExtra("maxPriceForNight", maxBudget);
-                intent.putExtra("isStarTrip", isStarTrip);
-                intent.putExtra("numStops", numStops);
-                intent.putExtra("selectedFlight", selectedFlight);
-                intent.putExtra("peopleNumber", peopleNumber);
-                intent.putExtra("selectedReturnedFlight", selectedReturnedFlight);
+                if(greedyAlgorithm.isChecked()){
+                    HotelFilterRequest filterRequest = new HotelFilterRequest(
+                            Double.parseDouble(maxBudget),
+                            location,
+                            Double.parseDouble(rating),
+                            Double.parseDouble(kmFromCity),
+                            hotelOrCabbin
+                    );
 
-                startActivity(intent);
+                    // Fetch hotels
+                    fetchHotels(filterRequest, selectedFlight, selectedReturnedFlight, peopleNumber);
+                }
+                else {
+                    // Pass data to FlightsActivity using intent
+                    Intent intent = new Intent(Hotel_Preferance_Activity.this, HotelResultsActivity.class);
+                    intent.putExtra("location", location);
+                    intent.putExtra("kmFromCity", kmFromCity);
+                    intent.putExtra("hotelOrCabbin", hotelOrCabbin);
+                    intent.putExtra("rating", rating);
+                    intent.putExtra("maxPriceForNight", maxBudget);
+                    intent.putExtra("isStarTrip", isStarTrip);
+                    intent.putExtra("numStops", numStops);
+                    intent.putExtra("selectedFlight", selectedFlight);
+                    intent.putExtra("peopleNumber", peopleNumber);
+                    intent.putExtra("selectedReturnedFlight", selectedReturnedFlight);
+
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -435,7 +459,7 @@ public class Hotel_Preferance_Activity extends AppCompatActivity {
                 countryCode,
                 "P", // featureClass for populated places
                 10,  // maxRows
-                "Ariel0208" // replace with your GeoNames username
+                "Ariel0208" // Username
         );
 
         call.enqueue(new Callback<GeoNamesResponse>() {
@@ -464,5 +488,124 @@ public class Hotel_Preferance_Activity extends AppCompatActivity {
             }
         });
     }
+
+    private void getUserTrips() {
+        String username = globalVars.username;
+
+        TripAPI tripAPI = RetrofitClient.getClient("http://192.168.1.41:5000").create(TripAPI.class);
+        Call<List<Trip>> call = tripAPI.getUserTrips(username);
+        call.enqueue(new Callback<List<Trip>>() {
+            @Override
+            public void onResponse(Call<List<Trip>> call, Response<List<Trip>> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(Hotel_Preferance_Activity.this, "Error: " + response.code(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                tripList = response.body();
+            }
+            @Override
+            public void onFailure(Call<List<Trip>> call, Throwable t) {
+                Log.e("MyTripsActivity", "Failed to fetch trips: " + t.getMessage());
+                Toast.makeText(Hotel_Preferance_Activity.this, "Request failed!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void fetchHotels(HotelFilterRequest request, Flight selectedFlight, Flight selectedReturnedFlight, String peopleNumber) {
+        HotelAPI hotelAPI = RetrofitClient.getClient("http://192.168.1.41:5000").create(HotelAPI.class);
+
+        Call<List<Hotel>> call = hotelAPI.filterHotels(request);
+        call.enqueue(new Callback<List<Hotel>>() {
+            @Override
+            public void onResponse(Call<List<Hotel>> call, Response<List<Hotel>> response) {
+                if (!response.isSuccessful()) {
+                    Log.e("HotelsActivity", "Response error: " + response.code());
+                    return;
+                }
+                List<Hotel> hotelList = response.body();
+                if (hotelList != null) {
+                    getUserTrips();
+                    Hotel selectedHotel = selectBestHotel(hotelList, tripList);
+                    Intent intent = new Intent(Hotel_Preferance_Activity.this, Restaurant_Preferance_Activity.class);
+                    intent.putExtra("selectedHotel", selectedHotel);
+                    intent.putExtra("selectedFlight", selectedFlight);
+                    intent.putExtra("selectedReturnedFlight", selectedReturnedFlight);
+                    intent.putExtra("peopleNumber", peopleNumber);
+                    startActivity(intent);
+                    }
+                else{
+                    Toast.makeText(Hotel_Preferance_Activity.this, "No flights were found, try to change your preferences", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Hotel>> call, Throwable t) {
+                Log.e("HotelsActivity", "Request failed: " + t.getMessage());
+            }
+        });
+    }
+
+    public Hotel selectBestHotel(List<Hotel> availableHotels, List<Trip> userTrips) {
+        // Calculate average price and rating the user prefers based on past trips
+        double totalSpent = 0;
+        double totalRating = 0;
+        double totalDistance = 0;
+        int count = 0;
+        String typeOfAccommodation = availableHotels.get(0).getType();
+        int alpha = 1;
+
+        for (Trip trip : userTrips) {
+            if (trip.getSelectedHotel() != null) {
+                Hotel hotel = trip.getSelectedHotel();
+                if(hotel.getType().equals(typeOfAccommodation)) {
+                    alpha = 2;
+                }
+                else {
+                    alpha = 1;
+                }
+                totalSpent += alpha * hotel.getPricePerNight();
+                totalRating += alpha * hotel.getRating();
+                totalDistance += alpha * hotel.getDistanceFromCenterKm();
+                count+= alpha;
+            }
+        }
+
+        // Default to 0 if no trips, or calculate averages
+        double averageSpent = (count > 0) ? totalSpent / count : 0;
+        double averageRating = (count > 0) ? totalRating / count : 5;
+        double averageDistance = (count > 0) ? totalDistance / count : 0;
+
+        // Initialize variables to track the best hotel
+        Hotel bestHotel = null;
+        double bestScore = Double.MAX_VALUE;
+
+        for (Hotel hotel : availableHotels) {
+            // Calculate price deviation score
+            double priceDeviation = Math.abs(hotel.getPricePerNight() - averageSpent);
+
+            // Calculate rating deviation score (positive rating deviations are good)
+            double ratingBonus = Math.max(0, hotel.getRating() - averageRating);
+
+            // Calculate distance deviation score (closer is generally better)
+            double distanceDeviation = Math.abs(hotel.getDistanceFromCenterKm() - averageDistance);
+
+            // Combine scores: prioritize rating and proximity, with price deviation as a factor
+            double score = priceDeviation - ratingBonus * 2 + distanceDeviation;
+
+            // Log scoring for debug purposes
+            Log.d("BestHotel", "Hotel score: " + score + " | Price deviation: " + priceDeviation
+                    + " | Rating bonus: " + ratingBonus + " | Distance deviation: " + distanceDeviation);
+
+            // Find the hotel with the lowest score
+            if (score < bestScore) {
+                bestScore = score;
+                bestHotel = hotel;
+            }
+        }
+
+        return bestHotel;
+    }
+
 
 }

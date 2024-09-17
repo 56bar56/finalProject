@@ -443,7 +443,7 @@
                     android:layout_height="84dp"
                     android:layout_marginLeft="0dp"
                     android:layout_marginTop="0dp"
-                    android:text="Hello Bar,"
+                    android:text="Hello,"
                     android:textColor="@color/best_place_color"
                     android:textSize="20sp" />
 

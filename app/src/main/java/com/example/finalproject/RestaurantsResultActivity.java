@@ -96,7 +96,7 @@ public class RestaurantsResultActivity extends AppCompatActivity {
     }
 
     private void fetchRestaurants(RestaurantFilterRequest request, Flight selectedFlight, Flight selectedReturnedFlight, Hotel selectedHotel) {
-        RestaurantAPI restaurantAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(RestaurantAPI.class);
+        RestaurantAPI restaurantAPI = RetrofitClient.getClient("http://192.168.1.41:5000").create(RestaurantAPI.class);
 
         Call<List<Restaurant>> call = restaurantAPI.getFilteredRestaurants(request);
         call.enqueue(new Callback<List<Restaurant>>() {

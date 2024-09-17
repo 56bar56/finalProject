@@ -56,7 +56,7 @@ public class TourDetailsActivity extends AppCompatActivity {
     private List<Attraction> attractions;
     private ViewPager2 imageViewPager;
     private View[] dots;
-    private List<Integer> imageList;
+    private List<String> imageList;
     private int previousPosition = -1; // Track the current image
 
     private RecyclerView recyclerView;
@@ -95,9 +95,50 @@ public class TourDetailsActivity extends AppCompatActivity {
         title.setText(extractCityCountry(selectedTrip.getSelectedFlight().getArrival()));
 
         // Take care image_info RelativeLayout
-        //attractions = selectedTrip.getSelectedAttractions();
+        attractions = selectedTrip.getSelectedAttractions();
+
+        imageList = new ArrayList<>();
+        AttractionUtils attractionUtils = new AttractionUtils();
+        for (Attraction attraction : attractions) {
+            //imageList.add(attraction.getImageResource());  // Assuming each attraction has an image resource
+            String url = attractionUtils.getRandomUrlByType(attraction.getAttraction());
+            Log.d("tourImg", url);
+            imageList.add(url);
+        }
+
+        imageViewPager = findViewById(R.id.image_view_pager);
+        ImagePagerAdapter adapter = new ImagePagerAdapter(this, imageList);
+        imageViewPager.setAdapter(adapter);
+
+        LinearLayout dotsLayout = findViewById(R.id.dotsLayout);  // A container for the dots
+        dots = new View[attractions.size()];  // Create dots based on the number of attractions
+
+        for (int i = 0; i < dots.length; i++) {
+            dots[i] = new View(this);
+            dots[i].setBackgroundResource(R.drawable.ellipse_15_shape);  // Default dot shape
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(20, 20);
+            params.setMargins(8, 0, 8, 0);  // Add margins between dots
+            dots[i].setLayoutParams(params);
+            dotsLayout.addView(dots[i]);  // Add the dot to the layout
+        }
+
+        updateDots(0);  // Initialize the dots
+
+        // Set a PageTransformer to handle page change updates
+        imageViewPager.setPageTransformer(new ViewPager2.PageTransformer() {
+            @Override
+            public void transformPage(View page, float position) {
+                int currentItem = imageViewPager.getCurrentItem();
+                if (currentItem != previousPosition) {
+                    updateDots(currentItem % imageList.size());
+                    updateImageDetails(currentItem % imageList.size());
+                    previousPosition = currentItem;
+                }
+            }
+        });
 
 
+        /*
         // Initialize images
         imageList = Arrays.asList(R.drawable.top3number2, R.drawable.top3number3, R.drawable.ashim_d_silva_ihjohaud8ry_unsplash_1_ek1,
                 R.drawable.ashim_d_silva_ihjohaud8ry_unsplash_1, R.drawable.top3number3);
@@ -126,6 +167,8 @@ public class TourDetailsActivity extends AppCompatActivity {
                 }
             }
         });
+
+         */
 
 
         // Taking care of the service bar
@@ -172,47 +215,37 @@ public class TourDetailsActivity extends AppCompatActivity {
         for (int i = 0; i < dots.length; i++) {
             if (i == position) {
                 dots[i].setBackgroundResource(R.drawable.rectangle_9_shape);  // Wide circle
-                dots[i].getLayoutParams().width = 20;
+                dots[i].getLayoutParams().width = 40;  // Wide dot
+                dots[i].getLayoutParams().height = 15;  // Set consistent height
             } else {
                 dots[i].setBackgroundResource(R.drawable.ellipse_15_shape);  // Normal dot
-                dots[i].getLayoutParams().width = 5;
+                dots[i].getLayoutParams().width = 15;   // Small dot
+                dots[i].getLayoutParams().height = 15;  // Set consistent height
             }
+            // Request layout update after changing width/height
+            dots[i].requestLayout();
         }
-
     }
 
+
+    // Update the details about the attraction
     private void updateImageDetails(int position) {
+        Attraction attraction = attractions.get(position);  // Get the selected attraction
+
         TextView location = findViewById(R.id.location);
         TextView attractionName = findViewById(R.id.attraction_name);
         TextView price = findViewById(R.id.price);
+        TextView kidFriendly = findViewById(R.id.kid_friendly);
 
-        switch (position) {
-            case 0:
-                location.setText("Bangkok, Thailand");
-                attractionName.setText("Capital of Thailand");
-                price.setText("10,000$");
-                break;
-            case 1:
-                location.setText("Paris, France");
-                attractionName.setText("Eiffel Tower");
-                price.setText("12,000$");
-                break;
-            case 2:
-                location.setText("New York, USA");
-                attractionName.setText("Statue of Liberty");
-                price.setText("15,000$");
-                break;
-            case 3:
-                location.setText("Jerusalem, Israel");
-                attractionName.setText("The Cotel");
-                price.setText("20,000$");
-                break;
-            case 4:
-                location.setText("Amsterdam, Holland");
-                attractionName.setText("Van Gogh Museum");
-                price.setText("12,000$");
-                break;
-
+        location.setText(attraction.getLocation());
+        attractionName.setText(attraction.getName());
+        Log.d("attraction", attraction.getName());
+        int cost = (int)attraction.getAverageCost();
+        price.setText(cost + "$");
+        if(attraction.getKidFriendly().equals("yes")) {
+            kidFriendly.setText("Kid Friendly");
+        } else {
+            kidFriendly.setText("");
         }
     }
 

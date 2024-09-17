@@ -19,11 +19,27 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.finalproject.adapters.FlightListAdapter;
+import com.example.finalproject.adapters.TripListAdapter;
+import com.example.finalproject.api.FlightAPI;
+import com.example.finalproject.api.TripAPI;
+import com.example.finalproject.items.Flight;
+import com.example.finalproject.items.Trip;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Flight_Preferance_Activity extends AppCompatActivity {
 
@@ -45,6 +61,8 @@ public class Flight_Preferance_Activity extends AppCompatActivity {
     EditText maxBudgetEditText;
     CheckBox roundedTripCheckBox;
     CheckBox allowConnectionCheckBox;
+    CheckBox greedyAlgorithm;
+    private List<Trip> tripList = new ArrayList<>();
     private Button next_button;
 
 
@@ -305,6 +323,9 @@ public class Flight_Preferance_Activity extends AppCompatActivity {
         roundedTripCheckBox = findViewById(R.id.rounded_trip);
         allowConnectionCheckBox = findViewById(R.id.allow_connection);
 
+        // Taking care of greedy algorithm
+        greedyAlgorithm = findViewById(R.id.greedy_algorithm);
+
         //taking care of clicking on next
         next_button = findViewById(R.id.next_button);
         next_button.setOnClickListener(new View.OnClickListener() {
@@ -356,7 +377,6 @@ public class Flight_Preferance_Activity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
                 // Check if max budget is empty
                 if (maxBudget.isEmpty()) {
                     Toast.makeText(Flight_Preferance_Activity.this, "Please enter a maximum budget", Toast.LENGTH_SHORT).show();
@@ -374,21 +394,34 @@ public class Flight_Preferance_Activity extends AppCompatActivity {
                 Log.d("FlightInfo", "isAllowConnection: " + isAllowConnection);
 
 
-                // Pass data to FlightsActivity using intent
-                Intent intent = new Intent(Flight_Preferance_Activity.this, FlightsActivity.class);
-                intent.putExtra("departureLocation", departureLocation);
-                intent.putExtra("arrivalLocation", arrivalLocation);
-                intent.putExtra("departureDate", departureDate);
-                intent.putExtra("arrivalDate", arrivalDate);
-                intent.putExtra("minDay", minDay);
-                intent.putExtra("maxDay", maxDay);
-                intent.putExtra("peopleNumber", peopleNumber);
-                intent.putExtra("maxPrice", maxBudget);
-                intent.putExtra("ROUNDED_TRIP", isRoundedTrip);
-                intent.putExtra("ALLOW_CONNECTION", isAllowConnection);
+                if(greedyAlgorithm.isChecked()){
+                    // Create filter request
+                    FlightFilterRequest filterRequest = new FlightFilterRequest(
+                            Double.parseDouble(maxBudget),
+                            departureLocation,
+                            arrivalLocation,
+                            departureDate,
+                            arrivalDate
+                    );
 
-                startActivity(intent);
-
+                    // Fetch flights
+                    fetchFlights(filterRequest, maxDay, minDay, maxBudget, isRoundedTrip, peopleNumber);
+                }
+                else{
+                    Intent intent = new Intent(Flight_Preferance_Activity.this, FlightsActivity.class);
+                    intent.putExtra("departureLocation", departureLocation);
+                    intent.putExtra("arrivalLocation", arrivalLocation);
+                    intent.putExtra("departureDate", departureDate);
+                    intent.putExtra("arrivalDate", arrivalDate);
+                    intent.putExtra("minDay", minDay);
+                    intent.putExtra("maxDay", maxDay);
+                    intent.putExtra("peopleNumber", peopleNumber);
+                    intent.putExtra("maxPrice", maxBudget);
+                    intent.putExtra("ROUNDED_TRIP", isRoundedTrip);
+                    intent.putExtra("ALLOW_CONNECTION", isAllowConnection);
+                    // Pass data to FlightsActivity using intent
+                    startActivity(intent);
+                }
             }
         });
 
@@ -447,4 +480,216 @@ public class Flight_Preferance_Activity extends AppCompatActivity {
             }
         }
     }
+
+    // The greedy algorithm
+    private void fetchFlights(FlightFilterRequest request, String days, String daysMin, String maxPrice, String isRoundedTrip, String peopleNumber) {
+        FlightAPI flightAPI = RetrofitClient.getClient("http://192.168.1.41:5000").create(FlightAPI.class);
+
+        Call<List<Flight>> call = flightAPI.filterFlights(request);
+        call.enqueue(new Callback<List<Flight>>() {
+            @Override
+            public void onResponse(Call<List<Flight>> call, Response<List<Flight>> response) {
+                if (!response.isSuccessful()) {
+                    Log.e("FlightsActivity", "Response error: " + response.code());
+                    return;
+                }
+
+                List<Flight> flightList = response.body();
+                if (flightList != null) {
+                    getUserTrips();
+                    Flight selectedFlight = selectBestFlight(flightList, tripList, Integer.parseInt(maxPrice));
+                    if (isRoundedTrip.equals("true")){
+                        String returnDate = calculateReturnDate(selectedFlight.getTakeoff(), days);  // Calculate return date by adding the user's stay duration
+                        String returnDateMin = calculateReturnDate(selectedFlight.getTakeoff(), daysMin);  // Calculate return date by adding the user's stay duration
+                        String returnDepartureLocation = selectedFlight.getArrival();
+                        String returnArrivalLocation = selectedFlight.getDeparture();
+
+                        // Create filter request for return flights
+                        FlightFilterRequest filterRequest = new FlightFilterRequest(
+                                Double.parseDouble(maxPrice),  // Max price is not relevant for return flight
+                                returnDepartureLocation,
+                                returnArrivalLocation,
+                                returnDateMin,
+                                returnDate
+                        );
+                        fetchReturnFlights(filterRequest, selectedFlight, peopleNumber, maxPrice);
+                    }
+
+                    else{
+                        Intent intent = new Intent(Flight_Preferance_Activity.this, Hotel_Preferance_Activity.class);
+                        intent.putExtra("selectedFlight", selectedFlight);  // Pass the selected flight
+                        intent.putExtra("peopleNumber", peopleNumber);  // Use maxPrice from constructor
+                        startActivity(intent);
+                    }
+                }
+                else{
+                    Toast.makeText(Flight_Preferance_Activity.this, "No flights were found, try to change your preferences", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Flight>> call, Throwable t) {
+                Log.e("FlightsActivity", "Request failed: " + t.getMessage());
+            }
+        });
+    }
+
+    private void fetchReturnFlights(FlightFilterRequest request, Flight selectedFlight, String peopleNumber, String maxPrice) {
+        FlightAPI flightAPI = RetrofitClient.getClient("http://192.168.1.41:5000").create(FlightAPI.class);
+
+        Call<List<Flight>> call = flightAPI.filterFlights(request);
+        call.enqueue(new Callback<List<Flight>>() {
+            @Override
+            public void onResponse(Call<List<Flight>> call, Response<List<Flight>> response) {
+                if (!response.isSuccessful()) {
+                    Log.e("ReturnFlightsActivity", "Response error: " + response.code());
+                    return;
+                }
+
+                List<Flight> flightList = response.body();
+                if (flightList != null) {
+                    Flight selectedReturnFlight = selectBestFlight(flightList, tripList, Integer.parseInt(maxPrice));
+                    Intent intent = new Intent(Flight_Preferance_Activity.this, Hotel_Preferance_Activity.class);
+                    intent.putExtra("selectedFlight", selectedFlight);  // Pass the selected outbound flight
+                    intent.putExtra("selectedReturnedFlight", selectedReturnFlight);  // Pass the selected return flight
+                    intent.putExtra("peopleNumber", peopleNumber);  // Use maxPrice from constructor
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(Flight_Preferance_Activity.this, "No flights were found, try to change your preferences", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Flight>> call, Throwable t) {
+                Log.e("ReturnFlightsActivity", "Request failed: " + t.getMessage());
+            }
+        });
+    }
+
+    // Getting all users trips
+    private void getUserTrips() {
+        String username = globalVars.username;
+
+        TripAPI tripAPI = RetrofitClient.getClient("http://192.168.1.41:5000").create(TripAPI.class);
+        Call<List<Trip>> call = tripAPI.getUserTrips(username);
+        call.enqueue(new Callback<List<Trip>>() {
+            @Override
+            public void onResponse(Call<List<Trip>> call, Response<List<Trip>> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(Flight_Preferance_Activity.this, "Error: " + response.code(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                tripList = response.body();
+            }
+            @Override
+            public void onFailure(Call<List<Trip>> call, Throwable t) {
+                Log.e("MyTripsActivity", "Failed to fetch trips: " + t.getMessage());
+                Toast.makeText(Flight_Preferance_Activity.this, "Request failed!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    // select the best flight with all the considerations.
+    public Flight selectBestFlight(List<Flight> availableFlights, List<Trip> userTrips, int maxPrice) {
+        // Calculate average price user spends on flights from past trips
+        double totalSpent = 0;
+        int count = 0;
+        for (Trip trip : userTrips) {
+            if (trip.getSelectedFlight() != null && trip.getSelectedFlight().getPrice() < maxPrice) {
+                totalSpent += trip.getSelectedFlight().getPrice();
+                count++;
+            }
+            if (trip.getSelectedReturnedFlight() != null && trip.getSelectedReturnedFlight().getPrice() < maxPrice) {
+                totalSpent += trip.getSelectedReturnedFlight().getPrice();
+                count++;
+            }
+        }
+        double averageSpent = (count > 0) ? totalSpent / count : 0; // If no trips, use 0
+        Map<String, Double> companyUsagePercentage = calculateCompanyUsagePercentage(userTrips);
+
+        // Initialize variables to track the best flights
+        Flight bestFlight = null;
+        //Flight bestFlightWithLayover = null;
+        double bestScore = Double.MAX_VALUE;
+        //double bestLayoverScore = Double.MAX_VALUE;
+
+        // Rank flights based on user's company preference, price deviation, and whether it's direct or with layover
+        for (Flight flight : availableFlights) {
+            double priceDeviation = Math.abs(flight.getPrice() - averageSpent);
+
+            // Company preference score
+            double companyUsageScore = companyUsagePercentage.getOrDefault(flight.getCompany(), 0.0);
+
+            // Score calculation (smaller score is better)
+            double score = priceDeviation;
+            score *= (1 - companyUsageScore);
+
+            /*
+            if (flight.size == 1) { // directed flight
+                score *= 0.8;
+            }
+            */
+            Log.d("BestFlight", "flight score: " + score + "flight companyUsageScore: " + companyUsageScore + "price deviation: " + priceDeviation);
+
+            if (score < bestScore) {
+                bestScore = score;
+                bestFlight = flight;
+            }
+        }
+        return bestFlight;
+    }
+
+    public Map<String, Double> calculateCompanyUsagePercentage(List<Trip> userTrips) {
+        Map<String, Integer> companyFrequency = new HashMap<>();
+        int totalFlights = 0;
+
+        // Calculate the frequency of companies from userTrips
+        for (Trip trip : userTrips) {
+            if (trip.getSelectedFlight() != null) {
+                Flight flight = trip.getSelectedFlight();
+                companyFrequency.put(flight.getCompany(), companyFrequency.getOrDefault(flight.getCompany(), 0) + 1);
+                totalFlights++;
+            }
+            if (trip.getSelectedReturnedFlight() != null) {
+                Flight flight = trip.getSelectedReturnedFlight();
+                companyFrequency.put(flight.getCompany(), companyFrequency.getOrDefault(flight.getCompany(), 0) + 1);
+                totalFlights++;
+            }
+        }
+
+        // Convert the company frequency map to percentages
+        Map<String, Double> companyUsagePercentage = new HashMap<>();
+        for (Map.Entry<String, Integer> entry : companyFrequency.entrySet()) {
+            double percentage = (double) entry.getValue() / totalFlights * 100; // Convert to percentage
+            companyUsagePercentage.put(entry.getKey(), percentage);
+        }
+        return companyUsagePercentage;
+    }
+
+    private String calculateReturnDate(String departureDate, String days) {
+        // Define the date format used in the input and output
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            // Parse the departure date string to a Date object
+            Date date = sdf.parse(departureDate);
+
+            // Create a Calendar object and set it to the parsed date
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+
+            // Add the number of days to the calendar
+            calendar.add(Calendar.DAY_OF_MONTH, Integer.parseInt(days));
+
+            // Get the new date and format it back to a string
+            Date returnDate = calendar.getTime();
+            return sdf.format(returnDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

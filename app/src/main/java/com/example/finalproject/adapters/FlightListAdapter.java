@@ -92,9 +92,6 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
                     if (!isRoundedTrip) {
                         intent = new Intent(context, Hotel_Preferance_Activity.class);
                         intent.putExtra("selectedFlight", flight);  // Pass the selected flight
-                        intent.putExtra("tripDays", days);  // Use days from constructor
-                        intent.putExtra("tripDaysMin", daysMin);  // Use daysMin from constructor
-                        intent.putExtra("maxPrice", maxPrice);  // Use maxPrice from constructor
                         intent.putExtra("peopleNumber", peopleNumber);  // Use maxPrice from constructor
                     }
                     context.startActivity(intent);

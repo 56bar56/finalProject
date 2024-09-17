@@ -58,7 +58,6 @@ public class FlightsActivity extends AppCompatActivity {
         String peopleNumber = getIntent().getStringExtra("peopleNumber");
 
 
-
         // Create filter request
         FlightFilterRequest filterRequest = new FlightFilterRequest(
                 Double.parseDouble(maxPrice),
@@ -73,7 +72,7 @@ public class FlightsActivity extends AppCompatActivity {
     }
 
     private void fetchFlights(FlightFilterRequest request, String days, String daysMin, String maxPrice, String isRoundedTrip, String peopleNumber) {
-        FlightAPI flightAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(FlightAPI.class);
+        FlightAPI flightAPI = RetrofitClient.getClient("http://192.168.1.41:5000").create(FlightAPI.class);
 
         Call<List<Flight>> call = flightAPI.filterFlights(request);
         call.enqueue(new Callback<List<Flight>>() {
@@ -103,7 +102,7 @@ public class FlightsActivity extends AppCompatActivity {
     }
     private void sendFlightsToChatGPT(List<Flight> flightList, String days, String daysMin, String maxPrice, String isRoundedTrip, String peopleNumber) {
         // Assuming you have a backend endpoint to process this
-        FlightAPI flightAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(FlightAPI.class);
+        FlightAPI flightAPI = RetrofitClient.getClient("http://192.168.1.41:5000").create(FlightAPI.class);
 
         Call<List<Flight>> call = flightAPI.sortFlights(flightList);
         call.enqueue(new Callback<List<Flight>>() {

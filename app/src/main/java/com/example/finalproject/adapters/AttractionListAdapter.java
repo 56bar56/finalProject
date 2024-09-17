@@ -52,13 +52,13 @@ public class AttractionListAdapter extends RecyclerView.Adapter<AttractionListAd
         Attraction attraction = attractionList.get(position);
 
         // Set restaurant details
-        //holder.name.setText(attraction.getName()); //TODO
+        holder.name.setText(attraction.getName());
         holder.type.setText("Type: " + mapType.get(attraction.getAttraction()));
         holder.location.setText("Location: " + attraction.getLocation());
         holder.rating.setText("Rating: " + attraction.getRating() + " stars");
         holder.price.setText(attraction.getAverageCost() + "$");
 
-        String imageURL = "https://thumbor.bigedition.com/sydney-opera-house/WC10wVtQEImDSv3RDFtzyAKEwGY=/800x0/filters:quality(80)/granite-web-prod/ca/1f/ca1f9fe650954918bb5b53fd47958764.jpeg";
+        String imageURL = "https://www.usnews.com/object/image/0000016a-e02a-df3a-a36b-fffa11610000/14-mount-rushmore-getty.jpg?update-time=1572431129200&size=responsive640";
         Glide.with(context)
                 .load(imageURL)
                 .placeholder(R.drawable.attraction_default)  // Optional placeholder while loading

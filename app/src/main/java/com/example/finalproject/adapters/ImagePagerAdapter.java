@@ -9,16 +9,17 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.finalproject.R;
 
 import java.util.List;
 
 public class ImagePagerAdapter extends RecyclerView.Adapter<ImagePagerAdapter.ViewHolder> {
 
-    private final List<Integer> images;  // List of drawable resource IDs
+    private final List<String> images;  // List of drawable resource IDs
     private final Context context;
 
-    public ImagePagerAdapter(Context context, List<Integer> images) {
+    public ImagePagerAdapter(Context context, List<String> images) {
         this.context = context;
         this.images = images;
     }
@@ -32,7 +33,12 @@ public class ImagePagerAdapter extends RecyclerView.Adapter<ImagePagerAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.imageView.setImageResource(images.get(position));
+        Glide.with(context)
+                .load(images.get(position))
+                .placeholder(R.drawable.top3number3)  // Optional placeholder while loading
+                .error(R.drawable.top3number3)    // Optional error placeholder
+                .into(holder.imageView);
+        // holder.imageView.setImageResource(images.get(position));
     }
 
     @Override

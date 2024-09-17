@@ -70,7 +70,7 @@ public class MyTripsActivity extends AppCompatActivity {
     private void getUserTrips() {
         String username = globalVars.username;
 
-        TripAPI tripAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(TripAPI.class);
+        TripAPI tripAPI = RetrofitClient.getClient("http://192.168.1.41:5000").create(TripAPI.class);
         Call<List<Trip>> call = tripAPI.getUserTrips(username);
 
         call.enqueue(new Callback<List<Trip>>() {

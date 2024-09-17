@@ -80,7 +80,7 @@ public class HotelResultsActivity extends AppCompatActivity {
     }
 
     private void fetchHotels(HotelFilterRequest request, Flight selectedFlight, Flight selectedReturnedFlight, String peopleNumber) {
-        HotelAPI hotelAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(HotelAPI.class);
+        HotelAPI hotelAPI = RetrofitClient.getClient("http://192.168.1.41:5000").create(HotelAPI.class);
 
         Call<List<Hotel>> call = hotelAPI.filterHotels(request);
         call.enqueue(new Callback<List<Hotel>>() {

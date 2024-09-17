@@ -109,7 +109,7 @@ public class AttractionsResultActivity extends AppCompatActivity {
     }
 
     private void fetchAttractions(AttractionFilterRequest request) {
-        AttractionAPI attractionAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(AttractionAPI.class);
+        AttractionAPI attractionAPI = RetrofitClient.getClient("http://192.168.1.41:5000").create(AttractionAPI.class);
 
         Call<List<Attraction>> call = attractionAPI.getFilteredAttractions(request);
         call.enqueue(new Callback<List<Attraction>>() {

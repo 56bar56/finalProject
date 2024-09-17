@@ -101,7 +101,7 @@ public class ReturnFlightsActivity extends AppCompatActivity {
     }
 
     private void fetchReturnFlights(FlightFilterRequest request, Flight selectedFlight, String peopleNumber) {
-        FlightAPI flightAPI = RetrofitClient.getClient("http://10.0.2.2:5000").create(FlightAPI.class);
+        FlightAPI flightAPI = RetrofitClient.getClient("http://192.168.1.41:5000").create(FlightAPI.class);
 
         Call<List<Flight>> call = flightAPI.filterFlights(request);
         call.enqueue(new Callback<List<Flight>>() {

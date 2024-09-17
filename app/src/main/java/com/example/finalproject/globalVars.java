@@ -8,5 +8,5 @@ public class globalVars extends Application {
     public static boolean lightOn = true;
     public static String username = "";
     public static String password = "";
-    public static String server="http://10.0.2.2:5000/api/";
+    public static String server="http://192.168.1.41:5000/api/";
 }
