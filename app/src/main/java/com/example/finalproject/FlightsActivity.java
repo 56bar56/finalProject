@@ -73,7 +73,7 @@ public class FlightsActivity extends AppCompatActivity {
 
         // Taking care of instructions text
         instructions = findViewById(R.id.instructions);
-        if (flightList == null && flightList.isEmpty()){
+        if (flightList == null || flightList.isEmpty()){
             instructions.setText("No flights where found, please go back and change your preferences");
         } else {
             instructions.setText("Please pick an outbound flight");
@@ -138,5 +138,11 @@ public class FlightsActivity extends AppCompatActivity {
     private void displayFlights(List<Flight> flights, String days, String daysMin, String maxPrice, String isRoundedTrip, String peopleNumber) {
         FlightListAdapter adapter = new FlightListAdapter(FlightsActivity.this, flights, days, daysMin, maxPrice, null, Boolean.parseBoolean(isRoundedTrip), true, peopleNumber);
         flightsRecyclerView.setAdapter(adapter);
+        instructions = findViewById(R.id.instructions);
+        if (flightList == null || flightList.isEmpty()){
+            instructions.setText("No flights where found, please go back and change your preferences");
+        } else {
+            instructions.setText("Please pick an outbound flight");
+        }
     }
 }

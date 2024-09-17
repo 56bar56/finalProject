@@ -76,13 +76,6 @@ public class ReturnFlightsActivity extends AppCompatActivity {
 
         fetchReturnFlights(filterRequest, selectedFlight, peopleNumber);
 
-        // Taking care of instructions text
-        instructions = findViewById(R.id.instructions);
-        if (flightList == null && flightList.isEmpty()){
-            instructions.setText("No flights where found, please go back and change your preferences");
-        } else {
-            instructions.setText("Please pick a return flight");
-        }
     }
 
     private String calculateReturnDate(String departureDate, String days) {
@@ -122,9 +115,15 @@ public class ReturnFlightsActivity extends AppCompatActivity {
                 }
 
                 flightList = response.body();
+                // Taking care of instructions text
+                instructions = findViewById(R.id.instructions);
                 if (flightList != null) {
                     FlightListAdapter adapter = new FlightListAdapter(ReturnFlightsActivity.this, flightList, "none", "none", "none", selectedFlight, true, true, peopleNumber);
                     flightsRecyclerView.setAdapter(adapter);
+                    instructions.setText("Please pick a return flight");
+                }
+                else{
+                    instructions.setText("No flights where found, please go back and change your preferences");
                 }
             }
 

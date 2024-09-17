@@ -94,13 +94,7 @@ public class AttractionsResultActivity extends AppCompatActivity {
         // Fetch attractions
         fetchAttractions(filterRequest);
 
-        // Taking care of instructions text
-        instructions = findViewById(R.id.instructions);
-        if (attractionList == null && attractionList.isEmpty()){
-            instructions.setText("No attractions where found, please click next or go back and change your preferences");
-        } else {
-            instructions.setText("Please pick attractions");
-        }
+
 
         // Set "Done Choosing" button click listener
         nextButton.setOnClickListener(v -> {
@@ -130,9 +124,15 @@ public class AttractionsResultActivity extends AppCompatActivity {
                 }
 
                 attractionList = (ArrayList<Attraction>) response.body();
+                instructions = findViewById(R.id.instructions);
                 if (attractionList != null) {
                     adapter = new AttractionListAdapter(AttractionsResultActivity.this, attractionList, true);
                     attractionRecyclerView.setAdapter(adapter);
+                    // Taking care of instructions text
+                    instructions.setText("Please pick attractions");
+                }
+                else {
+                    instructions.setText("No attractions where found, please click next or go back and change your preferences");
                 }
             }
 

@@ -81,13 +81,6 @@ public class RestaurantsResultActivity extends AppCompatActivity {
         // Fetch restaurants
         fetchRestaurants(filterRequest, selectedFlight, selectedReturnedFlight, selectedHotel);
 
-        // Taking care of instructions text
-        instructions = findViewById(R.id.instructions);
-        if (restaurantList == null && restaurantList.isEmpty()){
-            instructions.setText("No restaurants where found, please click next or go back and change your preferences");
-        } else {
-            instructions.setText("Please pick restaurants");
-        }
 
         // Set "Done Choosing" button click listener
         nextButton.setOnClickListener(v -> {
@@ -117,9 +110,15 @@ public class RestaurantsResultActivity extends AppCompatActivity {
                 }
 
                 restaurantList = response.body();
+                // Taking care of instructions text
+                instructions = findViewById(R.id.instructions);
                 if (restaurantList != null) {
                     adapter = new RestaurantListAdapter(RestaurantsResultActivity.this, restaurantList, true);
                     restaurantRecyclerView.setAdapter(adapter);
+                    instructions.setText("Please pick restaurants");
+                }
+                else{
+                    instructions.setText("No restaurants where found, please click next or go back and change your preferences");
                 }
             }
 

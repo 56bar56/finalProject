@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
-            android:text="After choosing restaurants, click next"
+            android:text="please choose what you want and click next"
             android:textColor="@color/_10_color"
             android:textSize="16sp" />
 

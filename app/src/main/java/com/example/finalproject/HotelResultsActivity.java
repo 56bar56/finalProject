@@ -78,14 +78,6 @@ public class HotelResultsActivity extends AppCompatActivity {
 
         // Fetch hotels
         fetchHotels(filterRequest, selectedFlight, selectedReturnedFlight, peopleNumber);
-
-        // Taking care of instructions text
-        instructions = findViewById(R.id.instructions);
-        if (hotelList == null && hotelList.isEmpty()){
-            instructions.setText("No hotels where found, please go back and change your preferences");
-        } else {
-            instructions.setText("Please pick a hotel");
-        }
     }
 
     private void fetchHotels(HotelFilterRequest request, Flight selectedFlight, Flight selectedReturnedFlight, String peopleNumber) {
@@ -101,9 +93,15 @@ public class HotelResultsActivity extends AppCompatActivity {
                 }
 
                 hotelList = response.body();
+                instructions = findViewById(R.id.instructions);
                 if (hotelList != null) {
                     HotelListAdapter adapter = new HotelListAdapter(HotelResultsActivity.this, peopleNumber, hotelList, selectedFlight, selectedReturnedFlight, true);
                     hotelsRecyclerView.setAdapter(adapter);
+                    instructions.setText("Please pick a hotel");
+                }
+                else {
+                    instructions.setText("No hotels where found, please go back and change your preferences");
+
                 }
             }
 

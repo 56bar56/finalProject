@@ -86,10 +86,13 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
                 Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
 
                 // Set the decodedBitmap to your ImageView
-                holder.profileImg.setImageBitmap(decodedBitmap);
+                //holder.profileImg.setImageBitmap(decodedBitmap);
+                holder.profileImg.setImageResource(R.drawable.profile_img);
+
             } catch (Exception e) {
                 e.printStackTrace();
                 // Handle the error if decoding or setting the image fails
+                holder.profileImg.setImageResource(R.drawable.profile_img);
             }
             //TODO change to the user img
             //holder.profileImg.setImageResource(resourceId);
