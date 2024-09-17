@@ -25,6 +25,9 @@
             android:name=".FinishTripActivity"
             android:exported="false" />
         <activity
+            android:name=".bestChoiceActivity"
+            android:exported="false" />
+        <activity
             android:name=".AttractionsResultActivity"
             android:exported="false" />
         <activity

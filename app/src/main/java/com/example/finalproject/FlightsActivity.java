@@ -86,7 +86,7 @@ public class FlightsActivity extends AppCompatActivity {
                 flightList = response.body();
                 if (flightList != null) {
                     if (flightList != null && flightList.size() > 3) {
-                        sendFlightsToChatGPT(flightList, days, daysMin, maxPrice, isRoundedTrip, peopleNumber);
+                        sortFlightsByPrice(flightList, days, daysMin, maxPrice, isRoundedTrip, peopleNumber);
                     } else {
                         // Show flights directly if there are 3 or fewer flights
                         displayFlights(flightList, days, daysMin, maxPrice, isRoundedTrip, peopleNumber);
@@ -100,7 +100,7 @@ public class FlightsActivity extends AppCompatActivity {
             }
         });
     }
-    private void sendFlightsToChatGPT(List<Flight> flightList, String days, String daysMin, String maxPrice, String isRoundedTrip, String peopleNumber) {
+    private void sortFlightsByPrice(List<Flight> flightList, String days, String daysMin, String maxPrice, String isRoundedTrip, String peopleNumber) {
         // Assuming you have a backend endpoint to process this
         FlightAPI flightAPI = RetrofitClient.getClient("http://192.168.1.41:5000").create(FlightAPI.class);
 

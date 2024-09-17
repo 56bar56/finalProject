@@ -34,6 +34,8 @@ public class WelcomeActivity extends AppCompatActivity {
     ImageView profile;
     Button new_trip;
     Button my_trips;
+    Button create_trip;
+
     private WebServiceAPI webServiceAPI;
     private Retrofit retrofit;
     private UsersApiToken user;
@@ -56,6 +58,8 @@ public class WelcomeActivity extends AppCompatActivity {
         profile = findViewById(R.id.profile);
         new_trip = findViewById(R.id.new_trip);
         my_trips = findViewById(R.id.my_trips);
+        create_trip = findViewById(R.id.create_trip);
+        create_trip.setText("let us create your next trip");
 
         // Get the intent and extract the name
         String username = globalVars.username;
@@ -145,6 +149,16 @@ public class WelcomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Set onClickListener for the create_trip button to go to bestChoiceActivity
+        create_trip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WelcomeActivity.this, bestChoiceActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         // Set onClickListener for the profile button to go to ProfileActivity
         profile.setOnClickListener(new View.OnClickListener() {

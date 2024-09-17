@@ -55,56 +55,56 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
     @Override
     public void onBindViewHolder(@NonNull FlightViewHolder holder, int position) {
         Flight flight = flightList.get(position);
+        if(flight != null) {
+            // Set flight details
+            holder.flightNumber.setText("Flight Number: " + flight.getFlightNumber());
+            holder.departure.setText("Departure: " + flight.getDeparture());
+            holder.arrival.setText("Arrival: " + flight.getArrival());
+            holder.takeoff.setText("Takeoff: " + formatDateString(flight.getTakeoff()));
+            holder.landing.setText("Lending: " + formatDateString(flight.getLanding()));
+            // Format price as an integer
+            int priceAsInt = (int) flight.getPrice();  // Cast the double price to an integer
+            holder.price.setText(priceAsInt + "$");  // Display price as integer
 
-        // Set flight details
-        holder.flightNumber.setText("Flight Number: " + flight.getFlightNumber());
-        holder.departure.setText("Departure: " + flight.getDeparture());
-        holder.arrival.setText("Arrival: " + flight.getArrival());
-        holder.takeoff.setText("Takeoff: " + formatDateString(flight.getTakeoff()));
-        holder.landing.setText("Lending: " + formatDateString(flight.getLanding()));
-        // Format price as an integer
-        int priceAsInt = (int) flight.getPrice();  // Cast the double price to an integer
-        holder.price.setText(priceAsInt + "$");  // Display price as integer
+            // Logic to handle company logo or fallback text
+            int logoResId = getCompanyLogoResId(flight.getCompany());
+            try {
+                holder.profileImg.setImageResource(logoResId);
+                holder.profileImg.setVisibility(View.VISIBLE);
+                holder.fallbackText.setVisibility(View.GONE);
+            } catch (Exception e) {
+                Log.e("ProfileImgError", "Failed to set image resource: " + e.getMessage());
+                holder.profileImg.setVisibility(View.GONE);
+                holder.fallbackText.setText(flight.getCompany());
+                holder.fallbackText.setVisibility(View.VISIBLE);
+            }
 
-        // Logic to handle company logo or fallback text
-        int logoResId = getCompanyLogoResId(flight.getCompany());
-        try {
-            holder.profileImg.setImageResource(logoResId);
-            holder.profileImg.setVisibility(View.VISIBLE);
-            holder.fallbackText.setVisibility(View.GONE);
-        } catch (Exception e) {
-            Log.e("ProfileImgError", "Failed to set image resource: " + e.getMessage());
-            holder.profileImg.setVisibility(View.GONE);
-            holder.fallbackText.setText(flight.getCompany());
-            holder.fallbackText.setVisibility(View.VISIBLE);
-        }
-
-        if(needOnClick) {
-            // Set OnClickListener for each flight item
-            holder.itemView.setOnClickListener(v -> {
-                if (selectedFlight == null) {
-                    Intent intent = new Intent(context, ReturnFlightsActivity.class);
-                    intent.putExtra("selectedFlight", flight);  // Pass the selected flight
-                    intent.putExtra("tripDays", days);  // Use days from constructor
-                    intent.putExtra("tripDaysMin", daysMin);  // Use daysMin from constructor
-                    intent.putExtra("maxPrice", maxPrice);  // Use maxPrice from constructor
-                    intent.putExtra("peopleNumber", peopleNumber);  // Use maxPrice from constructor
-                    if (!isRoundedTrip) {
-                        intent = new Intent(context, Hotel_Preferance_Activity.class);
+            if (needOnClick) {
+                // Set OnClickListener for each flight item
+                holder.itemView.setOnClickListener(v -> {
+                    if (selectedFlight == null) {
+                        Intent intent = new Intent(context, ReturnFlightsActivity.class);
                         intent.putExtra("selectedFlight", flight);  // Pass the selected flight
+                        intent.putExtra("tripDays", days);  // Use days from constructor
+                        intent.putExtra("tripDaysMin", daysMin);  // Use daysMin from constructor
+                        intent.putExtra("maxPrice", maxPrice);  // Use maxPrice from constructor
                         intent.putExtra("peopleNumber", peopleNumber);  // Use maxPrice from constructor
+                        if (!isRoundedTrip) {
+                            intent = new Intent(context, Hotel_Preferance_Activity.class);
+                            intent.putExtra("selectedFlight", flight);  // Pass the selected flight
+                            intent.putExtra("peopleNumber", peopleNumber);  // Use maxPrice from constructor
+                        }
+                        context.startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(context, Hotel_Preferance_Activity.class);
+                        intent.putExtra("selectedFlight", selectedFlight);  // Pass the selected outbound flight
+                        intent.putExtra("selectedReturnedFlight", flight);  // Pass the selected return flight
+                        intent.putExtra("peopleNumber", peopleNumber);  // Use maxPrice from constructor
+                        context.startActivity(intent);
                     }
-                    context.startActivity(intent);
-                } else {
-                    Intent intent = new Intent(context, Hotel_Preferance_Activity.class);
-                    intent.putExtra("selectedFlight", selectedFlight);  // Pass the selected outbound flight
-                    intent.putExtra("selectedReturnedFlight", flight);  // Pass the selected return flight
-                    intent.putExtra("peopleNumber", peopleNumber);  // Use maxPrice from constructor
-                    context.startActivity(intent);
-                }
-            });
+                });
+            }
         }
-
     }
 
     @Override

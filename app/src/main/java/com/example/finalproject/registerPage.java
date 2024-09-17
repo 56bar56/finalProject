@@ -3,6 +3,7 @@ package com.example.finalproject;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.ImageDecoder;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -51,7 +52,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-@RequiresApi(api = Build.VERSION_CODES.R)
+//@RequiresApi(api = Build.VERSION_CODES.R)
 public class registerPage extends AppCompatActivity {
     Button registerBtn;
     TextView toLogIn;
@@ -100,7 +101,7 @@ public class registerPage extends AppCompatActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                function();
+                //function();
             }
         });
         registerBtn.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +114,7 @@ public class registerPage extends AppCompatActivity {
                 String profileName = editProfileName.getText().toString();
                 //String profilePic = imageView.toString();
                 String profilePic = "";
+                /*
                 Bitmap resizedBitmap = null;
 
                 try {
@@ -127,7 +129,7 @@ public class registerPage extends AppCompatActivity {
                     Toast.makeText(registerPage.this, "Error with the image", Toast.LENGTH_LONG).show();
                     return;
                 }
-
+                */
                 String errorMsg="";
                 if (password.length() > 16 || password.length() < 4) {
                     informationOk = false;
@@ -238,7 +240,7 @@ public class registerPage extends AppCompatActivity {
         });
 
     }
-
+    /*
     private void function() {
         Intent i = new Intent();
         i.setType("image/*");
@@ -254,8 +256,12 @@ public class registerPage extends AppCompatActivity {
                         Uri selectedImageUri = data.getData();
                         Bitmap selectedBitmap;
                         try {
-                            selectedBitmap = MediaStore.Images.Media.getBitmap(
-                                    getContentResolver(), selectedImageUri);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                                ImageDecoder.Source source = ImageDecoder.createSource(getContentResolver(), selectedImageUri);
+                                selectedBitmap = ImageDecoder.decodeBitmap(source);
+                            } else {
+                                selectedBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
+                            }
                             imageView.setImageBitmap(selectedBitmap);
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -264,6 +270,7 @@ public class registerPage extends AppCompatActivity {
                 }
             }
     );
+     */
 
     public void chatsPageAfterRegister(String username, String password) {
         Callback<ResponseBody> callbackForGetUserInfo = new Callback<ResponseBody>() {

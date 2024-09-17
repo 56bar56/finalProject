@@ -560,7 +560,18 @@
                     android:layout_width="335dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="0dp"
-                    android:layout_marginTop="70dp"
+                    android:layout_marginTop="60dp"
+                    app:backgroundTint="@null"
+                    android:background="@drawable/login_button_rounded"                    android:text="@string/my_trips"
+                    android:textColor="@color/_bg__main_page_ek2_color"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/create_trip"
+                    android:layout_width="335dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="120dp"
                     app:backgroundTint="@null"
                     android:background="@drawable/login_button_rounded"                    android:text="@string/my_trips"
                     android:textColor="@color/_bg__main_page_ek2_color"
