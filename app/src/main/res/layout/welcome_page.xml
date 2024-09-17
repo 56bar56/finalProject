@@ -439,8 +439,8 @@
 
                 <TextView
                     android:id="@+id/hello_name"
-                    android:layout_width="213dp"
-                    android:layout_height="84dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="0dp"
                     android:layout_marginTop="0dp"
                     android:text="Hello,"
@@ -542,7 +542,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="200dp"
                 android:layout_marginStart="21dp"
-                android:layout_marginTop="286dp">
+                android:layout_marginEnd="21dp"
+                android:layout_marginTop="260dp"
+                >
 
                 <Button
                     android:id="@+id/new_trip"
@@ -553,7 +555,8 @@
                     app:backgroundTint="@null"
                     android:background="@drawable/login_button_rounded"                    android:text="@string/new_trip"
                     android:textColor="@color/_bg__main_page_ek2_color"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:layout_centerHorizontal="true"/>
 
                 <Button
                     android:id="@+id/my_trips"
@@ -564,19 +567,20 @@
                     app:backgroundTint="@null"
                     android:background="@drawable/login_button_rounded"                    android:text="@string/my_trips"
                     android:textColor="@color/_bg__main_page_ek2_color"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:layout_centerHorizontal="true"/>
 
-                <Button
+                <TextView
                     android:id="@+id/create_trip"
-                    android:layout_width="335dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="0dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
                     android:layout_marginTop="120dp"
-                    app:backgroundTint="@null"
-                    android:background="@drawable/login_button_rounded"                    android:text="@string/my_trips"
-                    android:textColor="@color/_bg__main_page_ek2_color"
-                    android:textSize="16sp" />
-
+                    android:text="Feeling spontaneous? Let GOTOUR create your next trip"
+                    android:textColor="#FF7D0D"
+                    android:textSize="20sp"
+                    android:layout_centerHorizontal="true"
+                    android:textAlignment="center"/>
 
             </RelativeLayout>
 

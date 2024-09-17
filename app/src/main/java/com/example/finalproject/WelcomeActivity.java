@@ -34,7 +34,7 @@ public class WelcomeActivity extends AppCompatActivity {
     ImageView profile;
     Button new_trip;
     Button my_trips;
-    Button create_trip;
+    TextView create_trip;
 
     private WebServiceAPI webServiceAPI;
     private Retrofit retrofit;
@@ -59,7 +59,6 @@ public class WelcomeActivity extends AppCompatActivity {
         new_trip = findViewById(R.id.new_trip);
         my_trips = findViewById(R.id.my_trips);
         create_trip = findViewById(R.id.create_trip);
-        create_trip.setText("let us create your next trip");
 
         // Get the intent and extract the name
         String username = globalVars.username;

@@ -3,7 +3,7 @@ package com.example.finalproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,8 +38,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class bestChoiceActivity extends AppCompatActivity {
-    private ImageButton v;
-    private ImageButton x;
+    private ImageView vButton;
+    private ImageView xButton;
     private TextView title;
     private RecyclerView recyclerView;
     private FlightListAdapter flightAdapter;
@@ -64,9 +64,9 @@ public class bestChoiceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_best_choice);
         getUserTrips();
-        x = findViewById(R.id.delete_button);
+        xButton = findViewById(R.id.delete_button);
 
-        x.setOnClickListener(v -> {
+        xButton.setOnClickListener(v -> {
             Intent intent = new Intent(bestChoiceActivity.this, WelcomeActivity.class);
             startActivity(intent);
         });
@@ -219,16 +219,16 @@ public class bestChoiceActivity extends AppCompatActivity {
         findViewById(R.id.attraction_icon).setOnClickListener(v -> {
             recyclerView.setAdapter(attractionAdapter);
         });
-        v = findViewById(R.id.confirm_button);
-        x = findViewById(R.id.delete_button);
+        vButton = findViewById(R.id.confirm_button);
+        xButton = findViewById(R.id.delete_button);
 
-        v.setOnClickListener(v -> {
+        vButton.setOnClickListener(v -> {
             sendTripToServer(newTripForUser);
             Intent intent = new Intent(bestChoiceActivity.this, WelcomeActivity.class);
             startActivity(intent);
         });
 
-        x.setOnClickListener(v -> {
+        xButton.setOnClickListener(v -> {
             Intent intent = new Intent(bestChoiceActivity.this, WelcomeActivity.class);
             startActivity(intent);
         });
