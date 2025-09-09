@@ -43,7 +43,7 @@ Built as a final-year Computer Science project at **Bar-Ilan University** by **A
     git clone https://github.com/56bar56/finalProject.git
 
 2. Open in **Android Studio** and build the project.  
-3. Ensure the **server repository** is running for full backend functionality: [Server Repo](https://github.com/56bar56/serverFinalProject)  
+3. Ensure the **server repository** is running for full backend functionality, you can clone it's repository here:  https://github.com/56bar56/serverFinalProject.git
 4. Run on an emulator or Android device.
 
 ---
